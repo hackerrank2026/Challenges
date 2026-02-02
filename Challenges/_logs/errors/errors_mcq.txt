@@ -1,0 +1,1689 @@
+Section 2: SQL & MySQL MCQs (Q.6 - Q.69) 
+
+ * Q.6 Column Deletion: ALTER TABLE queue DROP COLUMN status
+
+ * Q.7 MySQL: Self Join: SELECT * FROM users users, users clients 
+
+ * Q.8 Sorting Direction: SELECT * FROM categories ORDER BY id DESC 
+
+ * Q.9 Comma In From Clause: Selects everything in "users", then adds columns from "clients" 
+
+ * Q.10 Space In From Clause: Selects everything in "users", then assigns "clients" alias 
+
+ * Q.11 Combining Tables Errors: SELECT * FROM logs 11 AND FROM logs 12 ON 11.id = 12.id aur UNION logs 12 ON 11.id=12.id 
+
+ * Q.12 Result Limit Offset: SELECT * FROM logs LIMIT 3, 5 
+
+ * Q.13 Rounding Numbers (0 return): SELECT FLOOR(.6) 
+
+ * Q.14 Field Selection Error: SELECT 123 
+
+ * Q.15 Result Set Combine Operator: UNION 
+
+ * Q.16 Condition Operator Error: SELECT IFNOT('true', FALSE) 
+
+ * Q.17 GROUP BY Incorrect Statement: Aggregate functions (COUNT, MAX, etc.) can be used only with an explicit GROUP BY statement 
+
+ * Q.18 Joins Incorrect Statement: Using the RIGHT JOIN keyword returns only records that are joined in the right way 
+
+ * Q.19 NULL Constraint Difference: CREATE TABLE users (id INT NOT NULL) 
+
+ * Q.20 Deleting a Database: DROP DATABASE users 
+
+ * Q.21 Creating a Database: CREATE DATABASE users 
+
+ * Q.22 MySQL Comments: Option A & B & C
+ - # comment
+ - -- comment
+ - /* comment */ 
+
+ * Q.23 Deleting a Table: Option A & C (Multi Choice)
+- DROP TABLE IF EXISTS users
+- DROP TABLE users 
+
+ * Q.24 Join Type (Left + Matched Right): LEFT JOIN aur LEFT OUTER JOIN 
+
+ * Q.25 String Comparison Error: none of the above, all expressions are correct 
+
+ * Q.26 Matching Values Join: INNER JOIN 
+
+ * Q.27 Results Order Error: none of the above, all expressions are correct 
+
+ * Q.28 White Space Alias: (Multi Choice) (option A & B & C)
+- "customer name"
+- 'customer name'
+- customer name 
+
+ * Q.29 Valid Join Types: LEFT, CROSS, RIGHT 
+
+ * Q.30 Student Result: 2 
+
+ * Q.31 Common Students: select s1.name from s1 INNER JOIN s2 ON s1.id=s2.id ORDER BY s1.name 
+
+ * Q.32 Results Limit:(Option A & D) 
+- LIMIT 5 OFFSET 10 
+- LIMIT 5, 10 
+
+ * Q.33 Like Pattern (Not match): none of the above, all values will be matched 
+
+ * Q.34 Output Rows: 2 
+
+ * Q.35 SQL Order of Operations: SELECT, FROM, JOIN WHERE, GROUP BY, HAVING, ORDER BY  
+
+ * Q.36 Select Statements (Print '56'): SUBSTR ('123456',5), SUBSTR ('123456',-2), SUBSTR ('123456',5,2), SUBSTR ('123456',-2,2) 
+
+ * Q.37 Duplicate Fetch Command: SELECT DISTINCT 
+
+ * Q.38 SQL ROUND (45.926, -2): Option D: prints 0 
+
+ * Q.39 Print Domain Name: '@',1)+1) 
+
+ * Q.40 DBMS_OUTPUT fix: SET SERVEROUTPUT ON 
+
+ * Q.41 Specific Range Search: SELECT * FROM logs WHERE priority IN ('high', 'medium') 
+
+ * Q.42 PRIMARY KEY Incorrect: The primary key can contain NULL values 
+
+ * Q.43 Null Comparison Incorrect: SELECT * FROM categories WHERE id <> NULL aur WHERE id != NULL 
+
+ * Q.44 Group By Clause Error: None of the above, all expressions are correct 
+
+ * Q.45 Nested Comments Error: SELECT * FROM /*#*/*/ categories aur SELECT * FROM /*/*#*/*/categories 
+
+ * Q.46 Ampersand Error: None of the above, all expressions are correct. 
+
+ * Q.47 Pipe Error: SELECT level ||| depth FROM Categories 
+
+ * Q.48 String Trimming: SELECT TRIM( LEADING 'www.' FROM 'www.domain.com') 
+
+ * Q.49 Substring Extraction Error: SELECT SUBSTRING_INDEX( 'my.subdomain.domain.com', '.', 2, 2)
+
+ * Q.50 Substring Function: None of the above, all expressions return the same value. 
+
+ * Q.51 Comparing Types (0 return): SELECT STRCMP('0', 0) Option D
+
+ * Q.52 Repeating Strings Error: SELECT STRREPEAT(' ', 10) 
+
+ * Q.53 ANY and ALL Operators: The ANY operator returns the first available record... while ALL returns a subset only if the entire query condition is true 
+
+ * Q.54 AUTO_INCREMENT Incorrect: Updating an existing AUTO_INCREMENT column value resets the AUTO_INCREMENT sequence 
+
+ * Q.55 DEFAULT Constraint Error: (Multi Choice)
+Options C & D
+- DEFAULT NOT NULL
+- DEFAULT RAND() 
+
+ * Q.56 FOREIGN KEY Incorrect: A column cannot have a foreign key reference to itself 
+
+ * Q.57 UNIQUE Constraint Error: CREATE TABLE users (first_name VARCHAR(255) UNIQUE, last_name VARCHAR(255) UNIQUE) (Note: Statement doesn't cause error, expected answer was likely multi-column syntax) 
+
+ * Q.58 Not a Table Constraint: None of the above. 
+
+ * Q.59 Creating a Table Error: None of the above, all expressions are correct. 
+
+ * Q.60 Group By Condition Error: SELECT customer_id, COUNT(*) AS transactions FROM transactions WHERE transactions > 10 GROUP BY customer_id 
+
+ * Q.61 Group Field Error: SELECT customer_id, RAND(amount) FROM transactions GROUP BY customer_id 
+
+ * Q.62 Group By Having Error: none of the above, all expressions are correct 
+
+ * Q.63 Group By Order Error: none of the above, all expressions are correct 
+
+ * Q.64 Group Variations Correct: (Multi Choice) Option A & D
+- SELECT customer_id, MAX(is_active) FROM transactions GROUP BY customer_id HAVING MAX(is_active)
+- MAX(is_active) AS is_active... HAVING is_active 
+
+ * Q.65 Distinct Multiple Tables: 
+- SELECT DISTINCT a.id, b.id FROM customers a, customers b 
+
+ * Q.66 Substring Syntax:(MultiChoice) option A & B
+- SELECT SUBSTRING(status, 2, 5) FROM customers
+- SUBSTRING(status FROM 2 FOR 5) 
+
+ * Q.67 Select Multiple Tables Error (Multi Choice): Option B & C & D
+- SELECT id, id FROM customers, customers
+- SELECT id FROM customers, customers
+- SELECT a.id, id FROM customers a, customers 
+
+ * Q.68 SQL Statements NOT Correct (Multi Choice): 
+Option C & D 
+- DELETE command is a DDL command whereas DROP is a DML command
+- ACID...Complexity, Isolation, and Duplicacy 
+
+ * Q.69 Table Alteration Correct:
+- ALTER TABLE statement is used to add, remove, change existing columns 
+-  to add and remove various constraints 
+
+Section 3: React MCQs (Q.70 - Q.120) 
+
+ * Q.70 Query Based Question 3: setValue = (event) => { this.setState({ [event.target.name]: event.target.value }); [span_98](start_span)[span_99](start_span)}; 
+
+ * Q.71 Class Component Rendering: 1 (stale State)
+
+ * Q.72 React Class State Output: 0,0,3 (for 3 callback is used)
+
+ * Q.73 State Update (Hooks) Option C: setStudent({...student, Presence }); 
+
+ * Q.74 Initial Rendering Error: Error (infinite loop call) 
+
+ * Q.75 State Management (Counter) Option D: Replace line 5 with setCount(prevCount => prevCount+ 1); 
+
+ * Q.76 Event (Mouse Position) option A: useEffect with window.addEventListener("mousemove", ...) and window.removeEventListener("mousemove",setFromEvent)
+
+ * Q.77 React True Statements  (Multi Choice):
+OPtion A & D:
+- 1 (one root element)
+- 4 (hooks cannot be used outside functional component) 
+
+ * Q.78 React Route Render:  Option A: <Home /> 
+
+ * Q.79 React Children Output: <p>Hello candidate</p> <p>Welcome to Hackerrank!</p> 
+
+ * Q.80 Statement Error-free: Statement 1 & Statements 3  & Statements 4 
+
+ * Q.81 Add Class Dynamically: Option A & C: S1 & S3 
+
+ * Q.82 Styling in JS: div style= {{background-color: "blue", color:"red", fontSize:"large", border: "solid 10px black"}} 
+
+ * Q.83 Hook Match: 1.c, 2.a, 3.d, 4.b 
+
+ * Q.84 React Welcome Output: This code will generate an error. (multiple root elements) 
+
+ * Q.85 Component Load: NotFoundPage 
+
+ * Q.86 Counter Value: 10 
+
+ * Q.87 Functional Component Equivalent: function Hello({ name = 'David', age }) { ... } with default props
+
+ * Q.88 States and Props Reset: Score: 5, Goal: 5 
+
+ * Q.89 Event Bubbling: Goal, No Goal 
+
+ * Q.90 Render Function: componentDidUpdate() 
+
+ * Q.91 Context Wrapper: <NotesContext.Provider value={this.state.notes}> //code </NotesContext.Provider> 
+
+ * Q.92 Equivalent Hooks: Option C: useEffect(() => { // }, []); 
+
+ * Q.93 Click 3 times: 10 
+
+ * Q.94 Method Search: Both A and B (getDerivedStateFromError aur componentDidCatch) 
+
+ * Q.95 Science Project Variable Syntax: <Uppersky className="Space_Details">{SkyColor}</Uppersky> 
+
+ * Q.96 Submit: Render Element Type: span 
+
+ * Q.97 Hello App Output: Hello, Everyone, Good Morning 
+
+ * Q.98 Update State Option: Option C:  this.setState({name:"David"}) 
+
+ * Q.99 Name Output: peter 
+
+ * Q.100 Leap Year Code:Option B: let year = props.year; 
+
+ * Q.101 CSS Module Access: Option D
+import React from 'react';
+import ReactDOM from 'react-dom';
+import styles from './mystyle.module.css';
+class TextColor extends React.Component {
+  render() {
+    return <h1 className={styles.TextDesign}>Hello I am a text!</h1>;
+  }
+}
+
+export default TextColor;
+className={styles.TextDesign} 
+
+ * Q.102 Array Functions: Ranjit Object Fetch:
+Option C: 
+let result=data.find((data)=>data.name=="Ranjit"); 
+
+ * Q.103 Components Correct Statement: The Loader component will always be shown, and the useEffect hook will not be executed. 
+
+ * Q.104 React Valid Routes: Invalid Route: /post 
+
+ * Q.105 Clock Run Result: There is a runtime exception. (Object as child) 
+
+ * Q.106 React Hooks Infinite useEffect: None of the above 
+
+ * Q.107 Query Based Question 2 : add() { ... this.setState({ count: count + 1 }, () =>{ console.log(...) }); [span_164](start_span)[span_165](start_span)} 
+
+ * Q.108 incrementNumber snippet: The incrementNumber function throws an error. (const variable update) 
+
+ * Q.109 React Class Name: A React functional component should have a capitalized name. 
+
+ * Q.110 HoC 'hello' message: 'hellohello' 
+
+ * Q.111 Counter Value (double/reset): 3 
+
+ * Q.112 Slow load optimization: Wrap the calculateEmi() function with the useMemo hook. 
+
+ * Q.113 Hooks Warning True: All of the above 
+
+ * Q.114 Code Problem (setCounter): Option B: This will result in the error "React hooks must be called in a React function component..." 
+
+ * Q.115 Access without props: Option B:  Use useContext(Context) with Context.Provider 
+
+ * Q.116 Values 1 to 10 infinitely:
+import React, { useState, useEffect } from 'react';
+export default function App() {
+  const [a, change_a] = useState(1);
+  useEffect(() => {
+    setTimeout(() => {
+      change_a((a) => a + 1);
+    }, 1000);
+    if (a > 10) {
+      change_a(() => 1);
+    }
+  });
+  return ({ a });
+}
+
+ * Q.117 Clock Snippet Output: Option C: This code will not compile
+
+ * Q.118 Data App Output: I am an H1 title, I am a paragraph., I am the default 
+
+ * Q.119 React Hook: Chocolates and Price: Chocolates = 2, Price = 9 
+
+ * Q.120 React Hooks I Output: Option A:  Chocolates = 1, Price = 1 
+
+Section 4: Spring Boot & Microservices (Q.121 - Q.179) 
+
+ * Q.121 AWS Lambda Node.js: The Lambda function uses the Promise.all() method to process all S3 objects in parallel... 
+
+ * Q.122 Clustered Express: Option A The application forks a new worker process for each available CPU core. 
+
+ * Q.123 Mocking Beans: @MockBean ApiClient apiClient; 
+
+ * Q.124 Secure Method: @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USER_MANAGER')") aur @RolesAllowed 
+
+ * Q.125 New Instance every call: @Component @Scope(scopeName = "prototype", proxyMode= ScopedProxyMode.TARGET_CLASS) 
+
+ * Q.126 Circular Bean Exception: Option E & F 
+- The application runs and it will write... then it will throw org.springframework.beans.factory.BeanCurrentlyInCreationException.
+- removal of @PostConstruct 
+
+ * Q.127 AOP X and Y positions: X = @Aspect, Y = @Around("execution(* spring.service.Notifier.notify(..))") 
+
+ * Q.128 Metadata Change before instance: Implement BeanFactoryPostProcessor. 
+
+ * Q.129 Transactional Tests: Transactions for both methods will be committed. 
+
+ * Q.130 Behavior Inheritance Output: Animal init Cat init 
+
+ * Q.131 Multiple Beans Definition: The code throws NoUniqueBeanDefinitionException. 
+
+ * Q.132 Path Variable Valid uses:Option A & C & D userId, addressId match aur userId match personnelId with explicit value 
+
+ * Q.133 User Controller Result: OK 200 and prints 'name: Duke surname: null' 
+
+ * Q.134 Injection Type: Construction 
+
+ * Q.135 Specific Custom Query: @Query 
+
+ * Q.136 Staging Profile Start: --spring.profiles.active=staging 
+
+ * Q.137 Property Value Injection: @Value 
+
+ * Q.138 Dependency Injection options: Setter injection, Constructor injection, aur @Autowired 
+
+ * Q.139 Actuator Blank: /actuator/** 
+
+ * Q.140 Object Validator (not used): @Size(limit = 100) (is strictly for collections/strings, @Length is alternative) 
+
+ * Q.141 Rest Handle segment: Option A
+@RestController
+public class DemoHandler {
+    private static Map<String, Product> dataRepo = new HashMap<>();
+    @RequestMapping(value = "/handle", method = RequestMethod.POST)
+    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+    }
+}
+
+ * Q.142 Data storage Mechanism: @Repository 
+
+ * Q.143 Business Logic class: @Service public class A{ .. } 
+
+ * Q.144 Dependency Injected: field based 
+
+ * Q.145 Actuator starter use: application analysis 
+
+ * Q.146 Component Annotation: It allows Spring to detect custom beans automatically. 
+
+ * Q.147 Derived Query Method: findByAuthor 
+
+ * Q.148 HTTP Requests Handling: They are handled by a controller and identified by the @RestController annotation. 
+
+ * Q.149 FooBar link: GET request http://localhost:8080/home/ex/basic/bar 
+
+ * Q.150 Postgres Specific Code: @ConditionalOnProperty(prefix = "database", name = "vendor", havingValue = "postgres") @ConditionalOnClass(name = "org.postgresql.Driver") 
+
+ * Q.151 Component Dependency True: The code throws BeanCurrentlyInCreationException when run. 
+
+ * Q.152 Production Profile Environment: spring.profiles.active=prod 
+
+ * Q.153 Data Layer Isolation Test: @DataJdbcTest 
+
+ * Q.154 Pagination Ability Repository: JpaRepository aur PagingAndSortingRepository 
+
+ * Q.155 Event Bus Handler:
+The script will output the following messages simultaneously:
+"Event A has been triggered" and "Event B has been triggered"
+
+ * Q.156 Controller Correct Definition Problem:  (Multi Choice) 
+- The method is fine, and http://localhost:8080/myScore/1?name=Adam maps to the method myScore
+- The method is fine, and http://localhost:8080/myScore/23?surname=Adamson maps to the method myScore.
+
+ * Q.157 Spring Data Repositories: Option B & D
+- `setUserAge` throws `InvalidDataAccessApiUsageException` when executed
+- `setUserAge` method runs fine and sets the user matching `id` age to the specified `age` value if `@Modifying` is inserted instead of <CODE 1> and `@Transactional(readOnly = false)` is inserted instead of <CODE 2>.
+
+
+ * Q.158 Pointcut Expressions: Option A & D
+
+ * Q.159. Spring Data Transactional: Option A & D:
+- It will try to delete the student then the DataIntegrityViolationException will be thrown.
+- If @Transactional annotation is put in place of X (StudentServer.java), after saving the student and lessons, it will update lessons and remove the student. Then it will throw an SQLException.
+
+ * Q.160 Configuration Properties:
+A BeanDefinitionParsingException is thrown because the @Configuration bean cannot be marked as final.
+
+ * Q.161 Spring Bean Initialization: Option D: throws org.springframework.beans.factory.NoUniqueBeanDefinitionException on runtime
+
+ * Q.162 Spring Transactional: Option B:
+saveProductToLogService will use a new transaction for productLogService.save method.
+ 
+ * Q.163 Spring Data Entity Graph: Option B
+@EntityGraph(attributePaths={'appointmentList'},type=EntityGraph.EntityGraphType.FETCH)
+
+ * Q.164 Security Custom Login: Option C: .permitAll();
+
+ * Q.165 Spring Circular Dependency: Option C:
+@Lazy
+
+ * Q.166 Spring Data Repository: Option A:
+@EnableJpaRepositories(basePackages = {repsitoryPackageOfJarModule})
+
+ * Q.167 Spring Boot Localization (Multi Choice):
+Option A & B
+MessageResource & MessageBundle
+
+ * Q.168 Spring IOC Container(Multi Choice): Option A & D Application Context and Bean Factory
+
+ * Q.169 Dispatcher Servlet: Option C It is used to handle all HTTP requests and responses
+
+ * Q.170 CSRF
+None of the above. CSRF is configured by default when Spring Security Dependency is added.
+
+ * Q.171 Spring Scopes(Multi Choice): Option A & B & C & D 
+
+ * Q.172 Spring Mvc RestController (Multi Choice):  Option A & C & D
+
+ * Q.173 Endpoint Security: Option C:
+Configuration class annotated with @EnableGlobalMethodSecurity(prePostEnabled = true)
+
+ * Q.174 DemoHandler: Option D: CORS Handler
+
+ * Q.175 Security: Option B
+.oauth2ResourceServer().jwt();
+
+ * Q.176 JWT with RSA: Option B
+security:
+	oauth2:
+		resourceserver:
+			jwt:
+				jwk-set-uri: http://localhost:4000/auth/data/cont
+
+ * Q.177 Error Handling block: This block of code will be executed when we try to hit an API and it does not exist in the project scope. 
+
+ * Q.178 API Console Output: ERROR log, DEBUG log, INFO log (assuming level DEBUG) 
+
+ * Q.179 Predict Aspect Output: Option A: 
+After method : com.test.model.Employee addEmployee(String,String,String)
+Creating Employee with first name Ravi , second name - Shekhar and id - 123
+
+Section 5: Microservices & Git (Q.180 - Q.237)
+ 
+ * Q.180 Transactions: Option D: A & C
+
+ * Q.181 Microservice Security: Sabse Lamba (
+load balancer + jwt
+)
+
+ * Q.182 Conway's Law: Option D:Restructure … Communication Channels.
+
+ * Q.183 Client Side Load Balancing:  Option D:
+B and C
+
+ * Q.184 Master Master Replication:  Master-Master replication stateful set.
+- All of the above
+
+ * Q.185 Semantic Monitoring Drawback 
+- All of the above
+
+ * Q.186 Tests in Production 
+Option A decrease in average downtime as we can pinpoint which service is at faul
+
+ * Q.187 Master Master Replication 3: E2E
+Option C: 3 >2 >1
+
+ * Q.188 Microservices Reliability:
+Option A & B
+- Separate the read and write APIs into separate services.
+- Add a queue to the write API and a cache on the read API so the system can efficiently handle messages.
+
+ * Q.189 Disaster Recovery Mitigate: Add redundancy to the downstream services. 
+
+ * Q.190 Service Discovery Solution: Add multiple service discovery options in the infrastructure. 
+
+ * Q.191 Distributed System Advantage (Multi Choice): 
+Options A & D
+If one component fails... remaining components may be able to continue operating. 
+
+ * Q.192. Understanding Microservice (Multi Choice): 
+Option A & C
+- Focuses on a single responsibility principle
+- Responsible for its own task and communicates with other services through simple APIs to solve a larger complex business
+problem
+
+ * Q.193. Communication Methods: All of these
+
+ * Q.194 Microservice decision: Try 2 and then 1.
+ - existing system - custom solution
+
+ * Q.195 Latency/Consistency Steps: 1 -> 3 -> 2 
+- test - refactor - add queues
+
+ * Q.200 Kubernetes YAML instructions: Use --- separator.
+
+ * Q.201 Kubernetes Pod Logs: 
+Option C: kubectl logs --tail=10 -l publisher=hacker-company
+
+ * Q.204 Kubernetes Run Command: 
+Option D: kubectl exec pod/frontend-controller-01 -- apt-get update
+
+ * Q.205 Kubernetes Find Documentation:
+Option A: kubectl explain service
+
+ * Q.206 Kubernetes Pods Query:
+Option B: kubectl get pods --selector=environment=staging
+
+ * Q.207 Kubernetes Basic Pod: 
+Option D: kubectl run --rm -i --image=hello-world --restart=Never test
+
+ * Q. 208 Kubernetes Pods Status: kubectl get pods -n hacker-company
+
+ * Q. 210 Kubernetes Get Deployment Information: 
+kubectl describe deployment hacker-application
+
+ * Q. 211 Kubernetes labels & Annotations:
+- C ) kubectl label deployment hacker-application environment=staging
+kubectl annotate deployment hacker-application \
+  url="https://staging.hacker-company.com"
+
+* Q. 212 Kubernetes Deployment Scale:  
+A.  kubectl scale --replicas=3 -n hacker-company ReplicaSet/redis
+
+ * Q.219 git status True: git add README.md was executed and then another change was made to the README.md file. 
+
+ * Q.220 git squash command: git rebase -i HEAD~3 (change to 'squash' or 'fixup') aur git reset --soft HEAD~3 && git commit 
+Option A B C
+
+ * Q.221 Branches count: 6 (5 remote + 1 local) 
+
+ * Q.222 Clone with submodules: git clone --recurse-submodules, git clone --recursive, aur git submodule update --init --recursive 
+Option  A & C & D
+
+ * Q.223 git describe: Nearest tag 
+
+ * Q.224 Successful Test X,Y,Z: X= @ExtendWith(MockitoExtension.class), Y = @InjectMocks, Z, T, S = @Mock 
+Option C
+
+ * Q.225 Integration Test Dirties Context Annotation Usage:
+- Option D Only the fourth test will pass test
+
+ * Q.226 JUnit Multiple When Usage: Option C
+-  10 , 20 , 30 , 3 times
+
+ * Q.227 JUnit Real Method Call Trap: Option D
+- It will throw a null pointer exception on line myList.add(15).
+ArrayList is mocked and its array length is unknown.
+Even if the original add method is called, since its length is null, it will fail.
+
+ * Q.228 Mockito Inject Mock: @InjectMocks
+
+ * Q.229 Mockito mockMvc: Matchers.containsStringIgnoringCase
+
+ * Q.230 Mockito Mock vs Spy: All of the above 
+
+ * Q.231 Mockito Static Methods: Option A C D
+- Mockito.mockStatic(<Class>) 
+- Mockito.spy(<Instance>) 
+- Mockito.mock 
+
+ * Q.232 pass test annotation: Option B @ExtendWith(MockitoExtension.class)   (Hint: class Level annotation)
+
+ * Q.233 JUnit Test Order (Multi Choice): Options A C
+- MethodOrderer.Random.class Order 1 2 3
+- MethodOrderer.OrderAnnotation.class Order 1 3 2
+
+ * Q.234 Financial Year (Multi Choice): Options A B C
+
+ * Q.235 Mockito Verify (Multi Choice): Options A B C D E
+
+ * Q.236 Console Print result: Result : [All, is one] 
+
+ * Q.237 Integration Test Pass: Option D {"data":{ "key":"Hacker Rank Rock", value:"Rank rocks"}} 
+
+Section 6: Java MCQs (Q.238 - Q.317) 
+
+ * Q.238 Take control out of loop: break 
+
+ * Q.239 Constant without instance: public static final int intConst 
+
+ * Q.240 Not a primitive type: String 
+
+ * Q.241 FilteredRowSet Salary > 5000 (Multi Choice): Option A & C
+- Iterate through each row, delete rows with salary <= 5000) 
+- Correct SQL Query
+
+* Q.242 JSP Implicit Objects (Multi Choice): Options A & B & D (no such application.getAtt exsist)
+
+ * Q.243 JSP Integration Correct: Option A (request.setAttribute + forward) aur Option D (session.setAttribute + forward) 
+
+ * Q.244 Interface True statements: The Platypus class only have to implement the eat(), fly(), and lactation() method. 
+
+* Q.245 getPI: Option D 
+A outerObj = new A();
+A.B innerObj = outerObj.new B();
+
+double piValue = A.B.getPI();
+System.out.println("The value of PI is: " + piValue);
+
+* Q.246 Classes and Objects (Multi Choice)(Option A & B):
+- Employee class is abstract and cannot be instantiated.
+- Both HourlyEmployee and SalariedEmployee class should override the calcSalary() method, in order to get instantiated.  
+
+ * Q.247 Method Overloading True (Multi Choice) (Option C & D): 
+- private void foo(List data) { }
+- public ArrayList foo(ArrayList data) { }
+
+
+ * Q.248 Java GC (Multi Choice): Option A & D
+- The garbage collector can only free memory that was allocated using the new keyword
+- The finalize() method can be used to prevent an object from being garbage collected
+
+ * Q.249 BufferedReader Output: Hello Hackerrank followed by IOException: Stream closed 
+
+ * Q.250 PriorityQueue Poll/Remove: Hackerrank followed by NoSuchElementException 
+
+ * Q.251 parseInt Output: Exception 1 occurs. class java.lang.NumberFormatException  Exception 2 occurs 
+
+* Q.252 Java Networking: <p>Client: null</p> (Client Nalla)
+
+* Q.253 Java Generics: <p>Compile-time error while retrieving the values from array list and assigning them to their respective datatypes.</p>
+
+* Q.254 Java Design Pattern: Singleton Design Pattern
+
+* Q.255 Java Concatenate:Option B 
+String result = myClass.foo2(
+    (s, x, y) -> s + " " + (x + y),
+    "HackerRank", 2, 3
+);
+
+System.out.println(result);
+
+* Q.256 Java Interface Output: Hello 2 
+
+ * Q.257 Multi-threaded snippets: ExecutorService with fixed/scheduled thread pool aur new Thread(worker) in a loop
+Options A B C (Not D due to SingleThreadPool) 
+
+ * Q.258 Empty Collection code: Stack to Queue with i = i - 1 & both for loopwith stack and queue with remove decrement during removal Option D
+
+ * Q.259 variable z value: 6 
+
+ * Q.260 Execution without error: Options B, C, D (convert to int type before stream operations) (Hint:AllparseInt)
+
+ * Q.261 Display True (kayak)(Multi Choice): anyMatch aur noneMatch for palindrome check logic  Options A C E
+
+ * Q.262 <p>Make Dog Noise...</p> <p>Make Golden Retriever Noise</p>
+
+ * Q.263 Weather Sorting Output: Option C (stream().sorted() with comparator on temperature) 
+
+ * Q.264 Java String Pool: Option A 1
+
+ * Q.265 Stream + Fibonacci: Option D 0
+
+ * Q.264 String Pool execution: 1 (compiler optimizations) 
+
+ * Q.266 Java Variables: 6
+
+ * Q.267 len Output: 6000 
+
+ * Q.268 Largest three scores: Arrays.stream(scores).boxed().sorted().skip(5).collect(...) 
+
+ * Q.269 ArrayList vs Vector: Vector is synchronized while ArrayList is not 
+
+ * Q.270 Even Numbers block: Option B
+Collection<Integer> c = Arrays.asList(1, 2, 3, 4, 5);
+List<Integer> list =
+    c.stream()
+     .filter(i -> i % 2 == 0)
+     .map(i -> i * 2 - 1)
+     .filter(i -> i > 4)
+     .collect(Collectors.toList());
+
+ * Q.271 Not RuntimeException: FileNotFoundException 
+
+ * Q.272 Empty a HashMap: clear() 
+
+ * Q.273 Different implementation same name: overriding 
+
+ * Q.274 True about iterators (Multi Choice): Iterator is an interface, Iterators are used to traverse through the elements of a collection 
+
+ * Q.275 Synchronized Keyword (Multi Choice): Instance methods, Static methods, aur Code blocks inside static methods 
+
+ * Q.276 Look up in Map: get() 
+
+ * Q.277 Type Promotion: double 
+
+ * Q.278 Overloaded String operator: Java Does not support operator overloading
+
+ * Q.279 Select the Correct Statement from the options below GC:If object obj1 can access object obj2 that is eligible for garbage collection, then obj1 is also eligible for garbage collection
+
+ * Q.280 Java Exception Root: Throwable 
+
+ * Q.281 cities binarySearch result: 
+
+ * Q.282 Same Name Field member: The program will compile, and this feature is called 'hiding' or 'shadowing'. 
+
+ * Q.283 PirateTalk Output: dog, scurvy 
+
+ * Q.284 Static Analysis 1: ACD
+
+ * Q.285 Java Classes: Static member classes can contains non static methods.
+
+ * Q.286 Result of Concurrent Thread: The Value may vary each  time across runs.
+
+ * Q.287 Bitwise Operators in Java: 1,7
+ 
+ * Q.288 JDK Designe Patterns: Stratey
+
+ * Q.289 variable k value: Doesn’t matter what the values of i and j are, the output will always be 9  
+
+ * Q.290 Default imported package: java.lang 
+
+ * Q.291 Automatic Imports (lang/io/util): False (only lang is default) 
+
+ * Q.292 AirJet Output: The code does not compile because of an error in the constructor of class Airjet. 
+
+ * Q.293 True about Interfaces: An interface cannot have instance variables 
+
+ * Q.294 Classpath command: javac -classpath exam/app.jar Test.java 
+
+ * Q.295 Test snippet output: 4 Error 
+
+ * Q.296 Will this compile? output: Compilation fails due to an error on lines 5
+
+ * Q.297 Java Print Sum result: Compilation fails due to error an on line 9, non-static method referenced from a static context. 
+
+ * Q.298 Priorities output: 4 bills bills bills dishes laundry
+
+ * Q.299 Correct Statement (Java file): If a Java file has a package statement, it must be the first statement (except comments). 
+
+ * Q.300 a = 5 effect: Produces no output 
+
+ * Q.301 super call position: The first statement in the constructor 
+
+ * Q.302 divide(4, 0) print: Exception Finally 
+
+ * Q.303 if(a = true) output: Prints out "Hello" 
+
+ * Q.304 Inner class output: Prints out "Sample" 
+
+ * Q.305 Overriding add(int a): the overriding method must return void 
+
+ * Q.306 Arrays in Java true: Arrays in Java are essentially objects. 
+
+ * Q.307 Abstract method declaration: public abstract void add(); 
+
+ * Q.308 String array declaration: String temp [] = {"a", "b", "c"}; 
+
+ * Q.309 Output -4.0: System.out.println(Math.ceil(-4.7)); 
+
+ * Q.310 Object Class true: The Class objects are constructed by the JVM as classes are loaded by an instance of java.lang.ClassLoader 
+
+ * Q.311 Error/Exception true: Both classes extend Throwable. 
+
+ * Q.312 t.increment(a) output: It compiles and prints 2. 
+
+ * Q.313 Division Check (10.0 / -0): Positive infinity 
+
+ * Q.314 Java Classes true: The Integer class extends the Number class. 
+
+ * Q.315 String Concatenation output: abcdefabcDEF 
+
+ * Q.316 Legal Declarations: s3=s1 + s2; 
+
+ * Q.317 syntax Review 1 output: It compiles and prints "Hello". 
+
+======================= PYQ =======================
+
+Que 1. Disable Copilot inline suggestions globally and enable them only for Markdown files 
+"github.copilot.inlineSuggest.enabled": false, 
+"[markdown]": { 
+"github.copilot.inlineSuggest.enabled": true 
+} 
+
+Que 2. Add a comment explicitly asking for edge cases in user registration 
+// Suggest edge cases to test user registration API
+
+Que 3. Use the appendTo(File) redirect method 
+redirectOutput(ProcessBuilder.Redirect.appendTo(file)); 
+
+Que 4. The method’s cyclomatic complexity due to multiple nested conditional branches
+
+Que 5. kubectl scale deployment
+
+Que 6. The method’s cyclomatic complexity due to multiple nested conditional branches
+
+Que 7. Patch management for the hosted operating system and runtime environment.
+
+Que 8. Test cases only invoke the method with integer parameters.
+
+Que 9. Coverage metrics are calculated based on the union of all possible build profiles. 
+public class Feature { 
+public void run() { 
+// Coverage reflects all code from all profiles 
+if (System.getProperty("feature.enabled").equals("true")) { 
+System.out.println("Feature enabled"); 
+} else { 
+System.out.println("Feature disabled"); 
+}}}
+
+Que 12. "feature" branch into main, but you prefer to keep a linear commit history
+git checkout main 
+git rebase feature 
+
+Que 13. SELECT account_id, SUM(amount) AS total_amount 
+FROM Transactions 
+GROUP BY account_id 
+HAVING SUM(amount) > 10000;
+
+Que 16. Using a load balancer to route requests to available service instances
+
+Que 17. Using RESTful HTTP calls for direct synchronous communication
+
+Que 18. It allows backward compatibility for clients when APIs evolve over time.
+
+Que 19. Configure server.ssl properties with keystore file and password in application.yml to 
+enable HTTPS termination at the gateway.
+server: 
+	port: 443 
+	ssl: 
+		enabled: true 
+		key-store: classpath:gateway.p12 
+		key-store-password: changeit 
+		key-store-type: PKCS12
+
+Que 20. 
+> Focuses on a single responsibility principle 
+> Responsible for its own task and communicates with other services through simple APIs to solve a larger complex business problem
+
+Que 21 The team added mTLS and added rules for inter-service communications. After that, 
+they pushed the internet-facing server behind a load balancer and applied JWT tokens 
+for authentication. 
+
+Que 22 The code throws IllegalStateException due to duplicate keys when collecting to an 
+unmodifiable map.
+
+Que 34. <properties> 
+<maven.compiler.source>8</maven.compiler.source> 
+<maven.compiler.target>8</maven.compiler.target> 
+</properties> 
+<dependencies> 
+<dependency> 
+<groupId>abc-def</groupId> 
+<artifactId>abc-def</artifactId> 
+<version>1.0.0</version> 
+</dependency> 
+</dependencies>
+
+Que 35. Exception 1 occurs. class java.lang.NumberFormatException Exception 2 occurs
+
+Que 36. Collecting with null keys throws NullPointerException immediately during collection.
+
+Que 37. 2 followedBy 3
+
+Que 38. 
+Parent rendered 
+Child Rendered
+
+Que 39. let combinedUsers = [...HR, ...IT];
+
+Que 40. createSalaryManager(baseSalary): 55000
+
+Que 41. render() function when state or props is 
+updated?: componentDidUpdate()
+
+Que 42. 
+{ 
+	"github.copilot.inlineSuggest.count": 1  
+} 
+
+Que 43. 
+ReactDOM.render( 
+<Clock title="ThisIsMyClock" />, 
+document.getElementById("root") 
+); B) There is a runtime exception
+
+Que 44.  C) The Loader component will always be shown, and the useEffect hook will  
+not be executed. 
+
+Que 45.  2. Add /usr/local/bin to the PATH environment variable before starting the  
+process 
+ProcessBuilder builder = new ProcessBuilder("docker", ""); 
+Map<String, String> env = builder.environment(); 
+env.put("PATH", env.get("PATH") + ":/usr/local/bin"); 
+Process process = builder.start(); 
+
+Que 46. KubernetesDeploy 
+
+Que 47. Test cases only invoke the method with integer parameters.
+
+Que 48. SELECT name, COUNT(*)  
+FROM Products  
+GROUP BY name  
+HAVING COUNT(*) > 1;
+
+Que 49. git revert def456 
+
+Que 50. Mockito Verify Method: All Statements are True
+
+Que 51. Transactions for both methods will be committed.
+
+Que 52.  The output will be a Tuple2 containing the values from both Monos: (Hello, World). 
+
+Que 53. Using RESTful HTTP calls for direct synchronous 
+communication.
+
+Que 54.  ResponseEntity is used to set HTTP status codes and response bodies in a Spring Boot controller. 
+
+Que 55. private List<Integer> convertToIntList(List<String> list) { 
+Option B & C & D
+
+Que 56. Objects are retained because clearObjects is not invoked after processing.
+
+Que 57. Coverage tools may not detect execution of private methods invoked via reflection, leading to 
+underreported coverage. 
+
+Que 58. 
+ The test cases do not execute any code within the private static nested class. 
+public class OuterClassTest { 
+@Test 
+public void testOuterMethod() { 
+OuterClass outer = new OuterClass(); 
+outer.outerMethod(); 
+// No reference to NestedClass 
+} 
+} 
+
+Que 59. Answer - Option 3 – Leverage built-in pipeline templates to define automated build, test, and deployment workflows.
+
+Que 60. public class Greeting { 
+public static void sayHello() { … }}
+Repeated use of the same string literal in multiple statements.
+
+Que 61.  Use the appendTo(File) redirect method.
+
+Que 62.  GitHub Copilot Chat: Open Chat.
+
+Que 63. Option D: 
+Use the Function interface to transform the string. 
+Function<String, String> stringTransformer = s -> s.toUpperCase(); 
+
+Que 64. Option A: 
+The code will print the sum of the two integers provided to the BiFunction. 
+int result = add.apply(5, 10); 
+System.out.println(result);
+
+Que 65. 
+The code throws IllegalStateException due to duplicate keys when collecting to an unmodifiable 
+map. 
+[Code snippet shows no merge function] 
+import java.util.stream.*; 
+import java.util.*; 
+public class Test { 
+public static void main(String[] args) { 
+List list = Arrays.asList("a", "b", "a"); 
+Map map = list.stream() 
+.collect(Collectors.toUnmodifiableMap( 
+s -> s, 
+s -> s.toUpperCase() 
+)); 
+System.out.println(map); 
+} 
+}
+
+Que 66.  
+Option B: 
+Using try-catch block inside the onMessage method with custom exception handling 
+public void onMessage(Message message) { 
+try { 
+// Process message 
+} catch (CustomException e) { 
+handleCustomException(e); 
+} 
+} 
+
+Que 67. To simplify HTTP-based communication between microservices by providing a declarative REST 
+client interface
+
+Que 68. Option A: 
+SELECT customer_id, 
+SUM(CASE WHEN order_status = 'Pending' THEN 1 ELSE 0 END) AS pending_orders, 
+SUM(CASE WHEN order_status = 'Completed' THEN 1 ELSE 0 END) AS completed_orders, 
+SUM(CASE WHEN order_status = 'Cancelled' THEN 1 ELSE 0 END) AS cancelled_orders 
+FROM Orders 
+GROUP BY customer_id; 
+
+Que 69.
+Option A: 
+WITH RECURSIVE subordinates AS ( 
+SELECT emp_id, name, manager_id 
+FROM Employees 
+WHERE emp_id = 1 
+UNION ALL 
+SELECT e.emp_id, e.name, e.manager_id 
+FROM Employees e 
+JOIN subordinates s ON e.manager_id = s.emp_id 
+) 
+SELECT * FROM subordinates; 
+
+Que 70. Option A
+WITH RECURSIVE subordinates AS (
+    SELECT emp_id, name, manager_id
+    FROM Employees
+    WHERE emp_id = 1              -- anchor: start from manager
+
+    UNION ALL
+
+    SELECT e.emp_id, e.name, e.manager_id
+    FROM Employees e
+    JOIN subordinates s ON e.manager_id = s.emp_id
+)
+SELECT * FROM subordinates;
+
+Que 71. Option A: 
+SELECT name 
+FROM Customers 
+WHERE EXISTS ( 
+SELECT 1 
+FROM Orders 
+WHERE Orders.customer_id = Customers.customer_id 
+); 
+
+Que 72. 
+Option A: 
+With Mockito's Mockito.mockStatic(<Class>) method, static methods can be mocked. 
+Option B: 
+With Mockito's Mockito.mockPrivate(<Class>) method, private methods can be mocked.  
+Option D: 
+Mockito.mock(<Class>) method returns mocked new instance of given class. 
+
+Que 73.
+Option A: 
+The class was never loaded during test execution, so the static block did not run. 
+// No reference to Example in tests 
+The class was never loaded during test execution, so the static block did not run. 
+public class Example { 
+static { 
+System.out.println("Static block executed"); 
+} 
+public static void doSomething() { 
+// ... 
+} 
+} 
+// No reference to Example in tests 
+
+Que 74. Option C: 
+"Request allowed", "Request allowed", "Request allowed", "Request blocked"
+
+Que 75. ption B: 
+$(document).ready(function(){ 
+$("button").click(function() { 
+$("p.hide").toggle(); 
+}); 
+});  
+
+Que 76.
+Use ProcessBuilder to execute Prowler, wait for completion, check exit code, and throw an 
+exception on non-zero 
+ProcessBuilder pb = new ProcessBuilder("prowler", "-f"); 
+Process process = pb.inheritIO().start(); 
+int exitCode = process.waitFor(); 
+if (exitCode != 0) { 
+throw new RuntimeException("Prowler scan failed with exit code " + exitCode); 
+}
+
+Que 77.
+Option A: 
+The Data class declaration without implementing Serializable 
+
+Que 78. Option A: Private Cloud Deployment Model
+
+Que 79. A & B & D throws , auto and struct are not reserved words
+
+Que 80. A comment requesting a function to sort an array of numbers in ascending order  
+// write a function that sorts an array of numbers in ascending order  
+
+Que 81. Press Tab to accept the Inline suggestion and insert it exactly as shown
+
+Que 82. docker.build
+
+Que 83. 1 followed by 2 if only 1 counter++ is given
+
+Que 84. Use the excludedScopes configuration to list test and provided scopes for exclusion  
+
+Que 85. The public constructor in the utility class  
+
+Que 86. A. git config --global user.email "project.email@example.com" git config --global core.editor "vim" 
+
+Que 87. @FeignClient(name="service-name") 
+
+Que 88. @Column(unique=true) 
+
+Que 89. -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+
+Que 90.  Collectors.toSet() wrapped with Collections.unmodifiableSet() 
+
+Que 91. Collect to ArrayList then wrap with Collections.unmodifiableList() 
+
+Que 92. create a mock of the repository. @Mock
+
+AWS -=========================================================================================
+Q1:AWS: Data Storage Solution
+• B)Use Amazon DynamoDB Global Tables for structured data and Amazon S3 Transfer Acceleration for unstructured data
+Q2:AWS: API Management Solution
+• B)Set up Amazon API Gateway with caching, OAuth 2.0, throttling, and CI/CD integration
+Q3:AWS: Multi-Regional Deployment With Automated Failover
+• B)Deploy applications on Amazon EC2 across regions and distribute traffic with Elastic Load Balancing (ELB). Integrate
+with Amazon RDS and enable Multi-AZ deployments for high availability and failover support
+Q4:AWS: Ensure Encrypted Data Transfers
+• D)Host the application on Amazon EC2 instances with dedicated hosts, use AWS Shield for DDoS protection, enable TLS
+encryption for data in transit, and use AWS KMS for data encryption at rest
+Q5:AWS: Setting Up CI/CD Pipelines
+• B) Implement AWS EC2 C-series and use Placement Groups to maintain consistent high performance for CI/CD operations.
+Q6:Concurrency Limits
+• B) The original rule had a more specific pattern for 502 errors which got overridden
+Q7:Throttling Cascade
+• B) The application events from 'S3' and 'S4' recently started to share certain attributes, and due to pattern matching
+intricacies, 'P2' now captures them
+Q8:Nested Nuances
+• B) The event pattern 'P3' uses the AWS array condition that matches the new nested array structures introduced in the
+deployment, causing it to process some events meant for 'L2.
+Q9:Artifact Anomaly
+• A) When rapidly provisioning new instances, the instance pools might sometimes introduce nodes with cold starts,
+causing an initial I/O performance dip during Delta cache population
+Q10:Data Federation
+• B) Partition the 'global_metrics' table in Amazon S3 using a composite key of year and region. Adjust the query predicates
+to leverage both partition keys, ensuring partition pruning effectiveness.
+Q11: SPICE Aggregation
+• B) Use the QuickSight console to modify the `amount` column's decimal precision settings, then rerun the AWS CLI
+command
+Q12:Lambda Encryption
+• A) The AWS CLI command `update-function-configuration` does not inherently support the automatic encryption of
+environment variables. Automatic encryption mandates explicit specification through the `--kms-key-arn` parameter
+Q13:Consumer Lag
+• A) Utilize the get-bootstrap-brokers command of AWS MSK to acquire broker endpoints, then delve into Kafka's native
+kafka-consumer-groups.sh tool for a detailed analysis of the consumer group 
+Q14:Bookmark Efficiency
+• B) Utilize the following push-down predicate in the `from_catalog` method (CODE SNIPPET)
+Q15:Unique Processing
+• A) Enable AWS Lambda Event Source Mapping with BatchSize set to 1 and use Kinesis as the event source
+Q16:Video Encoding Application
+• C) Use ChangeMessageVisibility to extend visibility timeout
+Q17:Elastic Load Balancer
+• 10
+Q18:Order Processing Application
+• D) Enable AWS CodeBuild timeouts
+Q19:Application Load Balancer Concurrency Limits
+• A) Set reserved concurrency for Lambda function B ....CONTINUES
+Q20:AWS API Gateway
+• B) Use AWS Lambda Authorizer
+Q21:Developer Associate
+• D) Create an AWS IAM role in account B with access to Amazon DynamoDB. Modify the trust policy of the role in Account
+B to allow the execution role of AWS Lambda to assume this role. Update the AWS Lambda function code to add the
+"AssumeRole" API call
+Q22: Application Load Balancer Latency
+• A) Amazon ALB access logs
+Q23 CPU Utilization:
+• A) Configure an SSL/TLS certificate on an Amazon Application Load Balancer via AWS Certificate Manager (ACM)
+• B) Create an HTTPS listener on the Amazon Application Load Balancer with SSL termination
+Q24:Handling Deployment
+• C) Deploy using 'Rolling with additional batch' deployment policy
+Q25 Elastic Load Balancer:
+• A) The security group of the AMazon EC2 instance does not allow for traffic from the security group of the Amazon Application Load Balancer.
+• B) The route for the health check is misconfigured.
+Q26:Workloads on AWS
+• D) AWS Secrets Manager
+Q27:Amazon API Gateway
+• A) Amazon API Gateway Mapping Templates
+Q28:Minimum Downtime
+• B)Set up the application to use an alias that points to the current version. Deploy the new version of the code and
+configure the alias to send 10% of the users to this new version. If the deployment goes wrong, reset the alias to point
+all traffic to the current version
+Q29 ElastiCache:
+D Amazon ElastiCache defined in .ebextensions/
+E Amazon RDS database defined externally and referenced through environment variables
+Q30:AWS SNS
+C) First in, first out (FIFO
+Q31: AWS S3 Fast Browsing Storage Class
+• C) Amazon S3 Standard
+Q32:AWS S3 Backup Storage Class
+• B)Amazon S3 Glacier
+Q33:AWS RDS
+• C) Amazon S3
+Q34:AWS IAM Identities
+• All of these
+Q35:AWS EC2 - Suitable Load Balancer
+•D) Application Load Balancer
+Q36: AWS EC2 - Remove a Load Balancer
+• A) Auto-scaling will continue to work
+Q37 Simple Web Application :
+• C) Use a query operation.
+• D) Reduce the page size
+Q38 AWS KMS Parameter Store:
+A) AWS CLI uses multipart upload
+B) The developer does not have the kms:Decrypt permission.
+Q39:DynamoDB Stream
+• A) Decrease Lambda execution interval to 24 hours
+Q40:Elastic Beanstalk With Lambda and DynamoDB
+• B) Enable DynamoDB Streams and configure them as the event source for the Lambda function.
+Q41:Elastic BeanStalk with Encrypted S3 Bucket
+• d) If encryption key is lost, object is lost
+Q42:AWS Serverless Application
+• d) Increase the AWS WAF web ACL capacity units (WCUs) to 200
+Q43:AWS Web App: Application Capacity Optimization
+• A) Upgrade the current 1 TB "st1" to 1 TB "gp2".
+Q44:AWS Web App: Load Balancing and Node Health
+• A) The ELB in AZ "A" will stop serving traffic to it and divert its traffic to a healthy instance
+Q45:AWS Web App: Load Balancing and Traffic Management
+• A) Each of the 2 targets in AZ A receives 25% of the traffic and each of the 3 targets in AZ B receives 16.67% of the traffic
+Q46: AWS Web App: Disabling Load Balancing Across AZs
+• Availability Zone A receives 50% of the traffic.
+• Availability Zone B receives 50% of the traffic
+Q47: AWS Web App: Enabling Cross Zone Load Balancing
+• C) Each target will receive 20% of traffic from the clients.
+Q48 AWS Web App: VPC and Subnet:
+• None of these
+Q49 AWS Web App: Capacity Enhancement:
+• Switch to a bigger or newer instance type because that might be optimized for EBS usage based on the current instance type.
+• Switch to a bigger instance type because more RAM might lead to a reduction in disk IOPS.
+Q50 AWS Web App: Access Management:
+• D)The security groups might not have the correct ACL rules, which might be limiting access to the database by the backend instances
+Q51 AWS Web App: Access Control:
+• A)The application load balancer should be in a public subnet because it servers traffic to the user.
+Q52 AWS Web App: Site Reliability vs Cost\:
+• D)You notice that CPU usage and memory usage are both low, so you decide to shift to an instance of smaller size but within M5 only.
+Q53:AWS Web App: Site Availability and Cache Management
+• None of these
+Q54:AWS Web APP: Handling DOS Traffic
+• C)Use AWS WAF to prevent requests like these coming to the load balancer.
+ 
+
+
+DOCKER=================================================================================
+
+✔ Q.22 Dockerfile Environment Variables:
+ENV API_TOKEN="5b0b8ef7-4c5c-4d35-89f2-4a6bfcb1d56d"
+✔ Q.23 Dockerfile Expose Instruction:
+tells Docker to listen on specified network ports at runtime
+✔ Q.24 Dockerfile Conditions:
+none of the above
+✔ Q.25 Dockerfile Command Execution:
+RUN apt-get update
+✔ Q.26 Docker Logs Inspection:
+docker logs
+✔ Q.27 Docker Image Download:
+docker pull nginx:latest
+✔ Q.28 Docker Images List:
+docker images or docker image ls
+✔ Q.29 Docker Containers List:
+docker ps
+✔ Q.30 Docker Test Launch:
+docker run hello-world
+✔ Q.36 Dockerfile Folder Adding:
+ADD .config/ /etc/.config
+
+
+JS JavaScript========================================================== 
+Question 1 – Custom Promise
+The error will be caught by the catch method, and "Error:" will be logged to the console followed by the error message.
+ 
+Question 2 – Web Worker
+a-The worker.js file contains the code to be executed in the web worker.
+b-The worker.postMessage method in main.js sends a message to the web worker to start the calculation
+
+Question 3 – Expensive Calculationa
+a- The expensiveCalculation function simulates an expensive calculation by returning a Promise that resolves after a delay.
+b- The cacheHandler object defines a get method that checks if a result is cached before performing the calculation
+Question 4 – Callback Hell
+a)
+const fetchData1 = () => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve("Data 1"), 1000);
+  });
+};
+const fetchData2 = (input) => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(input + " and Data 2"), 1000);
+  });
+};
+
+Question 5 – Modules
+a- The getUsersCount() method returns the number of users in the users array.
+b- After running both module.js and client.js code, the getUsersCount() method returns 4.
+ 
+Question 6 – Async and Await
+all options exetps -  D) An "Unexpected error:" message will be displayed
+
+ 
+Question 7 – Promises
+a)undefined 
+b)The array will only contain successful fetch results with the "Success:" prefix
+ 
+Question 8 – Aggregation and Sorting
+D) { A: 40, B: 70, C: 40 } and ["B", "C"]
+ 
+Question 9 – Async Methods
+A)
+[
+{ status: "fulfilled", value: 1 },
+{ status: "fulfilled", value: 2 },
+{ status: "fulfilled", value: 3 },
+{ status: "rejected", reason: "An error occurred" }
+]
+ 
+Question 10 – WeakMap and IIFE
+C) An error will be thrown
+ 
+Question 11 – Custom Error
+Data1 is valid
+CustomError: Invalid data provided
+ 
+Question 12 – SetTimeout
+B)Number: undefined
+Number: undefined
+Number: undefined
+Number: undefined
+Number: undefine
+
+Question 13 – Proxy
+A)
+John
+30 years old
+Hello, my name is John.
+
+Question 14 – Promise Chaining
+A) 
+fetchUserData()
+  .then(user => fetchUserPosts(user.id))
+  .then(posts => console.log(posts))
+  .catch(err => console.log(err));
+ 
+Question 15 – Currying 
+120
+ 
+Question 16 – Design Pattern
+A)Factory pattern
+ 
+Question 17 – IIFE II
+ A)To create a closure that encapsulates the counter variable and the functions that operate on it
+
+Question 18 – Callback Hell
+ 
+Correct option:
+C)const fs = require("fs");
+function readFile(path) {
+return new Promise((resolve, reject) => ...CONTINUE 
+
+Question 19 – Function Borrowing
+b)Jane Doe is 25 years old. Jane Doe is 25 years old
+
+Question 20 – Equality
+B)True, False, True
+
+Question 21 – Invoked Function Expression
+c) 2
+
+Question 22 – Closures
+b)25
+
+Question 23 – JavaScript WebBrowser APIs
+c-Web Search API
+d-TweetsAp
+
+Question 24 – JavaScript Objects
+d-let person;
+person['name'] = "Alex";
+person['age'] = 25;
+ 
+Question 25 – Typecasting Functions I
+b - 1-D, 2-C, 3-A, 4-B
+
+Question 26 – Typecasting Functions II
+a - 1-b, 2-c, 3-d, 4-a
+
+Question 27 – const keyword
+b-A variable declared with const is always block-scoped.
+
+Question 28 – JavaScript popups
+a - The confirm function displays a popup with two buttons: OK and Cancel.
+b - The confirm function returns true when its OK button is clicked.
+ 
+Question 29 – JavaScript strict mode
+a - It prohibits usage of undeclared variables
+b - It throws errors instead of silent failures
+d - Without strict mode, it is possible to assign a value to NaN
+
+Question 30 – let keyword
+b -A variable declared with let is always block-scoped
+d - A variable declared with let can be assigned later
+
+Question 31 – localStorage
+ 
+Correct options:
+a -The data in localStorage is stored without an expiration date.
+b - All data values stored in localStorage are stored as strings.
+c - localStorage is used to store limited data sizes. It is usually restricted to just a few megabytes
+ 
+Question 32 – Fetch API
+b- The promise returned by fetch() resolves on any successful response, including those with error codes 
+c - To extract JSON data from the response, we call its json() method.
+
+Question 33 – JSON data format
+ 
+Correct options:
+a - JSON uses double quotation marks to delimit strings.
+c - Trailing commas are forbidden.
+ 
+Question 34 – JSON data types
+b - JSON allows for the null value.
+ 
+Question 35 – DOM Elements Queries
+b- To get all button elements in a document we can call document.querySelectorAll("button").
+c -We can use document.querySelector to query for elements with a certain class set
+ 
+Question 36 – Window and Document
+b- The window element can be used to affect and react to events related to browser behavior.
+d -Both window and document are singletons within a page. This means that there is always exactly one window and exactly one document instance for
+a page
+ 
+Question 37 – NodeList vs JS Types
+a - DOM is designed to not depend on any specific language.
+c -NodeList and NamedNodeMap are sometimes live collections meaning that changes to them are reflected in the document
+ 
+Question 38 – DOM
+a- DOM has a tree structure.
+
+Question 39 – MapReduce
+b - MapReduce is a good architecture for many problems where a divide-and-conquer strategy can be used.
+c - MapReduce can be used to traverse graphs. Breadth-First Search (BFS) fits the MapReduce architecture better than Depth-First Search (DFS) for that
+purpose.
+ 
+Question 40 – JSON/XML
+b - JSON is, in general, more human-readable than XML.
+d - JSON data has an implicit schema. This means that the schema is deduced from the data.
+
+Question 41 – JavaScript Advanced
+b- JavaScript is a single-threaded language which means that at most one operation can be in progress at a time. In order to allow pseudo-asynchronous
+c- Variables defined with the let or var keyword can be reassigned. Variables defined with the const keyword cannot be reassigned
+
+Question 42 – JavaScript Basics
+b-When JavaScript code is executed in a browser, it uses client computational resources rather than server resources.
+d-Angular, React, and Vue are popular JavaScript frameworks used in Web development.
+ 
+Question 43 – Sessions vs JWT
+ a-If session-based authentication is used, the authentication state is stored on the server side
+ d-If JWT-based authentication is used, the authentication state is stored on the client side and is only decoded on the server side.
+ 
+Question 44 – NPM and Bower
+a- Bower is an NPM package and can be installed using NPM.
+ 
+Question 45 – NPM
+a- Node Package Manager
+
+Question 46 – Global Install
+a - npm install -g package
+
+Question 47 – package.json
+b- In the root directory of the application/module
+ 
+Question 48 – Grunt Metadata
+c-Package.json
+
+Question 49 – Grunt Plugin
+a-grunt-contrib-watch
+
+Question 50 – Grunt Dependency
+d-this.requires
+ 
+Question 51 – Install Grunt
+ a- Using npm
+
+Question 52 – Task Exists
+a - grunt.task.exists(name)
+
+Question 53 – Grunt Output III
+d - foo: 1,2,3 bar: hello world baz: false
+ 
+Question 54 – Grunt Output II
+b - bar: hello world
+ 
+Question 55 – Grunt Output I
+b- foo: 1,2,3
+ 
+Question - 55 Grunt Output I
+Option B:  foo:1,2,3
+
+Question - 56 Test Specification
+Option B:  Default
+
+Question - 57 Negative Comparator
+OPtion B: .not
+
+Question - 58 Declared Variables
+Option A: True
+
+Question - 59 Pass the Test Case
+return 3*a + 2*b;
+
+Question - 60 Execution Stop
+stopSpecOnExpectationFailure
+
+Question - 61 It Functions
+Option D: An it function can have any number of expects.
+
+Question - 62 Shape and Dimension Div Change
+Option D: 
+$(document).ready(function(){
+    $("button").click(function(){
+        var text=($(this).text());
+        if (text==='Change to Circle'){
+            $("div").animate({height: '200px',width: '200px',borderRadius:'50%'});
+            $("button").html("Change to Square");
+        }
+        else{
+            $("div").animate({height: '100px',width: '100px',borderRadius:'0%'});
+            $("button").html("Change to Circle");
+        }
+    });
+});
+
+Question - 63 Browser Display
+Option A 
+
+Question - 64 JavaScript Visibility
+Option B
+
+Question - 65 JavaScript Output
+Option C x:1 z:3 a:4 disp:function (p){
+
+Question - 66 Code Prediction
+Option B false education name surname residence age
+
+Question - 67 Array Element Passing
+Option A C
+
+Question - 68 First Five Alerts
+42, 28, 24, 28, 42
+
+Question - 69 Which of the following is not true of Javascript?
+Option B Semicolons at the end of Javascript statements are required
+
+Question - 70
+What is the Purpose of the 'noscript' tag?
+Option C Enclose text to be displayed by non-JavaScript browsers
+
+Question - 71 How to Capture Click Events in a Window
+Option D window.captureEvents(Event.CLICK );
+
+Question - 72 querySelector
+Option B  The first <p> element with class='five'
+
+Question - 73
+Which function would you use to find html elements using tag name?
+Option B document.getElementsByTagName()
+
+Question - 74
+What is the correct way to create a javascript array?
+var items = ["Orange","Apple"];
+
+Question - 75
+What is the data type of null in Javascript?
+Option C Object
+
+Question - 76
+What is correct way to run a Javascript in "strict mode"?
+Option B <script> "use strict" </script>
+
+Question - 77
+Which are correct ways to create a javascript object?
+Option A & D
+
+Question - 78
+Which of the following javascript functions perform the given tasks correctly
+Option C
+
+Question - 79
+JavaScript Reserved Word
+auto & struct
+
+Question - 80
+What is 'this'?
+Option B the global object
+
+Question - 81
+JS Data Types
+Option A  array
+
+Question - 82
+Value of x
+Option C undefined
+
+Question - 83
+Pass by Value or by Reference
+Option B depends on the parameter type
+
+Question - 84
+Equivalence Testing in JS
+Option C == compares value. === compares value and type
+
+Question - 85
+Logging to the console
+Option C  1 4 3 2
+
+Question - 86
+Compare Two Functions
+Option B no
+
+Question - 87
+Screen Properties
+Option C Selected
+
+Question - 88
+Loops in JavaScript
+Option D  do-if
+
+Question - 89
+Calling JavaScript Code
+Option A function/method 
+OPtion D Triggering Event
+
+Question - 90
+Which of the following is not a core datatype?
+OPtion D class
+
+Question - 91
+The XML service(s) enable networking with javascript HTTP requests is:
+Option B XMLHttpRequest
+
+Question - 92
+What is the output?
+Option A false
+
+Question - 93
+Identify the Programming Practice
+Option B Unobtrusive JavaScript
+
+Question - 94
+JavaScript: Appending Element to the Array
+Option B arr[arr.length] = value
+
+Question - 95
+What is the correct way to write a JavaScript array?
+Option A var txt = new Array("tim","kim","jim")
+
+Question - 96
+How can you add a comment in a JavaScript?
+//This is a comment
+
+Question - 97
+What is the role of the third parameter given below?
+Option C If true, the request can be handled without waiting.
+
+Question - 98
+Which of the following HTTP status codes denotes a server error?
+Option D 500
+
+Question - 99
+JavaScript Assignment
+Option B Assign a reference to the foo function to the variable myVar
+
+Question - 100
+What is the correct way to have the function checkState called after 10 seconds?
+Option B window.setTimeout(checkState, 10000)
+
+Question - 101
+What is the correct syntax to include a script named myScript.js into a page?
+Option C <script src="myScript.js">
+
+Question - 102
+Which HTTP server does AJAX require?
+Option C Any HTTP server will work
+
+Question - 103
+Which of the following is the right option?
+var myDiv = document.getElementById ("statusCode"); myDiv.innerHTML = req.status;
+
+Question - 104
+What is the purpose of the NOSCRIPT tag?
+Option C To enclose text to be displayed if the browser doesn't support JS
+
+Question - 105
+What should be called before 'send ()' to prepare an XMLHttpRequest object?
+Option B open()
+
+
+

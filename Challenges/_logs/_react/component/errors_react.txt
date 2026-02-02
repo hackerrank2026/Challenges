@@ -1,0 +1,5271 @@
+Failed to load resource: the server responded with a status of 404 ().
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1.  Autocorrection.jsx — lines 1–50 1
+2.  Birthday records — lines 51–161 1
+3.  BMI — lines 162–250 1
+4.  Budget Tracker — lines 251–434 1
+5.  Color peaker — lines 435–495 1
+6.  Editable table — lines 496–666 1
+7.  Fetch-stock — lines 667–761 1
+8.  Flashcards — lines 762–817 1
+9.  Form validation — lines 818–979 1
+10. Hacker-bank — lines 980–1053 1
+11. Hacker maps — lines 1054–1166 1
+12. Image-preview — lines 1167–1238 1
+13. Instrusction board — lines 1239–1362 1
+14. Job application — lines 1363–1549 1
+15. Kanban board — lines 1550–1690 1
+16. Movie booking — lines 1691–1779 1
+17. Movie-list — lines 1780–1844 1
+18. Movie-watchlist — lines 1845–1967 1
+19. CountryList — lines 1968–2012 1
+20. currency converter — lines 2013–2077 1
+21. customerlist — lines 2078–2130 1
+22. customerlist search — lines 2131–2217 1
+23. Fitness — lines 2218–2406 1
+24. Profile — lines 2407–2527 1
+25. Navbar — lines 2528–2567 1
+26. Pagination — lines 2568–2658 1
+27. Task manager — lines 2659–2794 1
+28. Team-selection — lines 2795–3017 1
+29. Teams and channel — lines 3018–3152 1
+30. Teliphone directory — lines 3153–3290 1
+31. Timer component — lines 3291–3360 1
+32. Pokemon details fetch — lines 3361–3495 1
+33. Kanban class — lines 3496–3596 1
+34. Hackershop cart — lines 3597–3724 1
+35. Team selection new — lines 3725–4074 1
+36. Hackershop checkout — lines 4075–4307 1
+37. Cesar cipher — lines 4308–4472 1
+ 
+
+
+1. Autocorrection.jsx
+================================
+
+class AutocorrectTextarea extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: "" };
+  }
+
+  handleChange = (e) => {
+    const input = e.target.value;
+    const { corrections } = this.props;
+
+    if (input.endsWith(" ")) {
+      const newVal = input.slice(0, -1);
+      const words = newVal.split(" ");
+      const lastWord = words[words.length - 1];
+      if (corrections && corrections[lastWord]) {
+        words[words.length - 1] = corrections[lastWord];
+      }
+
+      this.setState({ text: words.join(" ") + " " });
+    } else {
+      this.setState({ text: input });
+    }
+  };
+
+  render() {
+    return (
+      <div className="text-center">
+        <textarea
+          value={this.state.text}
+          onChange={this.handleChange}
+          data-testid="textarea"
+          rows={10}
+          cols={80}
+          className="card"
+        />
+      </div>
+    );
+  }
+}
+
+
+2.Birthday records
+===========================================
+
+App.js
+---------------------------
+function App() {
+  const [sortBy, setSortBy] = useState("");
+
+  return (
+    <div>
+      <h8k-navbar header={title}></h8k-navbar>
+      <Radio sortBy={sortBy} setSortBy={setSortBy} />
+      <Table sortBy={sortBy} />
+    </div>
+  );
+}
+
+
+Radio.js
+------------------------------
+import React from "react";
+
+const Radio = ({ sortBy, setSortBy }) => {
+  return (
+    <div className="layout-row align-items-center justify-content-center mt-75">
+      <label htmlFor="sortBy">Sort By</label>
+
+      <input
+        type="radio"
+        id="nameRadio"
+        value={sortBy}
+        name="sortBy"
+        data-testid="name"
+        title="Sort by name"
+        onChange={(e) => setSortBy(e.target.value)}
+      />
+      <label htmlFor="nameRadio" className="px-4">
+        Name
+      </label>
+
+      <input
+        type="radio"
+        id="ageRadio"
+        value={sortBy}
+        name="sortBy"
+        data-testid="age"
+        title="Sort by age"
+        onChange={(e) => setSortBy(e.target.value)}
+      />
+      <label htmlFor="ageRadio" className="px-4">
+        Age
+      </label>
+    </div>
+  );
+};
+
+
+Table.js
+--------------------------------
+const Table = ({ sortBy }) => {
+  const people = [
+    { name: "Rhianna Johnson", birth: "11/30/2011" },
+    { name: "Aiden Shaw", birth: "09/16/1992" },
+    { name: "Trevon Floyd", birth: "01/16/1992" },
+    { name: "Melanie Yates", birth: "12/12/2001" },
+    { name: "Chris Andrews", birth: "02/09/1891" },
+    { name: "Jacinda Miller", birth: "12/01/1982" },
+    { name: "Will Davis", birth: "11/30/2011" },
+    { name: "Eliza Baxter", birth: "10/31/1999" },
+  ];
+
+  const sorted = () =>
+    [...people].sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === "age") return new Date(a.birth) - new Date(b.birth);
+      else return data;
+    });
+
+  return (
+    <div className="table-div">
+      <div className="card w-50 mx-auto mt-20 pb-30">
+        <table data-testid="table">
+          <thead>
+            <tr>
+              <th className="course-name">Person Name</th>
+              <th className="duration">Date of Birth</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((item) => (
+              <tr>
+                <td>{item.name}</td>
+                <td>{item.birth}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+
+
+3. BMI
+=================================
+const BMICalculator: React.FC = () => {
+
+  const[bmi, setBmi] = useState("-")
+  const[category, setCategory]=useState("-");
+  const[weight, setWeight]=useState("")
+  const[height, setHeight]=useState("")
+  const[unit, setUnit] = useState("metric")
+
+
+  const calculateBMI=()=>{
+    if(!height.trim() ||!weight.trim() ||Number(height)<=0 || Number(weight)<=0){
+      return;
+    }
+
+    if(unit==="metric"){
+      let hh=Number(height)/100;
+      const calc=Number(weight)/(hh*hh);
+      setBmi(calc.toFixed(2))
+      if(calc<18.5)
+        setCategory("Underweight")
+      else if(calc>=18.5 && calc<=24.9)
+        setCategory("Normal weight")
+      else if (calc >=25 && calc <=29.9)
+        setCategory("Overweight")
+      else if(calc>=30)
+        setCategory("Obesity")
+    }
+    else if(unit==="imperial"){
+      const hh =Number(height) *Number(height)
+      const calc=703*Number(weight)/hh;
+      setBmi(calc.toFixed(2))
+      if(calc<18.5)
+        setCategory("Underweight")
+      else if(calc>=18.5 && calc<=24.9)
+        setCategory("Normal weight")
+      else if (calc >=25 && calc <=29.9)
+        setCategory("Overweight")
+      else if(calc>=30)
+        setCategory("Obesity")
+    }
+
+
+  }
+
+  return (
+    <div className="layout-column align-items-center justify-content-start bmi-calculator" data-testid="bmi-calculator">
+      <div className="bmi-calculator-scale card w-200 pt-30 pb-8 mt-20 mb-15">
+        <section className="layout-row align-items-center justify-content-center mr-20 ml-20">
+          <label htmlFor="weight">Weight:</label>
+          <input type="number" id="weight" data-testid="weight-input" value={weight || ''} onChange={(e) => {setWeight(e.target.value)}}/>(lbs)
+        </section>
+        <section className="layout-row align-items-center justify-content-center mt-20 mr-20 ml-20">
+          <label htmlFor="height">Height:</label>
+          <input type="number" id="height" data-testid="height-input" value={height || ''} onChange={(e) => {setHeight(e.target.value)}}/>(in)
+        </section>
+        <section className="layout-row align-items-center justify-content-center mt-20 mr-20 ml-20">
+          <label htmlFor="unit">Unit:</label>
+          <select id="unit" data-testid="unit-selector" value={unit} onChange={(e) => {setUnit(e.target.value)}}>
+            <option value="metric">Metric</option>
+            <option value="imperial">Imperial</option>
+          </select>
+        </section>
+        <section className="layout-row align-items-center justify-content-center mt-20 mr-20 ml-20">
+          <button onClick={calculateBMI} data-testid="calculate-button">Calculate</button>
+        </section>
+      </div>
+      <div className="bmi-calculator-result card w-200 mt-10 pt-10 pb-10">
+        <section className="layout-row align-items-center justify-content-center pl-50 pr-50">
+          <p data-testid="bmi-result">BMI: {bmi}</p>
+        </section>
+        <section className="layout-row align-items-center justify-content-center pl-50 pr-50">
+          <p data-testid="bmi-category">Category: {category}</p>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+
+
+4. Budget Tracker
+================================================
+
+BudgetTracker.js
+------------------------
+const BudgetTracker = () => {
+  const [totalIncome, setTotalIncome] = useState(0);
+  const [totalExpense, setTotalExpense] = useState(0);
+
+  const handleIncome = (amount) => {
+    setTotalIncome((prev) => prev + parseFloat(amount));
+  };
+
+  const handleExpense = (amount) => {
+    setTotalExpense((prev) => prev + parseFloat(amount));
+  };
+
+  const resetting = () => {
+    setTotalIncome(0);
+    setTotalExpense(0);
+  };
+  return (
+    <div>
+      <div className="flex flex-col md:flex-row gap-8 mb-8">
+        <IncomeForm onAddIncome={handleIncome} />
+        <ExpenseForm onAddExpense={handleExpense} />
+      </div>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold text-left">Summary</h2>
+        <button
+          className="px-4 py-2 border border-neutral-300 rounded-md bg-[#FAFAFA] hover:bg-gray-100 transition font-bold text-sm"
+          data-testid="reset-btn"
+          onClick={resetting}
+        >
+          Reset
+        </button>
+      </div>
+      <Summary totalInc={totalIncome} totalExp={totalExpense} />
+    </div>
+  );
+};
+
+
+
+Income.js
+---------------------------------------------
+const IncomeForm = ({ onAddIncome }) => {
+  const [income, setIncome] = useState("");
+  const addIncome = () => {
+    const trimNo = Number(String(income.trim()));
+    if (!trimNo || trimNo <= 0) return;
+    onAddIncome(trimNo);
+    setIncome("");
+  };
+  return (
+    <form className="flex-1 bg-white rounded-xl shadow p-5 flex flex-col items-start gap-6 min-w-[320px]">
+      <div className="flex flex-row space-x-3">
+        <div className="bg-[#DCFAE6] text-[#18A149] rounded-lg p-3">
+          <CirclePlus size={24} />
+        </div>
+        <div>
+          <div className="font-bold text-base">Add income</div>
+          <div className="text-neutral-500 text-sm">
+            Create an income manually
+          </div>
+        </div>
+      </div>
+      <div className="flex-1 flex w-full items-center bg-gray-100 rounded-lg border border-gray-200 px-3 py-2 mb-3">
+        <span className="text-black mr-3 text-xl">$</span>
+        <input
+          className="flex-1 bg-transparent outline-none text-black placeholder-black text-sm"
+          data-testid="income-input"
+          type="number"
+          placeholder="Enter income here"
+          value={income}
+          onChange={(e) => setIncome(e.target.value)}
+        />
+        <button
+          className="ml-2 bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition"
+          data-testid="add-income-btn"
+          type="button"
+          onClick={addIncome}
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  );
+};
+
+
+Expense.js
+---------------------------------
+const ExpenseForm = ({ onAddExpense }) => {
+  const [expense, setExpense] = useState("");
+  const addExpense = () => {
+    const trimNo = Number(String(expense.trim()));
+    if (!trimNo || trimNo <= 0) return;
+    onAddExpense(trimNo);
+    setExpense("");
+  };
+  return (
+    <form className="flex-1 bg-white rounded-xl shadow p-5 flex flex-col items-start gap-6 min-w-[320px]">
+      <div className="flex flex-row space-x-3">
+        <div className="bg-[#FEE4E2] text-[#D92D20] rounded-lg p-3">
+          <CircleMinus size={24} />
+        </div>
+        <div>
+          <div className="font-bold text-base">Add expense</div>
+          <div className="text-neutral-500 text-sm">
+            Create an expense manually
+          </div>
+        </div>
+      </div>
+      <div className="flex-1 flex w-full items-center bg-gray-100 rounded-lg border border-gray-200 px-3 py-2 mb-3">
+        <span className="text-black mr-3 text-xl">$</span>
+        <input
+          className="flex-1 bg-transparent outline-none text-black placeholder-black text-sm"
+          data-testid="expense-input"
+          type="number"
+          placeholder="Enter expense here"
+          value={expense}
+          onChange={(e) => setExpense(e.target.value)}
+        />
+        <button
+          className="ml-2 bg-black text-white px-4 py-2 rounded-lg text-sm hover:bg-gray-800 transition"
+          data-testid="add-expense-btn"
+          type="button"
+          onClick={addExpense}
+        >
+          Add
+        </button>
+      </div>
+    </form>
+  );
+};
+
+
+Summary.js
+------------------------------------
+const Summary = ({ totalInc, totalExp }) => {
+  let Inc = totalInc;
+  let Exp = totalExp;
+  return (
+    <div data-testid="summary" className="flex flex-col md:flex-row gap-8">
+      <div
+        data-testid="total-income"
+        className="flex-1 bg-white rounded-xl shadow p-6 min-w-[200px]"
+      >
+        <div className="text-gray-600 text-sm mb-2">Total Income</div>
+        <div className="text-4xl font-bold text-[#18A149]">
+          ${totalInc.toFixed(2)}
+        </div>
+      </div>
+      <div
+        data-testid="total-expenses"
+        className="flex-1 bg-white rounded-xl shadow p-6 min-w-[200px]"
+      >
+        <div className="text-gray-600 text-sm mb-2">Total Expenses</div>
+        <div className="text-4xl font-bold text-[#D92D20]">
+          ${totalExp.toFixed(2)}
+        </div>
+      </div>
+      <div
+        data-testid="balance"
+        className="flex-1 bg-white rounded-xl shadow p-6 min-w-[200px]"
+      >
+        <div className="text-gray-600 text-sm mb-2">Balance</div>
+        <div className="text-4xl font-bold text-black">
+          ${(Inc - Exp).toFixed(2)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
+5. Color peaker
+======================================
+export default class ColorPicker extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { selectedColor: props.initialSelectedColor || "" };
+  }
+
+  handleSelect = (color) => {
+    this.setState({ selectedColor: color });
+  };
+
+  render() {
+    const { selectedColor } = this.state;
+    const { colorPickerOptions } = this.props;
+    return (
+      <div>
+        <div className="layout-row justify-content-center">
+          <div className="card mt-75">
+            <div
+              style={{ background: selectedColor }}
+              className="canvas"
+              data-testid="selectedColor"
+            >
+              <p className="text-center mx-auto px-5">{selectedColor}</p>
+            </div>
+            <div className="card-actions">
+              <div
+                className="layout-row justify-content-center align-items-center"
+                data-testid="colorPickerOptions"
+              >
+                {colorPickerOptions.map((color, index) => {
+                  return (
+                    <div
+                      className={classNames({
+                        "color-box": true,
+                        "mx-8": true,
+                        "my-15": true,
+                        selected: selectedColor === color,
+                      })}
+                      key={color}
+                      onClick={() => this.handleSelect(color)}
+                      style={{ backgroundColor: color }}
+                    ></div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+6. Editable table
+================================================
+
+App.js
+----------------------------
+const App = () => {
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
+  const [salary, setSalary] = useState("");
+  const [list, setList] = useState(employeesList);
+
+  return (
+    <Fragment>
+      <h8k-navbar header={title}></h8k-navbar>
+      <div className="card w-45 mx-auto mt-75 pb-5">
+        <table data-testid="table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {list.map((employee, idx) => (
+              <tr key={employee.id} data-testid={`row-${idx}`}>
+                <Employee idx={idx} employee={employee} />
+              </tr>
+            ))}
+            <tr>
+              <AddEmployee
+                name={name}
+                setName={setName}
+                position={position}
+                setPosition={setPosition}
+                salary={salary}
+                setSalary={setSalary}
+                list={list}
+                setList={setList}
+              />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Fragment>
+  );
+};
+
+
+
+AddEmployee.js
+------------------------------------------------
+const AddEmployee = ({
+  name,
+  setName,
+  position,
+  setPosition,
+  salary,
+  setSalary,
+  list,
+  setList,
+}) => {
+  const newEmp = { name: name, position: position, salary: salary };
+  const addEmployee = () => {
+    const arr = [...list, newEmp];
+    setList(arr);
+    setName("");
+    setPosition("");
+    setSalary("");
+  };
+  return (
+    <Fragment>
+      <td className="pl-30">
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          data-testid="new-employee-name-input"
+          placeholder="Enter Name"
+        />
+      </td>
+      <td className="pl-20">
+        <input
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
+          data-testid="new-employee-position-input"
+          placeholder="Enter Position"
+        />
+      </td>
+      <td className="pl-20">
+        <input
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+          data-testid="new-employee-salary-input"
+          type="number"
+          placeholder="Enter Salary"
+        />
+      </td>
+      <td className="pl-20">
+        <button
+          data-testid="add-new-employee-button"
+          className="x-small w-75 ma-0 px-25"
+          onClick={addEmployee}
+          disabled={!name || !position || !salary}
+        >
+          Add
+        </button>
+      </td>
+    </Fragment>
+  );
+};
+
+
+Employee.js
+-----------------------------------------
+const Employee = ({ idx, employee }) => {
+  const [emp, setEmp] = useState(employee);
+  const [flag, setFlag] = useState(true);
+
+  const salaryChange = (e) => {
+    const value = e.target.value;
+    setEmp((prev) => ({ ...prev, salary: value === "" ? "" : Number(value) }));
+  };
+
+  const divClick = () => {
+    setFlag(false);
+  };
+
+  const handleSave = () => {
+    setFlag(true);
+  };
+  return (
+    <Fragment>
+      <td>{employee.name}</td>
+      <td className="pl-20">{employee.position}</td>
+      <td className="pl-20">
+        {flag ? (
+          <div onClick={divClick} data-testid={"employee-salary-div-" + idx}>
+            {emp.salary}
+          </div>
+        ) : (
+          <input
+            onChange={salaryChange}
+            data-testid={"employee-salary-input-" + idx}
+            type="number"
+            value={emp.salary}
+          />
+        )}
+      </td>
+      <td className="pl-20">
+        <button
+          className={"x-small w-75 ma-0 px-25"}
+          data-testid={"employee-save-button-" + idx}
+          onClick={handleSave}
+          disabled={emp.salary === employee.salary || flag}
+        >
+          Save
+        </button>
+      </td>
+    </Fragment>
+  );
+};
+
+
+7.Fetch-stock
+=============================================
+
+
+import React, { useEffect, useState } from 'react';
+import stocks from "../../stocks";
+
+function Users() {
+  const [data, setData] = useState(stocks);
+  const [currMonth, setCurrMonth] = useState("January");
+  const [monthData, setMonthData] = useState([]);
+  const [totalProfit, setTotalProfit] = useState(0);
+  const [totalLoss, setTotalLoss] = useState(0);
+
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  useEffect(() => {
+    const filteredMonth = data.filter(f => f.date.includes(currMonth))
+    setMonthData(filteredMonth);
+    total_profit_Loss(filteredMonth); // to avoiding the stale condition we have to pass filteredMonth here.
+  }, [currMonth])
+
+  const handleSort = () => {
+    const sortedData = [...monthData].sort((a, b) => (b.close - b.open)-(a.close - a.open));
+    setMonthData(sortedData);
+  }
+
+  function total_profit_Loss(filteredMonth) {  //for handling stale condition we are accepting "filteredMonth"  instead of direct "monthData"
+    let temp = 0;
+    let total_profit = 0;
+    let total_loss = 0;
+    for (let i = 0; i < filteredMonth.length; i++) {
+      temp = (filteredMonth[i].close - filteredMonth[i].open);
+      if (temp < 0) {
+        total_loss += temp;
+      }
+      else {
+        total_profit += temp;
+      }
+    }
+    setTotalProfit(total_profit);
+    setTotalLoss(total_loss);
+  }
+
+  return (
+    <>
+      <div className='layout-row justify-content-center'>
+        <select className='mt-13 mr-5' data-testid="select-month" defaultValue={'January'} onChange={(e) => { setCurrMonth(e.target.value) }}>
+          {months.map(m =>
+            <option>{m}</option>
+          )}
+        </select>
+        <button data-testid="sort" onClick={handleSort}>Sort</button>
+      </div>
+      <div className='layout-row wrap w-100 justify-content-center' data-testid="stocks">
+
+        {data && monthData.map((stock, index) =>
+          <div className='card layout-column w-20 ma-10 px-8' key={index}>
+            <p className='ma-0'>Date: {stock.date}</p>
+            <p className='ma-0'>High: {stock.high}</p>
+            <p className='ma-0'>Low: {stock.low}</p>
+            <p className='ma-0'>Profit: {((stock.close - stock.open) < 0) ? "❌" : "✅"} ({Number(Math.abs((stock.close - stock.open))).toFixed(2)})</p>
+          </div>
+        )
+        }
+
+      </div>
+      <div className='layout-column justify-content-center align-items-center' >
+        <p className='mb-0 font-weight-bold' data-testid='total-profit'>Total Profit: <span style={{ color: "#1ba94c" }}>{totalProfit.toFixed(2)}</span></p>
+        <p className='font-weight-bold' data-testid='total-loss'>Total Loss: <span style={{ color: "red" }}>{totalLoss.toFixed(2)}</span></p>
+      </div>
+    </>
+  )
+}
+
+export default Users
+
+
+
+8. Flashcards
+===================================================
+
+
+Flashcard deck.js
+----------------------------
+const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ flashCards }) => {
+  const[cards, setCards]=useState(flashCards);
+  const handleShuffle=()=>{
+    const next =[...cards];
+    [next[0], next[1]] =[next[1], next[0]]
+    setCards(next)
+  }
+  return (
+    <div className="layout-column align-items-center justify-content-start">
+      <div className="flashcard-deck" data-testid="flashcard-deck">
+        {cards.map((card, index)=>(
+
+          <FlashCard key={index} flashCard={card} />
+        ))}
+      </div>
+      <button onClick={handleShuffle} data-testid="shuffle-button">Shuffle</button>
+    </div>
+  );
+};
+
+
+
+Flashcard.js
+------------------------------------------------------
+const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ flashCards }) => {
+  const[cards, setCards]=useState(flashCards);
+  const handleShuffle=()=>{
+    const next =[...cards];
+    [next[0], next[1]] =[next[1], next[0]]
+    setCards(next)
+  }
+  return (
+    <div className="layout-column align-items-center justify-content-start">
+      <div className="flashcard-deck" data-testid="flashcard-deck">
+        {cards.map((card, index)=>(
+
+          <FlashCard key={index} flashCard={card} />
+        ))}
+      </div>
+      <button onClick={handleShuffle} data-testid="shuffle-button">Shuffle</button>
+    </div>
+  );
+};
+
+
+
+9. Form validation
+===============================================
+
+function Form() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [url, setUrl] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const validateName = (val) => {
+    if (!val) return false;
+    if (val.length > 25) return false;
+    if (!/^[A-Za-z ]+$/.test(val)) return false;
+    const lettercount = (val.match(/[A-Za-z]/g) || []).length;
+    return lettercount >= 3;
+  };
+
+  const validatePhone = (val) => {
+    if (!val) return false;
+    return /^\d{10}$/.test(val);
+  };
+
+
+function validateEmail(email) {
+  const regex = /^[a-zA-Z]{1}[a-zA-Z0-9]{2,19}@[a-zA-Z]{3,10}\.[a-zA-Z]{3,5}$/;
+  return regex.test(email);
+}
+
+function validateUrl(url) {
+  const regex = /https:\/\/[a-zA-Z]{3,10}.[a-zA-Z]{3,20}.[a-zA-Z]{2,5}$/;
+  return regex.test(url);
+}
+
+  const isNameValid = validateName(name);
+  const isEmailValid = validateEmail(email);
+  const isPhoneValid = validatePhone(phone);
+  const isUrlValid = validateUrl(url);
+
+  const allValid = isNameValid && isEmailValid && isPhoneValid && isUrlValid;
+
+  const onVerify = () => {
+    setSubmitted(true);
+  };
+  return (
+    <div className="card w-40 mx-auto py-50 px-50 my-10">
+      <div>
+        <div className="layout-column">
+          <label htmlFor="name">Name</label>
+          <input
+            id="name"
+            data-testid="name"
+            placeholder="John Doe"
+            className="large mt-8 px-10"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          {submitted && !isNameValid && (
+            <p
+              data-testid="nameErrorTxt"
+              className="form-hint error-text mx-10"
+              id="hint-input"
+            >
+              Error: Invalid Entry
+            </p>
+          )}
+        </div>
+      </div>
+      <div>
+        <div className="mt-15 layout-column">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            data-testid="email"
+            placeholder="johndoe@hackerrank.com"
+            className="large mt-8 px-10"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {submitted && !isEmailValid && (
+            <p
+              data-testid="emailErrorTxt"
+              className="form-hint error-text mx-10"
+              id="hint-input"
+            >
+              Error: Invalid Entry
+            </p>
+          )}
+        </div>
+      </div>
+      <div>
+        <div className="mt-15 layout-column">
+          <label htmlFor="phone">Phone</label>
+          <input
+            id="phone"
+            data-testid="phone"
+            placeholder="1234567890"
+            className="large mt-8 px-10"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          {submitted && !isPhoneValid && (
+            <p
+              data-testid="phoneErrorTxt"
+              className="form-hint error-text mx-10"
+              id="hint-input"
+            >
+              Error: Invalid Entry
+            </p>
+          )}
+        </div>
+      </div>
+      <div>
+        <div className="mt-15 layout-column">
+          <label htmlFor="blogUrl">Blog URL</label>
+          <input
+            id="blogUrl"
+            data-testid="url"
+            placeholder="https://www.johndoe.dev"
+            className="large mt-8 px-10"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+          />
+          {submitted && !isUrlValid && (
+            <p
+              data-testid="urlErrorTxt"
+              className="form-hint error-text mx-10"
+              id="hint-input"
+            >
+              Error: Invalid Entry
+            </p>
+          )}
+        </div>
+      </div>
+      <button
+        onClick={onVerify}
+        data-testid="verify"
+        className="button mt-40"
+        type="button"
+      >
+        VERIFY
+      </button>
+      {submitted && allValid && (
+        <div
+          data-testid="successMsg"
+          className="success-text success-text text-center py-40"
+        >
+          Verification Successful
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+
+10. Hacker-bank
+----------------------------------------------------
+
+function TransactionTable({ txns }) {
+  const [data, setData] = useState(txns);
+  const [input, setInput] = useState("2019-11-29");
+
+  const sort = () => {
+    const sorted = [...data].sort((x, y) => x.amount - y.amount);
+    setData(sorted);
+  };
+
+  const findByDate = () => {
+    const dateInput = document.getElementById("date").value;
+    if (!input) return;
+    const filtered = [...txns].filter((x) => x.date === input);
+    setData(filtered);
+  };
+  return (
+    <div className="layout-column align-items-center mt-50">
+      <section className="layout-row align-items-center justify-content-center">
+        <label className="mr-10">Transaction Date</label>
+        <input
+          id="date"
+          type="date"
+          defaultValue="2019-11-29"
+          onChange={(e) => setInput(e.target.value)}
+          role="search"
+        />
+        <button onClick={findByDate} className="small">
+          Filter
+        </button>
+      </section>
+
+      <div className="card mt-50">
+        <table className="table">
+          <thead>
+            <tr className="table">
+              <th className="table-header">Date</th>
+              <th className="table-header">Description</th>
+              <th className="table-header">Type</th>
+              <th className="table-header">
+                <span id="amount" onClick={sort} role="button">
+                  Amount ($)
+                </span>
+              </th>
+              <th className="table-header">Available Balance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.date}</td>
+                <td>{item.description}</td>
+                <td>{item.type === 1 ? "Debit" : "Credit"}</td>
+                <td>{item.amount}</td>
+                <td>{item.balance}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+
+
+11.Hacker maps
+===============================================
+
+export default class Navigation extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      locations: props.locations,
+    };
+  }
+
+  // Used for rendering
+  getClasses(ctx, index) {
+    let classes = `material-icons ${ctx}`;
+    if (ctx === "dots") {
+      if (this.isLast(index)) {
+        classes += " hidden";
+      }
+    } else {
+      classes += this.isLast(index) ? " small" : " x-small";
+      if (index === 0) {
+        classes += " first";
+      }
+    }
+    return classes;
+  }
+
+  // Used for rendering
+  isLast(index) {
+    return index === this.props.locations.length - 1;
+  }
+
+  moveUp = (index) => {
+    const data = [...this.state.locations];
+    const temp = data[index];
+    data[index] = data[index - 1];
+    data[index - 1] = temp;
+    this.setState({ locations: data });
+  };
+
+  moveDown = (index) => {
+    const data = [...this.state.locations];
+    const temp = data[index];
+    data[index] = data[index + 1];
+    data[index + 1] = temp;
+    this.setState({ locations: data });
+  };
+
+  render() {
+    const { locations } = this.state;
+    return (
+      <div className="layout-row align-items-center justify-content-center navigation-screen">
+        <div className="card layout-row flat map-card">
+          <section className="card pb-16 pr-16 flex-auto layout-column justify-content-center">
+            <ul className="pl-0" data-testid="location-list">
+              {/*Use this li for rendering each location item as it contains all the data-testid attributes required for the tests to pass*/}
+              {locations.map((location, index) => (
+                <li
+                  key={"row" + index}
+                  data-testid={"location-" + index}
+                  className="layout-row justify-content-between align-items-center mr-8 pl-40 relative"
+                >
+                  <div className="layout-column justify-content-start align-items-center handle">
+                    <i className={this.getClasses("marker", index)}>
+                      {this.isLast(index) ? "room" : "radio_button_checked"}
+                    </i>
+                    <i className={this.getClasses("dots", index)}>more_vert</i>
+                  </div>
+                  <div className="location-name">
+                    <p
+                      className="caption text-start mb-4"
+                      data-testid="location"
+                    >
+                      {location}
+                    </p>
+                  </div>
+                  <div>
+                    {!(index === 0) && (
+                      <button
+                        className="icon-only small mx-0"
+                        data-testid="up-button"
+                        onClick={() => this.moveUp(index)}
+                      >
+                        <i className="material-icons">arrow_upward</i>
+                      </button>
+                    )}
+                    {!(index === locations.length - 1) && (
+                      <button
+                        className="icon-only small mx-0"
+                        data-testid="down-button"
+                        onClick={() => this.moveDown(index)}
+                      >
+                        <i className="material-icons">arrow_downward</i>
+                      </button>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+          <section className="flex-auto">
+            <img src="images/map.svg" className="fill" alt="map" />
+          </section>
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
+12. Image-preview
+====================================================
+
+const ImagePreview = ({ images }) => {
+  const [items, setItems] = useState(images);
+
+  const imgToggle = (index) => {
+    setItems((prev) =>
+      prev.map((img, i) =>
+        i === index ? { ...img, visible: !img.visible } : img
+      )
+    );
+  };
+  const handleShow = () => {
+    setItems((prev) => prev.map((x) => ({ ...x, visible: true })));
+  };
+
+  const handleHide = () => {
+    setItems((prev) => prev.map((x) => ({ ...x, visible: false })));
+  };
+  return (
+    <div className="layout align-items-center mt-100">
+      <div className="card ma-20 pa-50">
+        <section>
+          <div
+            className="layout-row justify-content-around"
+            data-testid="images-div"
+          >
+            {items.map((img, index) =>
+              img.visible ? (
+                <img
+                  key={img.id}
+                  src={img.src}
+                  height={200}
+                  width={300}
+                  alt={img.all}
+                  onClick={() => imgToggle(index)}
+                />
+              ) : (
+                <HiddenImageDiv key={img.id} onClick={() => imgToggle(index)} />
+              )
+            )}
+          </div>
+        </section>
+        <section className="card-actions justify-content-center">
+          <button onClick={handleShow} data-testid="show-all-btn">
+            Show all
+          </button>
+          <button
+            onClick={handleHide}
+            className="danger"
+            data-testid="hide-all-btn"
+          >
+            Hide all
+          </button>
+        </section>
+      </div>
+    </div>
+  );
+};
+
+
+
+13. Instrusction board
+===================================================
+
+export default function InstructionBoard() {
+  let [instructions, setInstructions] = React.useState([]);
+  let [instruction, setInstruction] = React.useState("");
+  const [errMsg, setErrMsg] = React.useState("");
+
+  const addInstruction = (event) => {
+    event.preventDefault();
+    if (!instruction) {
+      setErrMsg("Please enter an instruction.");
+      return;
+    }
+    setInstructions([...instructions, instruction]);
+    setInstruction("");
+  };
+
+  const swapDown = (index) => {
+    let temp = instructions;
+    let temp2 = temp[index];
+    temp[index] = temp[index + 1];
+    temp[index + 1] = temp2;
+    setInstruction([]);
+    setInstructions(temp);
+  };
+
+  const swapUp = (index) => {
+    let temp = instructions;
+    let temp2 = temp[index];
+    temp[index] = temp[index - 1];
+    temp[index - 1] = temp2;
+    setInstruction([]);
+    setInstructions(temp);
+  };
+
+  return (
+    <div className="mt-50 layout-column justify-content-center align-items-center">
+      <div>
+        <form onSubmit={addInstruction}>
+          <section
+            className="my-30 layout-row align-items-center justify-content-center"
+            style={{ width: "1000px" }}
+          >
+            <input
+              id="instruction-input"
+              type="text"
+              placeholder="New Instruction"
+              data-testid="instruction-input"
+              style={{ width: "80%" }}
+              value={instruction}
+              onChange={(e) => setInstruction(e.target.value)}
+            />
+            <button
+              type="submit"
+              className="ml-30"
+              data-testid="add-instruction-button"
+              style={{ width: "20%" }}
+            >
+              Add Instruction
+            </button>
+          </section>
+        </form>
+        {errMsg !== "" && (
+          <span data-testid="error-message" className="error">
+            {errMsg}
+          </span>
+        )}
+      </div>
+      <div className="card outlined mt-0" style={{ width: "800px" }}>
+        <div className="card-text">
+          <h4>Instructions</h4>
+          <ul className="styled mt-50" data-testid="instructions">
+            {instructions.map((instruction, i) => (
+              <li
+                className="slide-up-fade-in"
+                key={i}
+                data-testid={`instruction-${instruction
+                  .split(" ")
+                  .join("-")}-li`}
+              >
+                <div className="li-content layout-row justify-content-between align-items-center py-10">
+                  <span data-testid={`${i + 1}`}>{i + 1}</span>
+                  <span
+                    data-testid={`instruction-${instruction
+                      .split(" ")
+                      .join("-")}`}
+                  >
+                    {instruction}
+                  </span>
+                  <div className="icons">
+                    <button
+                      disabled={i === instructions.length - 1}
+                      className="icon-only x-medium mx-2"
+                      data-testid={`${i}-swap-down`}
+                      onClick={() => swapDown(i)}
+                    >
+                      <i className="material-icons">arrow_drop_down_icon</i>
+                    </button>
+                    <button
+                      disabled={i === 0}
+                      className="icon-only x-medium mx-2"
+                      data-testid={`${i}-swap-up`}
+                      onClick={() => swapUp(i)}
+                    >
+                      <i className="material-icons">arrow_drop_up_icon</i>
+                    </button>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+14. Job application
+======================================================
+
+job application.jsx
+---------------------------------
+
+import React, { useState } from "react";
+import Preview from "./Preview";
+import SuccessMessage from "./SuccessMessage";
+
+const JobApplicationForm = () => {
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [exp, setExp] = useState("");
+
+  const [isInValidEmail, setIsInValidEmail] = useState(false);
+  const [isInValidName, setIsInValidName] = useState(false);
+  const [isInValidExp, setIsInValidExp] = useState(false);
+
+  const [showPreview, setShowPreview] = useState(false);
+  const [showSuccessMsg, setShowSuccessMsg] = useState(false);
+
+  function checkValidName(userName) {
+    if (userName.trim() === "") {
+      console.log("InValid Name");
+      setIsInValidName(true);
+
+    }
+  }
+
+  function checkValidEmail(userEmail) {
+    if (userEmail.trim() === "" || !userEmail.includes("@")) {
+      setIsInValidEmail(true);
+    }
+  }
+
+  function checkValidExp(yrs) {
+    if (yrs < 0 || yrs === "") {
+      setIsInValidExp(true);
+
+    }
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    checkValidName(name);
+    checkValidEmail(email);
+    checkValidExp(exp);
+    //If any one returns true that means do not take the submit (any true means it is invalid).
+    if (isInValidName || isInValidEmail || isInValidExp) {
+      setShowPreview(false);
+      return;
+    }
+    setShowPreview(true);
+  }
+
+  function doReset() {
+    setName("");
+    setEmail("");
+    setExp("");
+    setIsInValidEmail(false);
+    setIsInValidExp(false);
+    setIsInValidName(false);
+    setShowPreview(false);
+  }
+
+  return (
+
+    <>
+      <form data-testid="job-application-form" className="layout-column ml-auto">
+        <h2 className="ma-auto pa-20">Provide your details</h2>
+        <div>
+          <label className="font-weight-bold">
+            Name:
+            <input
+              data-testid="input-name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="pa-10 ml-120"
+            />
+          </label>
+          {isInValidName && <p data-testid="error-name" className="error">
+            Name is required.
+          </p>}
+        </div>
+        <div>
+          <label className="font-weight-bold">
+            Email:
+            <input
+              data-testid="input-email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="pa-10 ml-120"
+            />
+          </label>
+          {isInValidEmail && <p data-testid="error-email" className="error">
+            Enter a valid email address.
+          </p>}
+        </div>
+        <div>
+          <label className="font-weight-bold">
+            Experience (years):
+            <input
+              data-testid="input-experience"
+              type="number"
+              name="experience"
+              value={exp}
+              onChange={(e) => setExp(e.target.value)}
+              className="pa-10 ml-20"
+            />
+          </label>
+          {isInValidExp && <p data-testid="error-experience" className="error">
+            Experience must be a positive number.
+          </p>}
+        </div>
+        <div className="ml-100">
+          <button onClick={(e) => handleSubmit(e)} data-testid="preview-button" type="submit" className="mx-50">
+            Preview
+          </button>
+          <button onClick={doReset} data-testid="reset-button" type="button" className="mx-50">
+            Reset
+          </button>
+        </div>
+      </form>
+      {showPreview && <Preview name={name} email={email} exp={exp} doReset={doReset} setShowSuccessMsg={setShowSuccessMsg} />}
+      {showSuccessMsg && <SuccessMessage doReset={doReset} />}
+
+    </>
+  );
+};
+
+export default JobApplicationForm;
+
+
+
+Preview.js
+----------------------------------------------
+import React from "react";
+ 
+const Preview = ({ name, email, exp, doReset, setShowSuccessMsg }) => {
+  return (
+    <div data-testid="preview">
+      <h2>Preview Your Application</h2>
+      <p data-testid="preview-name">
+        <strong>Name:</strong> {name}
+      </p>
+      <p data-testid="preview-email">
+        <strong>Email:</strong> {email}
+      </p>
+      <p data-testid="preview-experience">
+        <strong>Experience:</strong> {exp} years
+      </p>
+      <button onClick={doReset} data-testid="clear-button">Clear</button>
+      <button onClick={() => setShowSuccessMsg(true)} data-testid="submit-button">Submit</button>
+    </div>
+  );
+};
+ 
+export default Preview;
+ 
+ 
+
+
+SuccessMessage.js
+---------------------------------------------
+import React from "react";
+ 
+const SuccessMessage = ({ doReset }) => {
+  return (
+    <div data-testid="success-message">
+      <h2>Application Submitted Successfully!</h2>
+      <p>Thank you for your application. We will review it soon.</p>
+      <button onClick={doReset} className="ma-auto" data-testid="reset-home-button">
+        Home
+      </button>
+    </div>
+  );
+};
+ 
+export default SuccessMessage;
+ 
+
+
+15. Kanban board
+======================================================
+import React, { useState } from "react";
+import "./index.css"
+
+export default function KanbanBoard(props) {
+
+	let [tasks, setTasks] = React.useState([
+		{ name: '1', stage: 0 },
+		{ name: '2', stage: 0 },
+	])
+
+	let [stagesNames, setStagesNames] = React.useState(['Backlog', 'To Do', 'Ongoing', 'Done']);
+
+	let stagesTasks = [];
+	for (let i = 0; i < stagesNames.length; ++i) {
+		stagesTasks.push([]);
+	}
+	for (let task of tasks) {
+		const stageId = task.stage;
+		stagesTasks[stageId].push(task);
+	}
+
+	// My logic here
+
+	const [newTask, setNewTask] = useState('');
+	const createTask = () => {
+		if (newTask == "") {
+			return;
+		}
+		const created = [...tasks, { name: newTask, stage: 0 }]
+		setTasks(created);
+		setNewTask("");
+
+	}
+
+	const forward = (name) => {
+		setTasks(tasks.map((t) => name == t.name ? ({ ...t, stage: t.stage + 1 }) : t));
+	}
+
+	const backward = (name) => {
+		setTasks(tasks.map((t) => name == t.name ? ({ ...t, stage: t.stage - 1 }) : t))
+	}
+
+	const handledelete = (name) => {
+		setTasks(tasks.filter((d) => name != d.name))
+	}
+
+	return (
+		<div className="mt-20 layout-column justify-content-center align-items-center">
+			<section className="mt-50 layout-row align-items-center justify-content-center">
+				<input id="create-task-input" type="text" className="large" placeholder="New task name" data-testid="create-task-input" value={newTask} onChange={(e) => setNewTask(e.target.value)} />
+				<button type="submit" className="ml-30" data-testid="create-task-button" onClick={() => createTask()}>Create task</button>
+			</section>
+			<div className="mt-50 layout-row">
+				{stagesTasks.map((tasks, i) => {
+					return (
+						<div className="card outlined ml-20 mt-0" key={`${i}`}>
+							<div className="card-text">
+								<h4>{stagesNames[i]}</h4>
+								<ul className="styled mt-50" data-testid={`stage-${i}`}>
+									{tasks.map((task, index) => {
+										return <li className="slide-up-fade-in" key={`${i}${index}`}>
+											<div className="li-content layout-row justify-content-between align-items-center">
+												<span data-testid={`${task.name.split(' ').join('-')}-name`}>{task.name}</span>
+												<div className="icons">
+													<button disabled={task.stage == 0} onClick={() => backward(task.name)} className="icon-only x-small mx-2" data-testid={`${task.name.split(' ').join('-')}-back`}>
+														<i className="material-icons">arrow_back</i>
+													</button>
+													<button disabled={task.stage == 3} onClick={() => forward(task.name)} className="icon-only x-small mx-2" data-testid={`${task.name.split(' ').join('-')}-forward`}>
+														<i className="material-icons" >arrow_forward</i>
+													</button>
+													<button
+														onClick={() => handledelete(task.name)}
+														className="icon-only danger x-small mx-2" data-testid={`${task.name.split(' ').join('-')}-delete`}>
+														<i className="material-icons" >delete</i>
+													</button>
+												</div>
+											</div>
+										</li>
+									})}
+								</ul>
+							</div>
+						</div>
+					)
+				})}
+			</div>
+		</div>
+	)
+}
+
+
+
+16. Movie booking
+======================================================
+export const TicketBooking = () => {
+  const rows = 10;
+  const cols = 10;
+  const [boookedSeats, setBookedSeats] = React.useState([]);
+  const [selectedSeats, setSelectedSeats] = React.useState([]);
+
+  const booking = () => {
+    if (selectedSeats.length === 0) {
+      alert("Please select at least one seat");
+      return;
+    }
+
+    setBookedSeats([...boookedSeats, ...selectedSeats]);
+    setSelectedSeats([]);
+  };
+  const clearing = () => {
+    setSelectedSeats([]);
+  };
+
+  const resetting = () => {
+    setBookedSeats([]);
+    setSelectedSeats([]);
+  };
+
+  const seatToggle = (id) => {
+    setSelectedSeats((prev) =>
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]
+    );
+  };
+
+  const seatClass = (id) =>
+    boookedSeats.includes(id)
+      ? "disabled seat"
+      : selectedSeats.includes(id)
+      ? "selected seat"
+      : "seat";
+
+  let seatRowsTimeAuto = "";
+  for (let i = 0; i <= cols; i++) {
+    seatRowsTimeAuto += "auto ";
+  }
+  return (
+    <div className="mt-50 layout-column justify-content-center align-items-center">
+      <div className="display-flex">
+        <button onClick={booking} data-testid="book-seats">
+          Book Seats
+        </button>
+        <button
+          onClick={clearing}
+          data-testid="clear-selection"
+          className="danger"
+        >
+          Clear
+        </button>
+      </div>
+      <div
+        style={{ display: "grid", gridTemplateColumns: `${seatRowsTimeAuto}` }}
+      >
+        {Array(rows)
+          .fill(0)
+          .map((_, row) => (
+            <div key={row} style={row === 4 ? { marginRight: "40px" } : null}>
+              {Array(cols)
+                .fill(0)
+                .map((_, col) => (
+                  <div
+                    onClick={() => seatToggle(`${row}${col}`)}
+                    data-testid={`${row}${col}`}
+                    className={seatClass(`${row}${col}`)}
+                    key={`${row}${col}`}
+                  >{`${String.fromCharCode(65 + col)}${row}`}</div>
+                ))}
+            </div>
+          ))}
+      </div>
+      <br />
+      <button onClick={resetting} data-testid="reset">
+        Reset Bookings
+      </button>
+    </div>
+  );
+};
+
+
+
+17. Movie-list
+========================================================
+
+function MovieList() {
+  const [input, setInput] = useState();
+  const [movies, setMovies] = useState([]);
+  const [searched, setSearched] = useState(false);
+
+  const search = async () => {
+    const year = Number(input.trim());
+    if (!year) return;
+    try {
+      const data = await fetch(
+        `https://jsonmock.hackerrank.com/api/moviesdata?Year=${year}`
+      );
+      const json = await data.json();
+
+      const arr = Array.isArray(json?.data) ? json.data : [];
+      setMovies(arr);
+    } catch {
+      setMovies([]);
+    } finally {
+      setSearched(true);
+    }
+  };
+
+  return (
+    <div className="layout-column align-items-center mt-50">
+      <section className="layout-row align-items-center justify-content-center">
+        <input
+          type="number"
+          className="large"
+          placeholder="Enter Year eg 2015"
+          data-testid="app-input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button onClick={search} className="" data-testid="submit-button">
+          Search
+        </button>
+      </section>
+
+      <ul className="mt-50 styled" data-testid="movieList">
+        {movies.map((movie) => (
+          <li key={movie.imdbId} className="slide-up-fade-in py-10">
+            {movie.Title}
+          </li>
+        ))}
+      </ul>
+      {searched && movies.length === 0 && (
+        <div className="mt-50 slide-up-fade-in" data-testid="no-result">
+          No Results Found!
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+18. Movie-watchlist
+=========================================================
+
+WatchlistApp
+---------------------------------------------------
+import React, { useState } from "react";
+import MovieCard from "./MovieCard";
+import Watchlist from "./Watchlist";
+
+
+const WatchlistApp = () => {
+
+  const [movies, setMovies] = useState([
+    { id: 1, title: "Inception" },
+    { id: 2, title: "Interstellar" },
+    { id: 3, title: "The Dark Knight" },
+    { id: 4, title: "Dunkirk" },
+    { id: 5, title: "The Shawshank Redemption" },
+  ]);
+
+  const [watchListMovies, setWatchListMovies] = useState([]);
+
+  function addToWatchList(movie) {
+    setWatchListMovies(() => [...watchListMovies, { id: movie.id, title: movie.title }]);
+
+  }
+
+  function removeMovieFromWatchList(movie) {
+    setWatchListMovies(() => watchListMovies.filter(w => w.id != movie.id));
+  }
+
+
+  function clearWatchListAllMovies() {
+    setWatchListMovies(() => []);
+  }
+
+  function checkMovieInWatchList(movie) {
+    return watchListMovies.some(w => w.id === movie.id);
+  }
+
+  return (
+    <div>
+      <h2>Movies</h2>
+      <div className="movies-container">
+        {
+          movies.map(m => <MovieCard showAddButton={true} showRemoveButton={false} disabledAdd={checkMovieInWatchList(m)} movie={m} addToWatchList={addToWatchList} />)
+        }
+      </div>
+      {
+        <Watchlist clearAllMovies={clearWatchListAllMovies} watchListMovies={watchListMovies} removeMovieFromWatchList={removeMovieFromWatchList} />
+      }
+    </div>
+  );
+};
+
+export default WatchlistApp;
+
+
+
+
+Watchlist
+-----------------------------------------------------
+import React from "react";
+import MovieCard from "./MovieCard";
+ 
+const Watchlist = ({ clearAllMovies, watchListMovies, removeMovieFromWatchList }) => {
+ 
+  return (
+    <div data-testid="watchlist-container">
+      {/* Provide the total count of movies watchlisted */}
+      <h2>Watchlist {<span>{watchListMovies.length}</span>}</h2>
+      {/* <p data-testid="watchlist-empty">Your watchlist is empty.</p> */}
+      <div>
+        <div data-testid="movie-container" className="movies-container">
+          {
+            watchListMovies.map((w) => <MovieCard showAddButton={false} showRemoveButton={true} movie={w} removeMovieFromWatchList={removeMovieFromWatchList} />)
+          }
+        </div>
+        {
+          watchListMovies.length === 0 ? <div data-testid="watchlist-empty">WatchList is Empty</div> : <button onClick={() => clearAllMovies()} data-testid="clear-watchlist-btn">Clear Watchlist</button>
+        }
+ 
+      </div>
+    </div>
+  );
+};
+ 
+export default Watchlist;
+ 
+
+
+Moviecard
+--------------------------------------------------
+
+import React from "react";
+ 
+const MovieCard = ({ showAddButton, showRemoveButton, disabledAdd, movie, addToWatchList, removeMovieFromWatchList }) => {
+  return (
+    // set all data-testids according to the movie id.
+    // Ex: on the movie card the data-testid for movie with id:1  will be movie-card-1.
+    <div className="movie-card" data-testid={`movie-card-${movie.id}`}>
+      <h3 data-testid={`movie-title-${movie.id}`}>{movie.title}</h3>
+      {
+        (showRemoveButton && <button
+          onClick={() => removeMovieFromWatchList(movie)}
+          className="danger" data-testid={`remove-btn-${movie.id}`}>
+          Remove
+        </button>)
+      }
+      {
+        (showAddButton && <button disabled={disabledAdd} data-testid={`add-btn-${movie.id}`}
+ 
+          onClick={() => addToWatchList(movie)}
+        >
+          Add to WatchList
+        </button>)
+      }
+    </div>
+  );
+};
+ 
+export default MovieCard;
+
+
+
+19. CountryList
+==========================================================
+
+Country.js
+-------------------------------------
+
+function CountryList({ input, countries }) {
+  return (
+    <section>
+      <ul className="card country-list" data-testid="countryList">
+        {countries
+          .filter((x) => x.toLowerCase().includes(input.toLowerCase()))
+          .map((item) => (
+            <li key={item} className="pa-10 pl-20">
+              {item}
+            </li>
+          ))}
+      </ul>
+    </section>
+  );
+}
+
+
+
+Search.js
+---------------------------------------------
+function Search({ input, setInput }) {
+  return (
+    <input
+      data-testid="filterInput"
+      className="large"
+      placeholder="Enter Country Name"
+      value={input}
+      onChange={(e) => setInput(e.target.value)}
+    />
+  );
+}
+
+
+
+20. currency converter
+=========================================================
+
+function CurrencyConvertor() {
+  const [input, setInput] = useState(defaultInput);
+  const [option, setOption] = useState(defaultCurrency);
+
+  const rate = exchangeRates.find((x) => x.currency === option)?.rate || 1;
+  const usdValue = (input * rate).toFixed(3);
+  const clearing = () => {
+    setInput(defaultInput);
+    setOption(defaultCurrency);
+  };
+  return (
+    <div>
+      <div className="layout-row justify-content-space-evenly min-height mt-75">
+        <div className="layout-column w-35 pa-30 card">
+          <select
+            onChange={(e) => setOption(e.target.value)}
+            className="mb-10"
+            data-testid="select-currency"
+          >
+            {exchangeRates.map((item) => (
+              <option>{item.currency}</option>
+            ))}
+          </select>
+          <input
+            className="h-50"
+            type="number"
+            value={input}
+            onKeyDown={preventNegative}
+            placeholder={`Enter value in ${option}`}
+            data-testid="input-value"
+            onChange={(e) => setInput(e.target.value)}
+          />
+        </div>
+
+        <div className="layout-column w-35 pa-30 card">
+          <h3 className="mb-10 mt-0">USD</h3>
+          <input
+            className="h-50"
+            type="number"
+            value={usdValue}
+            readOnly
+            data-testid="converted-value"
+          />
+        </div>
+      </div>
+
+      <div className="layout-row justify-content-center pa-20">
+        <button onClick={clearing} data-testid="clear-values">
+          Clear Input
+        </button>
+      </div>
+    </div>
+  );
+}
+
+
+
+21. customerlist
+===================================================
+
+function CustomerList() {
+  const [data, setData] = useState([]);
+  const [input, setInput] = useState("");
+  const adding = () => {
+    if (!input) return;
+    setData([...data, input]);
+    setInput("");
+  };
+  return (
+    <div className="mt-75 layout-column justify-content-center align-items-center">
+      <section className="layout-row align-items-center justify-content-center">
+        <input
+          type="text"
+          className="large"
+          placeholder="Name"
+          data-testid="app-input"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button
+          onClick={adding}
+          type="submit"
+          className="ml-30"
+          data-testid="submit-button"
+        >
+          Add Customer
+        </button>
+      </section>
+      {data.length !== 0 && (
+        <ul className="styled mt-50" data-testid="customer-list">
+          {data.map((item, index) => (
+            <li
+              className="slide-up-fade-in"
+              data-testid={`list-item${index}`}
+              key={`list-item${index}`}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+
+
+
+22. customerlist search
+==========================================================
+
+Customerlist.js
+-------------------------------------------------
+unction CustomerList({ customers }) {
+  return (
+    <div className="layout-column align-items-center justify-content-start">
+      {customers.length === 0 ? (
+        <p data-testid="no-results">No Results Found!</p>
+      ) : (
+        <div className="card w-40 pt-30 pb-8 mt-20">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Location</th>
+                <th>Gender</th>
+                <th>Income</th>
+              </tr>
+            </thead>
+            <tbody data-testid="searched-customers">
+              {customers.map((e) => (
+                <tr>
+                  <td>{e.name}</td>
+                  <td>{e.age}</td>
+                  <td>{e.location}</td>
+                  <td>{e.gender}</td>
+                  <td>{e.income}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
+SearchCustoemr.js
+-------------------------------------------------
+function SearchCustomer() {
+  const [input, setInput] = useState("");
+  const [data, setData] = useState(customers);
+
+  const setCustomer = (text) => {
+    setInput(text);
+
+    if (!text) {
+      setData(customers);
+      return;
+    }
+
+    setData(
+      customers.filter(
+        (e) =>
+          e.name.startsWith(text) ||
+          e.location.startsWith(text) ||
+          e.gender.startsWith(text)
+      )
+    );
+  };
+  return (
+    <>
+      <div className="layout-row align-items-center justify-content-center mt-30">
+        <input
+          className="large mx-20 w-20"
+          data-testid="search-input"
+          type="text"
+          value={input}
+          placeholder="Enter search term (Eg: Phil)"
+          onChange={(e) => setCustomer(e.target.value)}
+        />
+      </div>
+      <CustomerList customers={data} />
+    </>
+  );
+}
+
+
+
+
+23. Fitness
+==========================================================
+
+
+fitness tracker.js
+-----------------------------------------------
+  const [logs, setLogs] = useState([]);
+  const [error, setError] = useState("");
+
+  const validateAndAdd = ({ exe, dur, cal }) => {
+    const exercise = (exe || "").trim();
+    const duration = Number(dur.trim());
+    const calorie = Number(cal.trim());
+
+    if (!exercise) {
+      setError("Exercise type must not be empty.");
+      return false;
+    }
+    if (duration <= 0) {
+      setError("Duration must be a positive number.");
+      return false;
+    }
+    if (calorie <= 0) {
+      setError("Calories must be a positive number.");
+      return false;
+    }
+
+    const newData = {
+      id: Date.now(),
+      exe: exercise,
+      dur: duration,
+      cal: calorie,
+    };
+
+    setLogs((prev) => [...prev, newData]);
+    setError("");
+    return true;
+  };
+
+  const resetLogs = () => {
+    setLogs([]);
+    setError("");
+  };
+
+  return (
+    <div className="pa-20">
+      <h1>Track Your Fitness</h1>
+      <LogForm reset={resetLogs} error={error} onValid={validateAndAdd} />
+      <LogList logs={logs} />
+    </div>
+  );
+};
+
+
+
+logform.js
+-----------------------------------------------------
+const LogForm = ({ reset, onValid, error }) => {
+  const [exe, setExe] = useState("");
+  const [dur, setDur] = useState("");
+  const [cal, setCal] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const valid = onValid({ exe, dur, cal });
+    if (valid) {
+      setExe("");
+      setDur("");
+      setCal("");
+    }
+  };
+
+  const handleReset = () => {
+    setExe("");
+    setDur("");
+    setCal("");
+    reset();
+  };
+
+  return (
+    <div className="layout column justify-content-center align-items-center">
+      <form data-testid="log-form">
+        <div className="mb-10">
+          <label>
+            Exercise Type:
+            <input
+              type="text"
+              name="exerciseType"
+              value={exe}
+              placeholder="e.g., Running"
+              className="ml-50"
+              data-testid="input-exerciseType"
+              required
+              onChange={(e) => setExe(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="mb-10">
+          <label>
+            Duration (minutes):
+            <input
+              type="number"
+              name="duration"
+              value={dur}
+              placeholder="e.g., 30"
+              className="ml-10"
+              data-testid="input-duration"
+              required
+              onChange={(e) => setDur(e.target.value)}
+            />
+          </label>
+        </div>
+        <div className="mb-10">
+          <label>
+            Calories Burned:
+            <input
+              type="number"
+              name="caloriesBurned"
+              value={cal}
+              placeholder="e.g., 300"
+              className="ml-30"
+              data-testid="input-caloriesBurned"
+              required
+              onChange={(e) => setCal(e.target.value)}
+            />
+          </label>
+        </div>
+        <button
+          onClick={handleSubmit}
+          type="submit"
+          data-testid="btn-logActivity"
+          className="mr-10"
+        >
+          Log Activity
+        </button>
+        <button onClick={handleReset} type="button" data-testid="btn-resetLog">
+          Reset Log
+        </button>
+      </form>
+      {error && (
+        <p data-testid="error-message" style={{ color: "red" }}>
+          {error}
+        </p>
+      )}
+    </div>
+  );
+};
+
+
+
+
+loglist.js
+------------------------------------------------------
+const LogList = ({ logs }) => {
+  return (
+    <div data-testid="log-list">
+      <h2>Activity Log</h2>
+      {logs.length !== 0 ? (
+        <ul className="pl-0 log-entry-ul">
+          {logs.map((log) => (
+            <li data-testid="log-entry" className="log-entry-li mb-10 pa-10">
+              <p>
+                <strong>Exercise:</strong> {log.exe}
+              </p>
+              <p>
+                <strong>Duration:</strong> {log.dur} minutes
+              </p>
+              <p>
+                <strong>Calories Burned:</strong> {log.cal} kcal
+              </p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p>No activities logged yet.</p>
+      )}
+    </div>
+  );
+};
+
+
+
+24. Profile
+====================================================
+
+const Profile = () => {
+  const [profile, setProfile] = useState({
+    firstName: "Sherlock",
+    lastName: "Holmes",
+    email: "sherlockholmes@email.com",
+  });
+  const [data, setData] = useState(profile);
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isEditing) {
+      setData(profile);
+      setIsEditing(true);
+      return;
+    }
+    const { firstName, lastName, email } = data;
+
+    if (!firstName.trim() || !lastName.trim() || !email.trim()) {
+      alert("Please enter all profile fields");
+      return;
+    }
+
+    setProfile({
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.trim(),
+    });
+    setIsEditing(false);
+    alert("Profile updated successfully");
+  };
+  return (
+    <div className="w-40 mr-75">
+      <div className="card pa-50">
+        <h1>User Profile</h1>
+        <form>
+          <div className="layout-column mb-15">
+            <label htmlFor="firstname" className="mb-3">
+              First Name
+            </label>
+            {isEditing ? (
+              <input
+                type="text"
+                id="firstName"
+                placeholder="Enter First Name"
+                data-testid="firstNameInput"
+                value={data.firstName}
+                onChange={(e) =>
+                  setData({ ...data, firstName: e.target.value })
+                }
+              />
+            ) : (
+              <div className="card pa-8" data-testid="firstNameDiv">
+                {profile.firstName}
+              </div>
+            )}
+          </div>
+          <div className="layout-column mb-15">
+            <label htmlFor="lastname" className="mb-3">
+              Last Name
+            </label>
+            {isEditing ? (
+              <input
+                type="text"
+                id="lastName"
+                placeholder="Enter Last Name"
+                data-testid="lastNameInput"
+                value={data.lastName}
+                onChange={(e) => setData({ ...data, lastName: e.target.value })}
+              />
+            ) : (
+              <div className="card pa-8" data-testid="lastNameDiv">
+                {profile.lastName}
+              </div>
+            )}
+          </div>
+          <div className="layout-column mb-30">
+            <label htmlFor="email" className="mb-3">
+              Email
+            </label>
+            {isEditing ? (
+              <input
+                type="text"
+                id="email"
+                placeholder="Enter Email"
+                data-testid="emailInput"
+                value={data.email}
+                onChange={(e) => setData({ ...data, email: e.target.value })}
+              />
+            ) : (
+              <div className="card pa-8" data-testid="emailDiv">
+                {profile.email}
+              </div>
+            )}
+          </div>
+          <div className="layout-row justify-content-end">
+            <button
+              onClick={handleSubmit}
+              type="submit"
+              className="mx-0"
+              data-testid="changeButton"
+            >
+              {!isEditing ? "Edit Profile" : "Save Changes"}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+
+
+25. Navbar
+======================================================
+
+export default function NavBar() {
+  const [active, setActive] = useState("Home");
+  const TABS = ["Home", "News", "Contact", "About"];
+
+  const getContent = () => {
+    return `${active.toUpperCase()} PAGE`;
+  };
+
+  return (
+    <div className="layout-column justify-content-center align-items-center">
+      <div
+        className="layout-row justify-content-around align-items-center mt-20 links"
+        data-testid="navigation-tabs"
+      >
+        {TABS.map((tab) => (
+          <a key={tab} onClick={() => setActive(tab)}>
+            {tab}
+          </a>
+        ))}
+      </div>
+
+      <div className="card w-20 ma-0">
+        <section className="card-text" data-testid="tab-content">
+          <span>{getContent()}</span>
+        </section>
+      </div>
+    </div>
+  );
+}
+
+
+
+26. Pagination
+======================================================
+
+
+pagination.js
+-----------------------------------------------
+import React, { useState } from "react";
+import Table from "./Table";
+
+const Pagination = ({ data }) => {
+  const [option, setOption] = useState(5);
+  const [btn, setBtns] = useState(10);
+  const [tableData, setTableData] = useState(data);
+
+  const showBtns = (OptionValue) => {
+    setOption(OptionValue);
+    if (OptionValue == 5) setBtns(10);
+    if (OptionValue == 15) setBtns(4);
+  }
+
+  const showData = (btnNo) => {
+    if (option == 5 && btnNo == 2) { setTableData([...tableData.slice(5, 10)]) }
+    if (option == 10 && btnNo == 3) { setTableData([...tableData.slice(20, 30)]) }
+  }
+  return (
+    <>
+      <div className="card flex flex-col items-center gap-8 p-8 mb-8">
+        {/* Heading kept from Solution styling */}
+        <h2 className="text-2xl font-semibold text-primary mb-2">Pagination Controls</h2>
+
+        <div className="flex items-center gap-4">
+          <label className="text-sm font-medium text-primary">Rows per page:</label>
+          <select data-testid="selectInput" className="select w-20" onChange={(e) => { showBtns(e.target.value) }}>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+
+        <div className="button-div" data-testid="buttonDiv">
+          {Array.from({ length: btn }).map((btn, i) => (<button key={i} className="btn btn-secondary" onClick={() => showData(i + 1)}>{i + 1}</button>))}
+        </div>
+      </div>
+
+      {/* Static table like in boilerplate */}
+      <Table tableData={tableData} />
+    </>
+  );
+};
+
+export default Pagination;
+
+
+
+Table.js
+-------------------------------------------------
+const Table = ({ data }) => {
+  return (
+    <div className="card overflow-hidden">
+      <div className="overflow-x-auto">
+        <table data-testid="table" className="table">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Capital</th>
+            </tr>
+          </thead>
+          <tbody data-testid="tableBody">
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.country}</td>
+                <td>{item.city}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+
+27. Task manager
+=======================================================
+
+function Tasks() {
+  const [name, setName] = useState("");
+  const [priority, setPriority] = useState("");
+  const [list, setList] = useState([]);
+
+  const addTask = (e) => {
+    e.preventDefault();
+    if (name.trim().length === 0 || priority === "" || priority <= 0) {
+      toast.error("Please enter both title and task priority");
+      return;
+    }
+
+    const tableData = {
+      name: name.trim(),
+      priority: priority,
+    };
+
+    const newList = [...list, tableData];
+    const sortedList = newList.sort((a, b) => a.priority - b.priority);
+    setList(sortedList);
+    setPriority("");
+    setName("");
+  };
+
+  const handleDelete = (index) => {
+    const filtered = [...list].filter((_, id) => id !== index);
+    setList(filtered);
+  };
+
+  return (
+    <div className="flex flex-col items-center w-full px-8">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow p-5 mt-12 mb-8">
+        <div className="flex flex-row space-x-3 mb-6">
+          <div className="bg-[#DCFAE6] text-[#18A149] rounded-lg p-4 flex items-center justify-center">
+            <CirclePlus size={24} />
+          </div>
+          <div>
+            <div className="font-bold text-md sm:text-lg">
+              Create a new task
+            </div>
+            <div className="text-neutral-500 text-sm sm:text-base">
+              Add task title and priority to create a new task
+            </div>
+          </div>
+        </div>
+        <form className="flex flex-col md:flex-row gap-6 mb-3">
+          <input
+            data-testid="input-task-name"
+            type="text"
+            className="flex-1 rounded-lg border border-gray-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-gray-800 bg-gray-100"
+            placeholder="Enter task title"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            data-testid="input-task-priority"
+            type="number"
+            className="md:w-72 rounded-lg border border-gray-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-gray-800 bg-gray-100"
+            placeholder="Enter task priority"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          />
+          <button
+            onClick={addTask}
+            data-testid="submit-button"
+            className="h-12 px-8 rounded-md bg-black text-white font-bold text-base hover:bg-gray-900 transition"
+          >
+            Add
+          </button>
+        </form>
+      </div>
+
+      <div className="w-full max-w-5xl mb-6">
+        <h2 className="text-3xl font-bold text-black">Your Tasks</h2>
+      </div>
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow overflow-hidden mb-8">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b border-spacing-2 border-gray-200">
+              <th
+                className="py-4 px-6 text-base font-bold text-gray-600"
+                style={{ width: "70%" }}
+              >
+                Task Title
+              </th>
+              <th
+                className="py-4 px-6 text-base font-bold text-gray-600"
+                style={{ width: "20%" }}
+              >
+                Priority
+              </th>
+              <th className="py-4 px-6" style={{ width: "10%" }}></th>
+            </tr>
+          </thead>
+          <tbody data-testid="tasksList">
+            {list.map((item, index) => (
+              <tr
+                key={index}
+                className="border-b border-spacing-2 border-gray-200 last:border-b-0 hover:bg-gray-50 transition"
+              >
+                <td className="py-2 px-6 text-neutral-500 text-base font-normal">
+                  {item.name}
+                </td>
+                <td className="py-2 px-6 text-neutral-500 text-base font-normal">
+                  {item.priority}
+                </td>
+
+                <td className="py-2 px-6">
+                  <button
+                    onClick={() => handleDelete(index)}
+                    className="p-2 rounded"
+                    aria-label="Delete task"
+                  >
+                    <Trash2 className="w-5 h-5 text-red-500 hover:text-red-700" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+
+
+28. Team-selection
+=======================================================
+
+
+export default function TeamSelection() {
+  const [players, setPlayers] = useState(playersList);
+  const [selectedPlayers, setSelectedPlayers] = useState([]);
+
+  const sortBy = (key) => {
+    const sorted = [...players].sort((a, b) => {
+      if (key === "name") return a.name.localeCompare(b.name);
+      else if (key === "type") return a.type.localeCompare(b.type);
+      else if (key === "battingSkill") return a.battingSkill - b.battingSkill;
+      else if (key === "bowlingSkill") return a.bowlingSkill - b.bowlingSkill;
+    });
+    setPlayers(sorted);
+    // Empty function - no sorting functionality
+  };
+
+  const addPlayer = (index) => {
+    // Empty function - no add functionality
+    const player = players?.find((_, id) => id === index);
+    setSelectedPlayers([...selectedPlayers, player]);
+  };
+
+  const removePlayer = (index) => {
+    // Empty function - no remove functionality
+    const filtered = [...selectedPlayers].filter((_, id) => id !== index);
+    setSelectedPlayers(filtered);
+  };
+
+  return (
+    <div className="flex flex-col items-start gap-6 sm:gap-8 px-4 sm:px-6 md:px-8 lg:px-12 pt-8 sm:pt-12 pb-24 w-full">
+      {/* Two Columns */}
+      <div className="flex w-full items-start gap-6 flex-col lg:flex-row">
+        {/* Available Players Section */}
+        <div className="flex-1 w-full">
+          <h2
+            className="m-0 p-0 mb-6 font-satoshi text-2xl sm:text-[32px] leading-8 sm:leading-[44px] font-bold text-[#101828]"
+            style={{ fontFeatureSettings: "'ss03' on" }}
+          >
+            Available Players
+          </h2>
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="p-4 sm:p-6">
+              <div className="overflow-hidden">
+                <table
+                  className="w-full table-fixed font-satoshi text-sm"
+                  style={{ fontFeatureSettings: "'ss03' on" }}
+                >
+                  <thead>
+                    <tr className="border-b border-[#ECEFF2] align-middle">
+                      <th
+                        data-testid="available-players-name"
+                        onClick={() => sortBy("name")}
+                        className="text-left py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6 cursor-pointer hover:bg-gray-50 w-auto sm:w-[160px]"
+                      >
+                        Name
+                      </th>
+                      <th
+                        data-testid="available-players-role"
+                        onClick={() => sortBy("type")}
+                        className="text-left py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6 cursor-pointer hover:bg-gray-50"
+                      >
+                        Role
+                      </th>
+                      <th
+                        data-testid="available-players-bat"
+                        onClick={() => sortBy("battingSkill")}
+                        className="hidden sm:table-cell text-center py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6 cursor-pointer hover:bg-gray-50"
+                      >
+                        Bat
+                      </th>
+                      <th
+                        data-testid="available-players-bowl"
+                        onClick={() => sortBy("bowlingSkill")}
+                        className="hidden sm:table-cell text-center py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6 cursor-pointer hover:bg-gray-50"
+                      >
+                        Bowl
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody data-testid="available-players-table-body">
+                    {players.map((player, index) => (
+                      <tr
+                        data-testid={`available-${player.name
+                          .split(" ")
+                          .join("-")}-row`}
+                        key={index}
+                        className="border-b border-[#ECEFF2] hover:bg-gray-50 align-middle"
+                      >
+                        <td
+                          data-testid={`available-${player.name
+                            .split(" ")
+                            .join("-")}-name`}
+                          className="flex items-center gap-3 py-2 sm:py-3 px-3 sm:px-6 text-[#101828] leading-5 w-auto sm:w-[180px] truncate"
+                        >
+                          {player.name}
+                        </td>
+                        <td className="py-2 sm:py-3 px-3 sm:px-6 text-[#516778] leading-5 truncate whitespace-nowrap">
+                          {player.type}
+                        </td>
+                        <td className="hidden sm:table-cell py-2 sm:py-3 px-3 sm:px-6 text-center text-[#516778] leading-5">
+                          {player.battingSkill}
+                        </td>
+                        <td className="hidden sm:table-cell py-2 sm:py-3 px-3 sm:px-6 text-center text-[#516778] leading-5">
+                          {player.bowlingSkill}
+                        </td>
+                        <td className="py-0 px-0 text-center w-12 sm:w-[68px]">
+                          <button
+                            data-testid={`available-${player.name
+                              .split(" ")
+                              .join("-")}-select`}
+                            onClick={() => addPlayer(index)}
+                            disabled={selectedPlayers.some(
+                              (x) => x.name === player.name
+                            )}
+                            aria-label="Select player"
+                            className="w-12 sm:w-[68px] px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-center gap-3 border-b border-[#ECEFF2] hover:bg-gray-50"
+                          >
+                            <span className="inline-flex items-center justify-center w-12 h-6 rounded-full bg-green-100">
+                              <img src="/assets/arrow.svg" alt="Select" />
+                            </span>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Selected Players Section */}
+        <div className="flex-1 w-full">
+          <h2
+            className="m-0 p-0 mb-6 font-satoshi text-2xl sm:text-[32px] leading-8 sm:leading-[44px] font-bold text-[#101828]"
+            style={{ fontFeatureSettings: "'ss03' on" }}
+          >
+            Selected Players
+          </h2>
+          <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden">
+            <div className="p-4 sm:p-6">
+              <div className="overflow-hidden">
+                <table
+                  className="w-full table-fixed font-satoshi text-sm"
+                  style={{ fontFeatureSettings: "'ss03' on" }}
+                >
+                  <thead>
+                    <tr className="border-b border-[#ECEFF2] align-middle">
+                      <th className="text-left py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6 w-auto sm:w-[180px]">
+                        Name
+                      </th>
+                      <th className="text-left py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6">
+                        Role
+                      </th>
+                      <th className="hidden sm:table-cell text-center py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6">
+                        Bat
+                      </th>
+                      <th className="hidden sm:table-cell text-center py-2 sm:py-3 px-3 sm:px-6 font-bold text-[#516778] leading-6">
+                        Bowl
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody data-testid="selected-players-table-body">
+                    {/* Empty - no players selected */}
+                    {selectedPlayers.map((player, index) => (
+                      <tr
+                        data-testid={`available-${player.name
+                          .split(" ")
+                          .join("-")}-row`}
+                        key={index}
+                        className="border-b border-[#ECEFF2] hover:bg-gray-50 align-middle"
+                      >
+                        <td
+                          data-testid={`available-${player.name
+                            .split(" ")
+                            .join("-")}-name`}
+                          className="flex items-center gap-3 py-2 sm:py-3 px-3 sm:px-6 text-[#101828] leading-5 w-auto sm:w-[180px] truncate"
+                        >
+                          {player.name}
+                        </td>
+                        <td className="py-2 sm:py-3 px-3 sm:px-6 text-[#516778] leading-5 truncate whitespace-nowrap">
+                          {player.type}
+                        </td>
+                        <td className="hidden sm:table-cell py-2 sm:py-3 px-3 sm:px-6 text-center text-[#516778] leading-5">
+                          {player.battingSkill}
+                        </td>
+                        <td className="hidden sm:table-cell py-2 sm:py-3 px-3 sm:px-6 text-center text-[#516778] leading-5">
+                          {player.bowlingSkill}
+                        </td>
+                        <td className="py-0 px-0 text-center w-12 sm:w-[68px]">
+                          <button
+                            data-testid={`selected-${player.name
+                              .split(" ")
+                              .join("-")}-remove`}
+                            onClick={() => removePlayer(index)}
+                            aria-label="Select player"
+                            className="w-12 sm:w-[68px] px-3 sm:px-6 py-2 sm:py-3 flex items-center justify-center gap-3 border-b border-[#ECEFF2] hover:bg-gray-50"
+                          >
+                            Delete
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+29. Teams and channel
+=======================================================
+
+
+Teamlist.js
+----------------------------------------------
+const TeamList = () => {
+  const teamList = [
+    {
+      name: "Team1",
+      channels: [
+        { name: "Channel1", id: 1 },
+        { name: "Channel2", id: 2 },
+      ],
+    },
+    {
+      name: "Team2",
+      channels: [
+        { name: "Channel1", id: 1 },
+        { name: "Channel2", id: 2 },
+      ],
+    },
+  ];
+
+  const [list, setList] = useState(teamList);
+  const [input, setInput] = useState("");
+
+  const addTeam = () => {
+    const newTeam = { name: input, channels: [] };
+    setList([...list, newTeam]);
+    setInput("");
+  };
+
+  return (
+    <div className="w-50 mx-auto">
+      <div className="card w-35 mt-50 mx-auto px-10 py-15">
+        <div className="layout-column" data-testid="team-list">
+          {list &&
+            list.map((team, id) => <Team key={id} id={id} team={team} />)}
+        </div>
+        <div className="layout-row">
+          <input
+            placeholder="Enter Team Name"
+            className="team-list-input w-75"
+            data-testid="team-name-input"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button
+            className="team-list-btn x-small w-35 h-30 pa-6 ma-0 ml-6"
+            data-testid="add-team-btn"
+            onClick={addTeam}
+            disabled={!input || list.some((x) => x.name === input)}
+          >
+            Add Team
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
+Team.js
+-------------------------------------------------------
+const Team = ({ team, id }) => {
+  const [input, setInput] = useState("");
+  const [channels, setChannels] = useState(team.channels);
+
+  const addChannel = () => {
+    let idCh = channels.length + 1;
+    const newChannel = { name: input, id: idCh };
+    setChannels([...channels, newChannel]);
+    setInput("");
+  };
+  const handleDelete = (index) => {
+    const filtered = [...channels].filter((x) => x.id !== index);
+    setChannels(filtered);
+  };
+  return (
+    <div>
+      {team && <h4 className="mt-0 mb-6">{team.name}</h4>}
+      {team && (
+        <div className="layout-row justify-content-end mb-6">
+          <input
+            placeholder="Enter Channel Name"
+            className="channel-name-input w-45 px-13"
+            data-testid={"channel-name-input-" + id}
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+          />
+          <button
+            className="channel-name-btn x-small w-35 h-30 pa-6 ma-0 ml-6"
+            data-testid={"add-channel-btn-" + id}
+            onClick={addChannel}
+            disabled={!input || channels.some((x) => x.name === input)}
+          >
+            Add Channel
+          </button>
+        </div>
+      )}
+      {team && (
+        <ul className="styled mb-20 pl-25" data-testid={"channel-list-" + id}>
+          {channels &&
+            channels.map((channel) => (
+              <li
+                key={channel.id}
+                className="flex slide-up-fade-in justify-content-between align-items-center pl-10 pr-5 py-6 mt-0 mb-6"
+              >
+                <span>{channel.name}</span>
+                <button
+                  data-testid={"remove-channel-button-" + id + channel.id}
+                  className="icon-only x-small danger ma-0 pa-0"
+                  onClick={() => handleDelete(channel.id)}
+                >
+                  <i className="material-icons">delete</i>
+                </button>
+              </li>
+            ))}
+        </ul>
+      )}
+    </div>
+  );
+};
+
+
+
+
+30. Teliphone directory
+======================================================
+
+App.js
+-----------------------------------------------
+const App = () => {
+  let [contactList, setContacts] = React.useState([]);
+  const handleFormSubmit = (_, childData) => {
+    setContacts([...contactList, childData]);
+    // event.preventDefault();
+  };
+  return (
+    <div>
+      <h8k-navbar header={title}></h8k-navbar>
+      <div className="flex align-items-center justify-content-center container">
+        <AddPerson onButtonClick={handleFormSubmit} />
+        <ListPeople contacts={contactList} />
+      </div>
+    </div>
+  );
+};
+
+
+
+ProfileTest.js
+--------------------------------------------
+
+export default function ListPeople({ contacts }) {
+	return (
+		<div className="card w-40 mx-10 px-30 py-30">
+			<h3 className="pt-10"> Contact List</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Phone Number</th>
+						<th>Email</th>
+					</tr>
+				</thead>
+				<tbody>
+					{contacts &&
+						contacts.map((contact, i) => (
+							<tr data-testid="article" key={i}>
+								<td data-testid="article-id">{i + 1}</td>
+								<td data-testid="article-title">{contact.name}</td>
+								<td data-testid="article-upvotes">{contact.number}</td>
+								<td data-testid="article-date">{contact.email}</td>
+							</tr>
+						))}
+				</tbody>
+			</table>
+		</div>
+	);
+}
+
+
+
+Addperson.js
+----------------------------------------------------
+export default function AddPerson({ onButtonClick }) {
+	const addPerson = (event) => {
+		event.preventDefault();
+		if (name !== "" && number !== 0 && String(number).length === 10 && email !== "") {
+			onButtonClick("", person);
+		}
+		else {
+			event.preventDefault()
+		}
+	};
+	let [person, setPerson] = useState({
+		name: "",
+		number: 0,
+		email: "",
+	});
+	let { name, number, email } = person;
+	const handleChange = (event) => {
+		setPerson({ ...person, [event.target.name]: event.target.value });
+	};
+	return (
+		<section>
+			<div className="card pa-30 mr-30">
+				<form data-testid="add-person-form" onSubmit={addPerson}>
+					<div className="layout-column mb-15">
+						<label htmlFor="name" className="mb-3">
+							Person Name
+						</label>
+						<input
+							type="text"
+							placeholder="Enter Person Name"
+							name="name"
+							value={name}
+							onChange={handleChange}
+							data-testid="person-name-input"
+						/>
+					</div>
+					<div className="layout-column mb-15">
+						<label htmlFor="number" className="mb-3">
+							Phone Number
+						</label>
+						<input
+							type="number"
+							placeholder="Enter Phone Number"
+							name="number"
+							value={number}
+							onChange={handleChange}
+							data-testid="phone-number-input"
+						/>
+					</div>
+					<div className="layout-column mb-30">
+						<label htmlFor="email" className="mb-3">
+							Email
+						</label>
+						<input
+							type="email"
+							placeholder="Enter Email Address"
+							name="email"
+							value={email}
+							onChange={handleChange}
+							data-testid="person-email-input"
+						/>
+					</div>
+					<div className="layout-row justify-content-end">
+						<button type="submit" className="mx-0" data-testid="add-person-button">
+							Add Person
+						</button>
+					</div>
+				</form>
+			</div>
+		</section>
+	);
+}
+
+
+
+31. Timer component
+========================================================
+
+import React, { useEffect, useState } from "react";
+import "./index.css"
+export default function Timer({initial}) {
+	const [initialValue, setInitialValue] = useState(initial);
+	const [stopped, setStopped] = useState(false);
+	useEffect(() => {
+		if (stopped) {
+			return;
+		}
+		const id = setInterval(() => {
+			setInitialValue(prev => {
+				if (prev <= 0) {
+					clearInterval(id);
+					setStopped(true);
+					return 0;
+				}
+				return prev - 1;
+			});
+		}, 1000	);
+		return () => clearInterval(id);
+	}, [!stopped]);
+
+
+	const handleStop = () => {
+		setStopped(true);
+	}
+	return (
+		<div className="mt-100 layout-column align-items-center justify-content-center">
+			<div className="timer-value" data-testid="timer-value" >{initialValue}</div>
+			<button className="large" data-testid="stop-button" onClick={handleStop}>Stop Timer</button>
+		</div>
+	);
+
+}
+
+
+32. Pokemon details fetch
+==========================================================
+
+Pokemon details.js
+----------------------------------------------
+
+import React from 'react';
+import { Pokemon } from '../pokemon/Pokemon';
+export const PokemonDetails = () => {
+	const [pokemon, setPokemon] = React.useState(null);
+	const [id, setId] = React.useState(0);
+	
+	const alertLine = (id) => { if (id < 1 || id > 151) { alert('Pokemon ID must be between 1 and 151'); return; } }
+	const poke1 = { id: 1, name: 'Bulbasaur' }
+	const poke2 = { id: 2, name: 'Ivysaur' }
+	return (
+		<div className="mt-50 layout-column justify-content-center align-items-center" >
+			{pokemon && <Pokemon pokemon={pokemon} />}
+			<p>
+				<button data-testid="pokemon-prev" disabled={id <= 1} onClick={() => { setPokemon(poke1), setId(1) }} >Previous Evolution</button>
+				<button data-testid="pokemon-next" disabled={id >= 151} onClick={() => { setPokemon(poke2), setId(2) }}>Next Evolution</button>
+			</p>
+			<p>
+				<input data-testid="id-input" value={id} onChange={(e) => { setId(e.target.value) }} type="number" placeholder='Pokemon Id'></input>
+				<button data-testid="random-pokemon" onClick={() => { alertLine(id); setPokemon(poke1); setId(1) }} className='text'>Get Pokemon</button>
+			</p>
+		</div>
+	)
+}
+
+
+
+Pokemon.js
+-------------------------------------------------------
+import React from 'react'
+export const Pokemon = ({ pokemon }) => {
+	return (
+		<div className="card outlined px-50 py-30" style={{ width: '900px' }}>
+			<div className="card-header">
+				<h4 className="card-title">
+					Pokemon Details
+				</h4>
+			</div>
+			<div className="card-body">
+				<div>
+					<p>
+						<strong>ID: </strong>
+						<span data-testid="pokemon-id">{pokemon.id}</span>
+					</p>
+					<p>
+						<strong>Name: </strong>
+						<span data-testid="pokemon-name">{pokemon.name}</span>
+					</p>
+					<p>
+						<strong>Type: </strong>
+					</p>
+					<ul data-testid="pokemon-types">
+						<li data-testid="pokemon-type-Grass">Grass</li>
+						<li data-testid="pokemon-type-Poison">Poison</li>
+					</ul>
+					<p>
+						<strong>Height: </strong>
+						<span data-testid="pokemon-height">0.71 m</span>
+					</p>
+					<p>
+						<strong>Weight: </strong>
+						<span data-testid="pokemon.weight">6.9 kg</span>
+					</p>
+					<p>
+						<strong data-testid="pokemon-weeknesses">
+							Weaknesses:
+						</strong>
+					</p>
+					<ol>
+						<li>Fire</li>
+						<li>Ice</li>
+						<li>Flying</li>
+						<li>Psychic</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+
+
+33. Kanban class
+=========================================================
+
+export default class KanbanBoard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      tasks: this.props.tasks,
+    };
+    this.stagesNames = ["Backlog", "To Do", "Ongoing", "Done"];
+  }
+ 
+    //CHANGEEEEE
+  move = (name, dir) => {
+    const newstage =
+      [...this.state.tasks].find((e) => e.name === name).stage + dir;
+    const newobj = { name: name, stage: newstage };
+    const filteredtasks = [...this.state.tasks].filter((e) => e.name !== name);
+    const finaltasks = [...filteredtasks, newobj];
+    this.setState({ tasks: finaltasks });
+  };
+ 
+  render() {
+    const { tasks } = this.state;
+ 
+    let stagesTasks = [];
+    for (let i = 0; i < this.stagesNames.length; ++i) {
+      stagesTasks.push([]);
+    }
+    for (let task of tasks) {
+      const stageId = task.stage;
+      stagesTasks[stageId].push(task);
+    }
+ 
+    return (
+      <div className="mt-20 layout-column justify-content-center align-items-center">
+        <div className="mt-50 layout-row">
+          {stagesTasks.map((tasks, i) => {
+            return (
+              <div className="card outlined ml-20 mt-0" key={`${i}`}>
+                <div className="card-text">
+                  <h4>{this.stagesNames[i]}</h4>
+                  <ul className="styled mt-50" data-testid={`stage-${i}`}>
+                    {tasks.map((task, index) => {
+                      return (
+                        <li className="slide-up-fade-in" key={`${i}${index}`}>
+                          <div className="li-content layout-row justify-content-between align-items-center">
+                            <span
+                              data-testid={`${task.name
+                                .split(" ")
+                                .join("-")}-name`}
+                            >
+                              {task.name}
+                            </span>
+                            <div className="icons">
+                              <button
+                                //CHANGEEEEE
+                               disabled={task.stage===0}
+                              onClick={()=>this.move(task.name,-1)}
+ 
+                                className="icon-only x-small mx-2"
+                                data-testid={`${task.name
+                                  .split(" ")
+                                  .join("-")}-back`}
+                              >
+                                <i className="material-icons">arrow_back</i>
+                              </button>
+                              <button
+                              //CHANGEEEEE
+                               disabled={task.stage===this.stagesNames.length-1}
+                               onClick={()=>this.move(task.name,1)}
+ 
+                                className="icon-only x-small mx-2"
+                                data-testid={`${task.name
+                                  .split(" ")
+                                  .join("-")}-forward`}
+                              >
+                                <i className="material-icons">arrow_forward</i>
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+}
+
+
+
+
+34. Hackershop cart
+==========================================================
+
+
+Cart.js
+---------------------------------------------------------
+export default class Cart extends Component {
+ 
+   
+ 
+    render() {
+        return (
+            <div className="card outlined my-16 mr-25 flex-30">
+                <section className="layout-row align-items-center justify-content-center px-16">
+                    <h4>Your Cart</h4>
+                </section>
+                <div className="divider"/>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Item</th>
+                        <th className="numeric">Quantity</th>
+                        <th className="numeric">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.props.cart.items.map((cartItem, idx) => {
+                            return (
+                                <tr data-testid={'cart-item-' + idx}
+                                    key={idx + 1}
+                                    className="slide-up-fade-in">
+                                    <td>{idx + 1}.</td>
+                                    <td className="name" data-testid="cart-item-name">{cartItem.item}</td>
+                                    <td className="numeric quantity" data-testid="cart-item-quantity">
+                                        {cartItem.quantity}
+                                    </td>
+                                    <td className="numeric quantity" data-testid="cart-item-price">
+                                        {cartItem.price}
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+ 
+                    </tbody>
+                </table>
+                <div className="layout-row justify-content-between align-items-center px-8 mx-12">
+                    <h5>Select Coupon</h5>
+                    <select data-testid="cart-coupon"
+                            className="coupon-select" onChange={this.props.addCoupon}>
+                        <option value="0">None</option>
+                        <option value="10">OFF10</option>
+                        <option value="20">OFF20</option>
+                    </select>
+                </div>
+                <ul className="bordered inset ma-0 px-8 mt-30">
+                    <li className="layout-row justify-content-between py-12 caption font-weight-light">
+                        <span>Subtotal</span>
+                        <span data-testid="cart-subtotal">${this.props.cart.subTotal}</span>
+                    </li>
+                    <li className="layout-row justify-content-between py-12 caption font-weight-light">
+                        <span>Discount (-)</span>
+                        <span className="discount" data-testid="cart-discount">${this.props.cart.discount}</span>
+                    </li>
+                    <li className="layout-row justify-content-between py-12 font-weight-bold">
+                        <span>Total</span>
+                        <span data-testid="cart-total">${this.props.cart.totalPrice}</span>
+                    </li>
+                </ul>
+            </div>
+ 
+        );
+    }
+}
+
+
+
+
+Product list.js
+---------------------------------------------------------
+export default class ProductList extends Component {
+    constructor() {
+        super();
+    }
+ 
+    render() {
+ 
+        return (
+            <div className="layout-row wrap justify-content-center flex-70 app-product-list">
+                {this.props.products.map((product, i) => {
+                    return (
+                        <section className="w-30"
+                            data-testid={'product-item-' + i}
+                            key={product.id}>
+                            <div className="card ma-16">
+                                <img alt="Your Cart" src={product.image}
+                                    className="d-inline-block align-top product-image" />
+                                <div className="card-text pa-4">
+                                    <h5 className="ma-0 text-center">{product.name}</h5>
+                                    <p className="ma-0 mt-8 text-center">${product.price}</p>
+                                </div>
+                                <div className="card-actions justify-content-center pa-4">
+                                    {product.cartQuantity === 0 ? <button className="x-small outlined" data-testid="btn-item-add" onClick={() => this.props.addToCart(i)}>
+                                        Add To Cart
+                                    </button> : <button className="x-small danger" data-testid="btn-item-remove" onClick={() => this.props.removeFromCart(i)}>
+                                        Remove
+                                    </button>}
+                                </div>
+                            </div>
+                        </section>
+                    )
+                })}
+ 
+            </div>
+ 
+        );
+    }
+}
+
+
+
+
+35. Team selection new
+==========================================================
+
+Player Info.js
+-------------------------------------------------------
+export default function PlayerDetail({
+  close,
+  i,
+  addPlayer,
+  selectedPlayers,
+  detPl,
+}) {
+  return (
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
+          zIndex: 40,
+          backdropFilter: "blur(4px)",
+        }}
+        onClick={close}
+      />
+      <div
+        className="card shadow-xl"
+        style={{
+          position: "fixed",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "calc(100% - 2rem)",
+          maxWidth: "500px",
+          zIndex: 50,
+          animation: "dropdownFadeIn 0.2s ease-out",
+          maxHeight: "90vh",
+          overflowY: "auto",
+          padding: "20px",
+        }}
+        data-testid={`player-${detPl.name.split(" ")[0]}-${
+          detPl.name.split(" ")[1]
+        }-details`}
+      >
+        <h1
+          className="text-center mb-8"
+          style={{ fontSize: "1.5rem", fontWeight: 600 }}
+        >
+          Player Detail
+        </h1>
+        <div style={{ marginBottom: "var(--spacing-4)" }}>
+          <p style={{ marginBottom: "var(--spacing-3)" }}>
+            <strong>Name:</strong>{" "}
+            <span
+              data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+                detPl.name.split(" ")[1]
+              }-name`}
+            >
+              {detPl.name}
+            </span>
+          </p>
+          <p style={{ marginBottom: "var(--spacing-3)" }}>
+            <strong>Type:</strong>{" "}
+            <span
+              data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+                detPl.name.split(" ")[1]
+              }-typ`}
+            >
+              {detPl.type}
+            </span>
+          </p>
+          <p style={{ marginBottom: "var(--spacing-3)" }}>
+            <strong>Batting:</strong>{" "}
+            <span
+              data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+                detPl.name.split(" ")[1]
+              }-batting`}
+            >
+              {detPl.battingSkill}
+            </span>
+          </p>
+          <p style={{ marginBottom: "var(--spacing-3)" }}>
+            <strong>Bowling:</strong>{" "}
+            <span
+              data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+                detPl.name.split(" ")[1]
+              }-bowling`}
+            >
+              {detPl.bowlingSkill}
+            </span>
+          </p>
+        </div>
+        <div
+          className="flex gap-3"
+          style={{ marginTop: "var(--spacing-6)", flexDirection: "row" }}
+        >
+          <button
+            disabled={selectedPlayers.includes(detPl)}
+            onClick={() => addPlayer && addPlayer(detPl)}
+            data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+              detPl.name.split(" ")[1]
+            }-add`}
+            className="btn btn-primary"
+            style={{ flex: 1 }}
+          >
+            Select
+          </button>
+          <button
+            onClick={close}
+            className="btn btn-secondary"
+            data-testid={`player-detail-${detPl.name.split(" ")[0]}-${
+              detPl.name.split(" ")[1]
+            }-close`}
+            style={{ flex: 1 }}
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </>
+  );
+}
+
+
+
+
+TeamSelection.js
+----------------------------------------------------------
+export default function TeamSelection() {
+  const [plLimit, setPlLimit] = useState({
+    ball: 0,
+    bat: 0,
+    wicket: 0,
+    all: 0,
+  });
+
+  const [detPl, setDetPlay] = useState();
+  const [selectedPlayers, setSelectedPlayer] = React.useState([]);
+  const [player, setPlayers] = React.useState(players);
+  const [welcome, setWelcome] = React.useState(true);
+  const [showPlayerDetail, setShowPlayerDetail] = React.useState(false);
+
+  const addPlayer = (p) => {
+    if (plLimit.ball + plLimit.bat + plLimit.all + plLimit.wicket == 11) {
+      alert("Only 11 players are allowed in a team");
+      return;
+    }
+
+    if (plLimit.all == 4 && p.type == "AllRounder") {
+      alert("All Rounders can not be more than 4");
+      return;
+    } else if (p.type == "AllRounder") {
+      setPlLimit({ ...plLimit, all: plLimit.all + 1 });
+    }
+
+    if (plLimit.ball == 6 && p.type == "Bowler") {
+      alert("Bowlers can not be more than 6");
+      return;
+    } else if (p.type == "Bowler") {
+      setPlLimit({ ...plLimit, ball: plLimit.ball + 1 });
+    }
+
+    if (plLimit.bat == 6 && p.type == "Batsman") {
+      alert("Batsmen can not be more than 6");
+      return;
+    } else if (p.type == "Batsman") {
+      setPlLimit({ ...plLimit, bat: plLimit.bat + 1 });
+    }
+
+    setSelectedPlayer([...selectedPlayers, p]);
+    closeCard();
+  };
+
+  const removePlayer = (p) => {
+    const newP = selectedPlayers.filter((obj) => obj != p);
+    setSelectedPlayer([...newP]);
+  };
+
+  const showplayerDetailsCard = (p) => {
+    setDetPlay(p);
+    setShowPlayerDetail(true);
+  };
+
+  const closeCard = () => {
+    setDetPlay();
+    setShowPlayerDetail(false);
+  };
+
+  return (
+    <div className="container py-12">
+      <div
+        className="responsive-container"
+        style={{ display: "flex", width: "95%", margin: "0 auto" }}
+      >
+        {showPlayerDetail && (
+          <PlayerDetail
+            selectedPlayers={selectedPlayers}
+            detPl={detPl}
+            i={0}
+            close={() => closeCard()}
+            index={1}
+            addPlayer={(detPl) => addPlayer(detPl)}
+          />
+        )}
+        <div
+          className="card"
+          style={{
+            flex: "1",
+
+            overflow: "auto",
+
+            maxHeight: "80vh",
+
+            marginRight: "10px",
+          }}
+        >
+          <h4 className="text-center mb-8">Available Players</h4>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th data-testid="available-players-name">Name</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody data-testid="available-players-table-body">
+                {welcome && (
+                  <tr>
+                    <td
+                      data-testid="selection-rules"
+                      colSpan={3}
+                      className="card pb-20"
+                    >
+                      <p
+                        data-testid="close-welcome"
+                        style={{ textAlign: "right", cursor: "pointer" }}
+                        onClick={() => setWelcome(false)}
+                      >
+                        X
+                      </p>
+                      <h3 style={{ textAlign: "center" }}>
+                        <strong>Welcome to Team Selection</strong>
+                      </h3>
+                      11 players are required in a team <br />
+                      3-6 batsmen and bowlers are allowed in a team
+                      <br />
+                      Only 1 Wicket Keeper required in a team
+                      <br />
+                      1-4 All Rounders are allowed in a team
+                    </td>
+                  </tr>
+                )}
+
+                {player.map((p, index) => (
+                  <tr
+                    key={index}
+                    data-testid={`available-${p.name.split(" ")[0]}-${
+                      p.name.split(" ")[1]
+                    }-row`}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td
+                      data-testid={`available-${p.name.split(" ")[0]}-${
+                        p.name.split(" ")[1]
+                      }-name`}
+                      onClick={() => showplayerDetailsCard(p)}
+                    >
+                      {p.name}
+                    </td>
+                    <td onClick={() => showplayerDetailsCard(p)}>{p.type}</td>
+                    <td>
+                      <button
+                        data-testid={`available-${p.name.split(" ")[0]}-${
+                          p.name.split(" ")[1]
+                        }-select`}
+                        onClick={() => addPlayer(p)}
+                        disabled={selectedPlayers.includes(p)}
+                        className="btn btn-primary text"
+                      >
+                        Select
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div
+          className="card"
+          style={{
+            flex: "1",
+
+            overflow: "auto",
+
+            maxHeight: "80vh",
+          }}
+        >
+          <h4 className="text-center mb-8">Selected Players</h4>
+          <div className="overflow-x-auto">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody data-testid="selected-players-table-body">
+                {selectedPlayers.map((player, index) => (
+                  <tr
+                    data-testid={`selected-${player.name
+                      .split(" ")
+                      .join("-")}-row`}
+                    key={index}
+                  >
+                    <td>{player.name}</td>
+                    <td>{player.type}</td>
+                    <td>
+                      <button
+                        data-testid={`selected-${player.name
+                          .split(" ")
+                          .join("-")}-remove`}
+                        onClick={() => removePlayer(player)}
+                        className="btn danger text"
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+36. Hackershop checkout
+==========================================================
+
+
+App.js
+----------------------------------------------
+
+class App extends Component {
+    constructor() {
+        super();
+        const products = [...PRODUCTS].map((product, index) => {
+            product.id = index + 1;
+            product.image = `/images/items/${product.name.toLocaleLowerCase()}.png`;
+            product.cartQuantity = 0;
+            return product;
+        });
+        this.state = {
+            cart: {
+                items: [],
+                subTotal: 0,
+                totalPrice: 0,
+                discount: 0,
+                selectedCoupon: '0'
+            },
+            products
+        }
+        this.addToCart = this.addToCart.bind(this);
+        this.removeFromCart = this.removeFromCart.bind(this);
+    }
+
+    addToCart(index) {
+        const products = this.state.products;
+        products[index].cartQuantity = 1;
+        let cart = {...this.state.cart};
+        cart.items.push({
+            id: products[index].id,
+            price: products[index].price,
+            item: products[index].heading,
+            quantity: 1
+        });
+        cart.subTotal= cart.subTotal + products[index].price;
+
+        const discount= parseInt(cart.selectedCoupon);
+        const calcDiscount= parseFloat((cart.subTotal * discount)/100);
+        cart.discount= calcDiscount;
+
+        const totalPr= cart.subTotal - cart.discount;
+        cart.totalPrice= totalPr;
+        this.setState({
+            products,
+            cart
+        })
+    }
+
+    removeFromCart(index) {
+        const products = this.state.products;
+        products[index].cartQuantity = 0;
+        let cart = {...this.state.cart};
+        let cartIndex = this.state.cart.items.findIndex(item => item.id === products[index].id);
+        cart.items.splice(cartIndex, 1);
+
+        cart.subTotal= cart.subTotal - products[index].price
+
+        const discount= parseInt(cart.selectedCoupon);
+        const calcDist= parseFloat((cart.subTotal * discount)/100);
+        cart.discount= calcDist;
+
+        const totalPr= cart.subTotal - cart.discount;
+        cart.totalPrice= totalPr;
+        this.setState({
+            cart,
+            products
+        })
+    }
+
+    addCoupon=(e)=>{
+        const newCart= {...this.state.cart};
+        const val= e.target.value;
+        newCart.selectedCoupon= val;
+
+        const discount= parseInt(val);
+        const calcDist= parseFloat((newCart.subTotal * discount)/100);
+        newCart.discount= calcDist;
+
+        newCart.totalPrice= newCart.subTotal - newCart.discount
+
+        this.setState({
+            cart: newCart
+        })
+    }
+
+
+    render() {
+
+        return (
+            <div>
+                <h8k-navbar header={title}></h8k-navbar>
+                <div className="layout-row shop-component">
+                    <ProductList products={this.state.products} addToCart={this.addToCart} removeFromCart={this.removeFromCart}/>
+                    <Cart cart={this.state.cart} addCoupon={this.addCoupon}/>
+                </div>
+            </div>
+        );
+    }
+}
+
+
+
+
+Cart.js
+---------------------------------------------------
+
+export default class Cart extends Component {
+
+    render() {
+        return (
+            <div className="card outlined my-16 mr-25 flex-30">
+                <section className="layout-row align-items-center justify-content-center px-16">
+                    <h4>Your Cart</h4>
+                </section>
+                <div className="divider"/>
+                <table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Item</th>
+                        <th className="numeric">Quantity</th>
+                        <th className="numeric">Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {
+                        this.props.cart.items.map((cartItem, idx) => {
+                            return (
+                                <tr data-testid={'cart-item-' + idx}
+                                    key={idx + 1}
+                                    className="slide-up-fade-in">
+                                    <td>{idx + 1}.</td>
+                                    <td className="name" data-testid="cart-item-name">{cartItem.item}</td>
+                                    <td className="numeric quantity" data-testid="cart-item-quantity">
+                                        {cartItem.quantity}
+                                    </td>
+                                    <td className="numeric quantity" data-testid="cart-item-price">
+                                        {cartItem.price}
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+
+                    </tbody>
+                </table>
+                <div className="layout-row justify-content-between align-items-center px-8 mx-12">
+                    <h5>Select Coupon</h5>
+                    <select data-testid="cart-coupon"
+                            className="coupon-select" onChange={this.props.addCoupon}>
+                        <option value="0">None</option>
+                        <option value="10">OFF10</option>
+                        <option value="20">OFF20</option>
+                    </select>
+                </div>
+                <ul className="bordered inset ma-0 px-8 mt-30">
+                    <li className="layout-row justify-content-between py-12 caption font-weight-light">
+                        <span>Subtotal</span>
+                        <span data-testid="cart-subtotal">${this.props.cart.subTotal}</span>
+                    </li>
+                    <li className="layout-row justify-content-between py-12 caption font-weight-light">
+                        <span>Discount (-)</span>
+                        <span className="discount" data-testid="cart-discount">${this.props.cart.discount}</span>
+                    </li>
+                    <li className="layout-row justify-content-between py-12 font-weight-bold">
+                        <span>Total</span>
+                        <span data-testid="cart-total">${this.props.cart.totalPrice}</span>
+                    </li>
+                </ul>
+            </div>
+
+        );
+    }
+}
+
+
+
+Product.js
+----------------------------------------------------------
+
+export default class ProductList extends Component {
+    constructor() {
+        super();
+    }
+
+    render() {
+
+        return (
+            <div className="layout-row wrap justify-content-center flex-70 app-product-list">
+                {this.props.products.map((product, i) => {
+                    return (
+                        <section className="w-30"
+                                 data-testid={'product-item-' + i}
+                                 key={product.id}>
+                            <div className="card ma-16">
+                                <img alt="Your Cart" src={product.image}
+                                     className="d-inline-block align-top product-image"/>
+                                <div className="card-text pa-4">
+                                    <h5 className="ma-0 text-center">{product.name}</h5>
+                                    <p className="ma-0 mt-8 text-center">${product.price}</p>
+                                </div>
+                                <div className="card-actions justify-content-center pa-4">
+                                    {product.cartQuantity==0 ?
+                                    (<button className="x-small outlined" data-testid="btn-item-add" onClick={()=> this.props.addToCart(i)}>
+                                        Add To Cart
+                                    </button>)
+                                    :
+                                    (<button className="x-small danger" data-testid="btn-item-remove" onClick={()=> this.props.removeFromCart(i)}>
+                                        Remove
+                                    </button>)
+                                    }
+                                </div>
+                            </div>
+                        </section>
+                    )
+                })}
+
+            </div>
+
+        );
+    }
+}
+
+
+
+
+37. Cesar cipher
+=========================================================
+
+App.js
+---------------------------------------------------------
+import React from 'react'
+import { Ciphertext, Plaintext, Shift } from './components'
+import './App.css'
+import 'h8k-components'
+
+const title = "Caesar's Cipher";
+
+function App() {
+  const [shift, setShift] = React.useState("");
+  const [cipherText, setCipherText] = React.useState("");
+  const [plainText, setPlainText] = React.useState("");
+
+  return (
+    <div>
+      <h8k-navbar header={title}></h8k-navbar>
+      <Shift shift={shift} setShift={setShift} />
+      <div className="layout-row justify-content-center mt-40">
+        <Plaintext shift={shift} plainText={plainText} setPlainText={setPlainText} setCipherText={setCipherText} />
+        <Ciphertext shift={shift} cipherText={cipherText} setCipherText={setCipherText} setPlainText={setPlainText} />
+      </div>
+    </div>
+  )
+}
+
+export default App
+
+
+
+Shift.js
+----------------------------------------------------------
+
+
+import React from 'react'
+
+function Shift({shift,setShift}) {
+
+  return (
+    <div className="layout-row justify-content-center mt-100">
+      <select data-testid="select" value={shift} onChange={(e)=> setShift(e.target.value)}>
+        <option value="" disabled>Enter shift amount</option>
+        <option value="1" >1</option>
+        <option value="2" >2</option>
+        <option value="3" >3</option>
+        <option value="4" >4</option>
+        <option value="5" >5</option>
+        <option value="6" >6</option>
+        <option value="7" >7</option>
+
+      </select>
+    </div>
+  );
+}
+
+export default Shift
+
+
+
+Plaintext.js
+---------------------------------------------------------
+import React from 'react';
+function Plaintext({ shift, plainText, setPlainText, setCipherText }) {
+  
+  const encryptText = (plainText, shift) => {
+    let cipherArr = []
+    let cipherLetter
+
+    plainText.split("").map(letter => {
+      let code = letter.charCodeAt(letter)
+      if (letter === " ") {
+        return cipherArr.push(letter)
+      }
+      // Uppercase letters
+      if (code >= 65 && code <= 90) {
+        cipherLetter = String.fromCharCode(((code - 65 + shift) % 26) + 65)
+      }
+      // Lowercase letters
+      else if (code >= 97 && code <= 122) {
+        cipherLetter = String.fromCharCode(((code - 97 + shift) % 26) + 97)
+      }
+      return cipherArr.push(cipherLetter)
+    })
+    return cipherArr.join("")
+  }
+
+  return (
+    <div className="card w-18 mr-20">
+      <h3 className="card-text text-center my-0 py-20">Plaintext</h3>
+      <textarea
+        name="plaintext"
+        rows={6}
+        cols={30}
+        placeholder="Enter Plaintext"
+        className="mx-25 mb-25"
+        data-testid="plain-text"
+        value={plainText}
+        onChange={e => {
+          setPlainText(e.target.value)
+          const cipher = encryptText(e.target.value, Number(shift))
+          setCipherText(cipher)
+        }
+        }
+      />
+    </div>
+  )
+}
+
+export default Plaintext;
+
+
+
+Ciphertext.js
+---------------------------------------------------------
+import React from 'react'
+
+function Ciphertext({shift, cipherText, setCipherText, setPlainText}) {
+  
+   const decryptText = (cipherText, shift) => {
+    let plainArr = []
+    let plainLetter
+
+    cipherText.split("").map(cipher => {
+      let code = cipher.charCodeAt(cipher)
+      if (cipher === " ") {
+        return plainArr.push(cipher)
+      }
+      // Uppercase letters
+      if (code >= 65 && code <= 90) {
+        let diff = code - 65 - shift
+        if (diff >= 0) {
+          plainLetter = String.fromCharCode((diff % 26) + 65);
+        } else {
+          plainLetter = String.fromCharCode(((26 + diff) % 26) + 65);
+        }
+      }
+      // Lowercase letters
+      else if (code >= 97 && code <= 122) {
+        let diff = code - 97 - shift
+        if (diff >= 0) {
+          plainLetter = String.fromCharCode((diff % 26) + 97);
+        } else {
+          plainLetter = String.fromCharCode(((26 + diff) % 26) + 97);
+        }
+      }
+      return plainArr.push(plainLetter)
+    })
+    return plainArr.join("")
+  }
+
+  return (
+    <div className="card w-18 ml-20">
+      <h3 className="card-text text-center my-0 py-20">Ciphertext</h3>
+      <textarea
+        name="ciphertext"
+        rows={6}
+        cols={30}
+        placeholder="Enter Ciphertext"
+        className="mx-25 mb-25"
+        data-testid="cipher-text"
+        value={cipherText}
+        onChange={e => {
+          setCipherText(e.target.value)
+          const plain = decryptText(e.target.value, Number(shift))
+          setPlainText(plain)
+        }
+        }
+      />
+    </div>
+  )
+}
+
+export default Ciphertext
+
+====================================  Fetch Stocks ==================================================
+index.js
+
+import React, { useState } from 'react';
+import stocks from "../../stocks";
+
+function Users() {
+  let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const [cm, setCm] = useState("January"); // Current Month
+  const [filteredStocks, setFilteredStocks] = useState([...stocks].filter((s) => s.date.includes("January")));
+  function updateStocks(currentMonth){
+    setCm(currentMonth);
+    setFilteredStocks(stocks.filter((s) => s.date.includes(currentMonth)));
+  }
+  function handleSort() {
+    setFilteredStocks([...filteredStocks].sort((a,b)=>(b.close-b.open)-(a.close-a.open)));
+  }
+  function calTotalProfit() {
+    let profit = 0;
+    for (let index = 0; index < filteredStocks.length; index++) {
+      let p = filteredStocks[index].close-filteredStocks[index].open;
+      if(p>0){
+        profit = profit + p; 
+      }
+    }
+    return Math.abs(profit).toFixed(2);
+  }
+  function calTotalLoss() {
+    let loss = 0;
+    for (let index = 0; index < filteredStocks.length; index++) {
+      let p = filteredStocks[index].close-filteredStocks[index].open;
+      if(p<0){
+        loss = loss + p; 
+      }
+    }
+    return Math.abs(loss).toFixed(2);
+  }
+  return (
+    <>
+      <div className='layout-row justify-content-center'>
+        <select className='mt-13 mr-5' data-testid="select-month" value={cm} onChange={(e) => {updateStocks(e.target.value);}}>
+          {
+            months.map((month) => (
+              <option value={month} key={month}>{month}</option>
+            ))
+          }
+        </select>
+        <button data-testid="sort" onClick={()=>handleSort()}>Sort</button>
+      </div>
+      <div className='layout-row wrap w-100 justify-content-center' data-testid="stocks">
+        {
+          filteredStocks.map((s) =>
+          (
+            <div className='card layout-column w-20 ma-10 px-8'>
+              <p className='ma-0'>Date: {s.date}</p>
+              <p className='ma-0'>High: {s.high}</p>
+              <p className='ma-0'>Low: {s.low}</p>
+              <p className='ma-0'>Profit: {(s.close - s.open)>0?"✅":"❌"} ({(Math.abs(s.close - s.open)).toFixed(2)})</p>
+            </div>
+          )
+          )
+        }
+
+      </div>
+      <div className='layout-column justify-content-center align-items-center' >
+        <p className='mb-0 font-weight-bold' data-testid='total-profit'>Total Profit: <span style={{ color: "#1ba94c" }}>{calTotalProfit()}</span></p>
+        <p className='font-weight-bold' data-testid='total-loss'>Total Loss: <span style={{ color: "red" }}>{calTotalLoss()}</span></p>
+      </div>
+    </>
+  )
+}
+
+export default Users
+
+=============================================================== Editable Table ======================================================================
+
+==== App.js ====
+import React, { Fragment, useState } from 'react'
+import 'h8k-components'
+
+import { AddEmployee, Employee } from './components'
+
+const title = 'Editable Table'
+
+const App = () => {
+  const [employeesList, setEmployeeList] = useState([
+    { id: 0, name: 'Chris Hatch', position: 'Software Developer', salary: 130000 },
+    { id: 1, name: 'Elizabeth Montgomery', position: 'Lead Research Engineer', salary: 70000 },
+    { id: 2, name: 'Aiden Shaw', position: 'Machine Learning Engineer', salary: 80000 },
+  ])
+  const [name, setName] = useState("");
+  const [position, setPosition] = useState("");
+  const [salary, setSalary] = useState("");
+  function handleOnAdd() {
+    setEmployeeList([...employeesList, { id: employeesList.length, name: name, position: position, salary: salary }]);
+    setSalary("");
+    setName("");
+    setPosition("");
+  }
+  function updateEmployee(employee, newSalary) {
+    setEmployeeList(prev => prev.map((emp) => emp === employee ? { ...emp, salary: newSalary } : emp))
+  }
+
+  return (
+    <Fragment>
+      <h8k-navbar header={title}></h8k-navbar>
+      <div className="card w-45 mx-auto mt-75 pb-5">
+        <table data-testid='table'>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Position</th>
+              <th>Salary</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {employeesList.map((employee, idx) => (
+              <tr key={employee.id} data-testid={`row-${idx}`}>
+                <Employee
+                  employee={employee}
+                  idx={idx}
+                  updateEmployee={updateEmployee}
+                />
+              </tr>
+            ))}
+            <tr>
+              <AddEmployee name={name} salary={salary} position={position} setName={setName} setPosition={setPosition} setSalary={setSalary} handleOnAdd={handleOnAdd} />
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </Fragment>
+  )
+}
+
+export default App
+
+==== Employee.js ====
+
+import React, { Fragment, useState } from 'react'
+
+const Employee = ({ employee, idx, updateEmployee }) => {
+  const [edit, setEdit] = useState(false);
+  const [newSalary, setNewSalary] = useState(employee.salary);
+  function handleOnSave() {
+    updateEmployee(employee, newSalary);
+    setEdit(false);
+  }
+  return (
+    <Fragment>
+      <td>{employee.name}</td>
+      <td className='pl-20'>{employee.position}</td>
+      <td className='pl-20'>
+        {edit ?
+          <input
+            data-testid={'employee-salary-input-' + idx}
+            type='number'
+            value={newSalary}
+            onChange={(e) => setNewSalary(e.target.value)}
+          />
+          : <div
+            data-testid={'employee-salary-div-' + idx}
+            onClick={() => setEdit(true)}
+          >
+            {employee.salary}
+          </div>
+        }
+
+        {/* use this block of code when the salary field becomes editable */}
+      </td>
+      <td className='pl-20'>
+        <button
+          className={'x-small w-75 ma-0 px-25'}
+          data-testid={'employee-save-button-' + idx}
+          onClick={() => handleOnSave()}
+          disabled={employee.salary === newSalary}
+        >
+          Save
+        </button>
+      </td>
+    </Fragment>
+  )
+}
+
+
+export default Employee
+
+==== AddEmployee.js ====
+
+import React, { Fragment } from 'react'
+
+const AddEmployee = ({ name, position, salary, setName, setPosition, setSalary, handleOnAdd }) => {
+
+  return (
+    <Fragment>
+      <td className='pl-30'>
+        <input
+          data-testid='new-employee-name-input'
+          placeholder='Enter Name'
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </td>
+      <td className='pl-20'>
+        <input
+          data-testid='new-employee-position-input'
+          placeholder='Enter Position'
+          value={position}
+          onChange={(e) => setPosition(e.target.value)}
+        />
+      </td>
+      <td className='pl-20'>
+        <input
+          data-testid='new-employee-salary-input'
+          type='number'
+          placeholder='Enter Salary'
+          value={salary}
+          onChange={(e) => setSalary(e.target.value)}
+        />
+      </td>
+      <td className='pl-20'>
+        <button
+          data-testid='add-new-employee-button'
+          className='x-small w-75 ma-0 px-25'
+          onClick={() => handleOnAdd()}
+          disabled={name.trim() === "" || position.trim() === "" || salary.trim() === ""}
+        >
+          Add
+        </button>
+      </td>
+    </Fragment>
+  )
+}
+
+export default AddEmployee
+
+=============================================================== Image Preview ======================================================================
+
+==== ImagePreview.js ====
+import React, { useState } from "react";
+import HiddenImageDiv from "./HiddenImageDiv";
+// import data from "./data";
+
+const ImagePreview = (props) => {
+  const [images, setImages] = useState([...props.images]);
+
+  function showAll() {
+    setImages(
+      prev => prev.map((image) => ({ ...image, visible: true }))
+    )
+  }
+  function hideAll() {
+    setImages(
+      prev => prev.map((image) => ({ ...image, visible: false }))
+    )
+  }
+  function handleToogle(i) {
+    setImages(prev => prev.map((image) => (image.id === i) ? ({ ...image, visible: !image.visible }) : image));
+  }
+  return (
+    <div className="min-h-screen bg-background py-12">
+      <div className="container mx-auto max-w-4xl">
+        <div className="card">
+          <div className="mb-8">
+            <h1 className="text-3xl font-semibold text-center mb-2">Image Gallery</h1>
+            <p className="text-secondary text-center">Click on images to hide/show them</p>
+          </div>
+
+          <section className="mb-8">
+            <div
+              className="flex flex-wrap justify-center gap-4"
+              data-testid="images-div"
+            >
+              {
+                images.map((i) =>
+                (
+                  <HiddenImageDiv key={i.id} image={i} handleToogle={handleToogle} />
+                )
+                )
+              }
+            </div>
+          </section>
+
+          <section className="flex justify-center gap-4">
+            <button
+              className="btn btn-primary"
+              data-testid="show-all-btn"
+              onClick={() => showAll()}
+            >
+              Show All
+            </button>
+            <button
+              onClick={() => hideAll()}
+              className="btn btn-secondary"
+              data-testid="hide-all-btn"
+            >
+              Hide All
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ImagePreview;
+
+==== HiddenImage.js ====
+
+import React from "react";
+
+const HiddenImageDiv = ({ image, handleToogle }) => {
+  if (image.visible) {
+    return <img
+      className="flex items-center justify-center w-[300px] h-[200px] bg-background-secondary border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-border-hover hover:bg-background-tertiary transition-colors"
+      onClick={() => handleToogle(image.id)} src={image.src} alt={image.alt}>
+    </img>
+  }
+  else {
+    return (
+      <div
+        className="flex items-center justify-center w-[300px] h-[200px] bg-background-secondary border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-border-hover hover:bg-background-tertiary transition-colors"
+        // {...props}
+        onClick={() => handleToogle(image.id)}
+      >
+        <span className="text-secondary font-medium">Hidden Image</span>
+      </div>
+    );
+  }
+};
+
+export default HiddenImageDiv;
+
+=============================================================== Job Application Portal ======================================================================
+==== JobApplicationForm ====
+import React, { useState } from "react";
+import Preview from "./Preview";
+
+const JobApplicationForm = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [exp, setExp] = useState("");
+
+  const [nameErr, setNameErr] = useState(false);
+  const [emailErr, setEmailErr] = useState(false);
+  const [expErr, setExpErr] = useState(false);
+
+  const [isPreview, setIsPreview] = useState(false);
+
+  function handleOnPreview(params) {
+    let error = false;
+    if (name === "") {
+      setNameErr(true);
+      error = true;
+    }
+    if (email === "" || !email.includes("@")) {
+      setEmailErr(true);
+      error = true;
+    }
+    if (exp === "" || Number(exp) < 0) {
+      setExpErr(true);
+      error = true;
+    }
+    if (!error) {
+      setIsPreview(true);
+    }
+  }
+  function reset() {
+    setName("");
+    setEmail("");
+    setExp("");
+    setNameErr(false);
+    setEmailErr(false);
+    setExpErr(false);
+    setIsPreview(false);
+  }
+  return (
+    <>
+      <form data-testid="job-application-form" className="layout-column ml-auto">
+        <h2 className="ma-auto pa-20">Provide your details</h2>
+        <div>
+          <label className="font-weight-bold">
+            Name:
+            <input
+              data-testid="input-name"
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="pa-10 ml-120"
+            />
+          </label>
+          {nameErr && <p data-testid="error-name" className="error">
+            Name is required.
+          </p>}
+        </div>
+        <div>
+          <label className="font-weight-bold">
+            Email:
+            <input
+              data-testid="input-email"
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="pa-10 ml-120"
+            />
+          </label>
+          {emailErr && <p data-testid="error-email" className="error">
+            Enter a valid email address.
+          </p>}
+        </div>
+        <div>
+          <label className="font-weight-bold">
+            Experience (years):
+            <input
+              data-testid="input-experience"
+              type="text"
+              name="experience"
+              value={exp}
+              onChange={(e) => setExp(e.target.value)}
+              className="pa-10 ml-20"
+            />
+          </label>
+          {expErr && <p data-testid="error-experience" className="error">
+            Experience must be a positive number.
+          </p>}
+        </div>
+        <div className="ml-100">
+          <button data-testid="preview-button" className="mx-50" type="button" onClick={() => handleOnPreview()}>
+            Preview
+          </button>
+          <button data-testid="reset-button" type="button" className="mx-50" onClick={() => reset()}>
+            Reset
+          </button>
+        </div>
+      </form>
+      {isPreview && <Preview name={name} email={email} exp={exp} reset={reset} />}
+    </>
+  );
+};
+
+export default JobApplicationForm;
+
+==== Preview ====
+import React, { useState } from "react";
+import SuccessMessage from "./SuccessMessage";
+
+const Preview = ({ name, email, exp, reset }) => {
+  const [isSuccess, setIsSuccess] = useState(false);
+  function handleOnSubmit() {
+    setIsSuccess(true);
+  }
+  return (
+    <>
+      <div data-testid="preview">
+        <h2>Preview Your Application</h2>
+        <p data-testid="preview-name">
+          <strong>Name:</strong> {name}
+        </p>
+        <p data-testid="preview-email">
+          <strong>Email:</strong> {email}
+        </p>
+        <p data-testid="preview-experience">
+          <strong>Experience:</strong> {exp} years
+        </p>
+        <button data-testid="clear-button" onClick={() => reset()}>Clear</button>
+        <button data-testid="submit-button" onClick={() => handleOnSubmit()}>Submit</button>
+      </div>
+      {isSuccess && <SuccessMessage reset={reset} />}
+    </>
+  );
+};
+
+export default Preview;
+
+==== SuccessMessage ====
+import React from "react";
+
+const SuccessMessage = ({ reset }) => {
+  return (
+    <div data-testid="success-message">
+      <h2>Application Submitted Successfully!</h2>
+      <p>Thank you for your application. We will review it soon.</p>
+      <button className="ma-auto" data-testid="home-button" onClick={() => reset()}>
+        Home
+      </button>
+    </div>
+  );
+};
+
+export default SuccessMessage;
+
+=============================================================== Task Manager ======================================================================
+
+==== Task.js ====
+import React, { useState } from "react";
+import { CirclePlus, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
+
+
+function Tasks() {
+  const [taskList, setTaskList] = useState([]);
+  const [title, setTitle] = useState("");
+  const [priority, setPriority] = useState(0);
+  function addToTask() {
+    if (title == "" || priority == "") {
+      toast.error("Please enter both title and task priority");
+      return;
+    }
+    let newTaskList = [...taskList, { title: title, priority: priority }];
+    let sortedList = newTaskList.sort((a, b) => a.priority - b.priority);
+    setTaskList(sortedList);
+    setTitle("");
+    setPriority(0);
+  }
+  function remove(t) {
+    setTaskList(taskList.filter((task) => task !== t));
+  }
+  return (
+    <div className="flex flex-col items-center w-full px-8">
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow p-5 mt-12 mb-8">
+        <div className="flex flex-row space-x-3 mb-6">
+          <div className="bg-[#DCFAE6] text-[#18A149] rounded-lg p-4 flex items-center justify-center">
+            <CirclePlus size={24} />
+          </div>
+          <div>
+            <div className="font-bold text-md sm:text-lg">Create a new task</div>
+            <div className="text-neutral-500 text-sm sm:text-base">
+              Add task title and priority to create a new task
+            </div>
+          </div>
+        </div>
+        <form className="flex flex-col md:flex-row gap-6 mb-3">
+          <input
+            data-testid="input-task-name"
+            className="flex-1 rounded-lg border border-gray-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-gray-800 bg-gray-100"
+            placeholder="Enter task title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+          <input
+            data-testid="input-task-priority"
+            className="md:w-72 rounded-lg border border-gray-200 px-4 py-3 text-base focus:outline-none focus:ring-2 focus:ring-gray-800 bg-gray-100"
+            placeholder="Enter task priority"
+            type="number"
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          />
+          <button
+            data-testid="submit-button"
+            className="h-12 px-8 rounded-md bg-black text-white font-bold text-base hover:bg-gray-900 transition"
+            type="button"
+            onClick={() => addToTask()}
+          >
+            Add
+          </button>
+        </form>
+      </div>
+
+      <div className="w-full max-w-5xl mb-6">
+        <h2 className="text-3xl font-bold text-black">Your Tasks</h2>
+      </div>
+      <div className="w-full max-w-5xl bg-white rounded-2xl shadow overflow-hidden mb-8">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b border-spacing-2 border-gray-200">
+              <th
+                className="py-4 px-6 text-base font-bold text-gray-600"
+                style={{ width: "70%" }}
+              >
+                Task Title
+              </th>
+              <th
+                className="py-4 px-6 text-base font-bold text-gray-600"
+                style={{ width: "20%" }}
+              >
+                Priority
+              </th>
+              <th className="py-4 px-6" style={{ width: "10%" }}></th>
+            </tr>
+          </thead>
+          <tbody data-testid="tasksList">
+            {taskList.map((t) => (
+              <tr key={t.title} className="border-b border-spacing-2 border-gray-200 last:border-b-0 hover:bg-gray-50 transition">
+                <td className="py-2 px-6 text-neutral-500 text-base font-normal">
+                  {t.title}
+                </td>
+                <td className="py-2 px-6 text-neutral-500 text-base font-normal">
+                  {t.priority}
+                </td>
+                <td className="py-2 px-6">
+                  <button className="p-2 rounded" aria-label="Delete task" onClick={() => remove(t)}>
+                    <Trash2 className="w-5 h-5 text-red-500 hover:text-red-700" />
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+export default Tasks;
+
+
+================================================================== Pokemon Details ============================================================
+==== PokemonDetails.js ====
+import React from 'react';
+import { Pokemon } from '../pokemon/Pokemon';
+export const PokemonDetails = () => {
+	const [pokemon, setPokemon] = React.useState(null);
+	const [id, setId] = React.useState(0);
+	const getPokemonById = id => {
+		if (id < 1 || id > 151) {
+			alert("Pokemon ID must be between 1 and 151");
+			return;
+		}
+		fetch(`https://jsonmock.hackerrank.com/api/pokemon?id=${id}`)
+			.then(resp => resp.json())
+			.then(data => setPokemon(data.data));
+	}
+
+	return (
+		<div className="mt-50 layout-column justify-content-center align-items-center" >
+			{pokemon && <Pokemon pokemon={pokemon} />}
+			<p>
+				<button data-testid="pokemon-prev" disabled={id == 1} onClick={() => { getPokemonById(1); setId(1); }}>Previous Evolution</button>
+				<button data-testid="pokemon-next" onClick={() => { getPokemonById(2); setId(2); }}>Next Evolution</button>
+			</p>
+			<p>
+				<input data-testid="id-input" value={id} onChange={(e) => { setId(e.target.value) }} type="number" placeholder='Pokemon Id'>
+				</input><button data-testid="random-pokemon" onClick={() => getPokemonById(id)} className='text'>Get Pokemon</button>
+			</p>
+		</div>
+	)
+}
+
+================================================================== Form Validation ============================================================
+
+import React, { useState } from 'react';
+import { validateEmail, validateUrl } from '../utils';
+
+function Form() {
+	const INVALID_NAMES_LIST = ["", 'd', 'Hastings45 g', '4', '9000', '#$%', '!`~', '         ', 'Hubert Blaine Wolfeschlegelsteinhausenbergerdorff Sr'];
+	const INVALID_PH_NO_LIST = ["", '98', '999999999', '#@#$@#%%%%', '9898989898989898', 'dewdewdwedwed', 'ee'];
+	const INVALID_EMAIL_LIST = ["", 'a@gmail.com', '0@0.0', '#$#$@#$', 'a34ferf@ede.ededjbrjhbrhj', 'abcdefghijklmnopqrstuvwx@dee.dde', 'dewdwedwed@abcdefghijklmnopqrstuvwx.dde']
+	const INVALID_URLS_LIST = ["", '2213213.2232.ccc', '#@#$#@$@2323.21323', 'https://aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.abc.com'];
+	const [name, setName] = useState("");
+	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
+	const [url, setUrl] = useState("");
+	const [e1, setE1] = useState(false);
+	const [e2, setE2] = useState(false);
+	const [e3, setE3] = useState(false);
+	const [e4, setE4] = useState(false);
+	const [successMsg, setSuccessMsg] = useState(false);
+	function handleOnVerify() {
+		let isSuccess = true;
+		if (INVALID_NAMES_LIST.includes(name)) {
+			isSuccess = false;
+			setE1(true);
+		} else {
+			setE1(false);
+		}
+		if (INVALID_EMAIL_LIST.includes(email)) {
+			isSuccess = false;
+			setE2(true);
+		} else {
+			setE2(false);
+		}
+		if (INVALID_PH_NO_LIST.includes(phone)) {
+			isSuccess = false;
+			setE3(true);
+		} else {
+			setE3(false);
+		}
+		if (INVALID_URLS_LIST.includes(url)) {
+			isSuccess = false;
+			setE4(true);
+		} else {
+			setE4(false);
+		}
+		if (isSuccess) {
+			setSuccessMsg(true);
+		}
+	}
+	return (
+		<div className="card w-40 mx-auto py-50 px-50 my-10">
+			<div>
+				<div className="layout-column">
+					<label htmlFor="name">Name</label>
+					<input id="name" value={name} onChange={(e) => { setName(e.target.value); setIsSuccess(false); }} data-testid="name" placeholder="John Doe" className="large mt-8 px-10" />
+					{e1 && <p data-testid="nameErrorTxt" className="form-hint error-text mx-10" id="hint-input">Error: Invalid Entry</p>}
+				</div>
+			</div>
+			<div>
+				<div className="mt-15 layout-column">
+					<label htmlFor="email">Email</label>
+					<input id="email" value={email} onChange={(e) => { setEmail(e.target.value); setIsSuccess(false); }} data-testid="email" placeholder="johndoe@hackerrank.com" className="large mt-8 px-10" />
+					{e2 && <p data-testid="emailErrorTxt" className="form-hint error-text mx-10" id="hint-input">Error: Invalid Entry</p>}
+				</div>
+			</div>
+			<div>
+				<div className="mt-15 layout-column">
+					<label htmlFor="phone">Phone</label>
+					<input id="phone" value={phone} onChange={(e) => { setPhone(e.target.value); setIsSuccess(false); }} data-testid="phone" placeholder="1234567890" className="large mt-8 px-10" />
+					{e3 && <p data-testid="phoneErrorTxt" className="form-hint error-text mx-10" id="hint-input">Error: Invalid Entry</p>}
+				</div>
+			</div>
+			<div>
+				<div className="mt-15 layout-column">
+					<label htmlFor="blogUrl">Blog URL</label>
+					<input id="blogUrl" value={url} onChange={(e) => { setUrl(e.target.value); setIsSuccess(false); }} data-testid="url" placeholder="https://www.johndoe.dev" className="large mt-8 px-10" />
+					{e4 && <p data-testid="urlErrorTxt" className="form-hint error-text mx-10" id="hint-input">Error: Invalid Entry</p>}
+				</div>
+			</div>
+			<button data-testid="verify" className="button mt-40" type="button" onClick={() => handleOnVerify()}>VERIFY</button>
+			{successMsg && <div data-testid="successMsg" className="success-text success-text text-center py-40">Verification Successful</div>}
+		</div>
+	);
+}
+export default Form;
+
+========================================================= FlashCard ==============================================
+FlashCard
+==== index.tsx ====
+import React, { useState } from 'react';
+import { FlashCardProps } from '../../types/FlashCard';
+import "./index.css"
+
+const FlashCard: React.FC<FlashCardProps> = ({ flashCard }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  return (
+    <div
+      className="flashcard"
+      onClick={() => setIsFlipped(!isFlipped)}
+      data-testid={`flashcard-container-${flashCard.id}`}
+    >
+      <div className={`flashcard-content ${isFlipped ? 'flipped' : ''}`}>
+        <div className="front" data-testid={`flashcard-question-${flashCard.id}`}>{flashCard.question}</div>
+        <div className="back" data-testid={`flashcard-answer-${flashCard.id}`}>{flashCard.answer}</div>
+      </div>
+    </div>
+  );
+};
+
+export default FlashCard;
+
+
+FlashCardDeck
+==== FlashCardDeck ====
+
+import React, { useState } from 'react';
+import { FlashCardDeckProps } from '../../types/FlashCard';
+import FlashCard from '../FlashCard';
+import "./index.css"
+
+const FlashCardDeck: React.FC<FlashCardDeckProps> = ({ flashCards }) => {
+
+  const[cards,setCards]=useState(flashCards);
+
+  function shuffle()
+  {
+    setCards(prev=>[prev[2],prev[0],prev[1]]);
+  }
+
+  return (
+    <div className="layout-column align-items-center justify-content-start">
+      <div className="flashcard-deck" data-testid="flashcard-deck">
+      {
+        cards.map((flashcard,idx)=>  <FlashCard key={1} flashCard={flashcard} />)
+      }
+      </div>
+      <button onClick={() => shuffle()} data-testid="shuffle-button">Shuffle</button>
+    </div>
+  );
+};
+
+export default FlashCardDeck;
+
+
+========================================================= Ceaser Cipher  ====================================
+
+App.js
+---------------------------------------------------------
+import React from 'react'
+import { Ciphertext, Plaintext, Shift } from './components'
+import './App.css'
+import 'h8k-components'
+
+const title = "Caesar's Cipher";
+
+function App() {
+  const [shift, setShift] = React.useState("");
+  const [cipherText, setCipherText] = React.useState("");
+  const [plainText, setPlainText] = React.useState("");
+
+  return (
+    <div>
+      <h8k-navbar header={title}></h8k-navbar>
+      <Shift shift={shift} setShift={setShift} />
+      <div className="layout-row justify-content-center mt-40">
+        <Plaintext shift={shift} plainText={plainText} setPlainText={setPlainText} setCipherText={setCipherText} />
+        <Ciphertext shift={shift} cipherText={cipherText} setCipherText={setCipherText} setPlainText={setPlainText} />
+      </div>
+    </div>
+  )
+}
+
+export default App
+
+
+
+Shift.js
+----------------------------------------------------------
+
+
+import React from 'react'
+
+function Shift({shift,setShift}) {
+
+  return (
+    <div className="layout-row justify-content-center mt-100">
+      <select data-testid="select" value={shift} onChange={(e)=> setShift(e.target.value)}>
+        <option value="" disabled>Enter shift amount</option>
+        <option value="1" >1</option>
+        <option value="2" >2</option>
+        <option value="3" >3</option>
+        <option value="4" >4</option>
+        <option value="5" >5</option>
+        <option value="6" >6</option>
+        <option value="7" >7</option>
+
+      </select>
+    </div>
+  );
+}
+
+export default Shift
+
+
+
+Plaintext.js
+---------------------------------------------------------
+import React from 'react';
+function Plaintext({ shift, plainText, setPlainText, setCipherText }) {
+  
+  const encryptText = (plainText, shift) => {
+    let cipherArr = []
+    let cipherLetter
+
+    plainText.split("").map(letter => {
+      let code = letter.charCodeAt(letter)
+      if (letter === " ") {
+        return cipherArr.push(letter)
+      }
+      // Uppercase letters
+      if (code >= 65 && code <= 90) {
+        cipherLetter = String.fromCharCode(((code - 65 + shift) % 26) + 65)
+      }
+      // Lowercase letters
+      else if (code >= 97 && code <= 122) {
+        cipherLetter = String.fromCharCode(((code - 97 + shift) % 26) + 97)
+      }
+      return cipherArr.push(cipherLetter)
+    })
+    return cipherArr.join("")
+  }
+
+  return (
+    <div className="card w-18 mr-20">
+      <h3 className="card-text text-center my-0 py-20">Plaintext</h3>
+      <textarea
+        name="plaintext"
+        rows={6}
+        cols={30}
+        placeholder="Enter Plaintext"
+        className="mx-25 mb-25"
+        data-testid="plain-text"
+        value={plainText}
+        onChange={e => {
+          setPlainText(e.target.value)
+          const cipher = encryptText(e.target.value, Number(shift))
+          setCipherText(cipher)
+        }
+        }
+      />
+    </div>
+  )
+}
+
+export default Plaintext;
+
+
+
+Ciphertext.js
+---------------------------------------------------------
+import React from 'react'
+
+function Ciphertext({shift, cipherText, setCipherText, setPlainText}) {
+  
+   const decryptText = (cipherText, shift) => {
+    let plainArr = []
+    let plainLetter
+
+    cipherText.split("").map(cipher => {
+      let code = cipher.charCodeAt(cipher)
+      if (cipher === " ") {
+        return plainArr.push(cipher)
+      }
+      // Uppercase letters
+      if (code >= 65 && code <= 90) {
+        let diff = code - 65 - shift
+        if (diff >= 0) {
+          plainLetter = String.fromCharCode((diff % 26) + 65);
+        } else {
+          plainLetter = String.fromCharCode(((26 + diff) % 26) + 65);
+        }
+      }
+      // Lowercase letters
+      else if (code >= 97 && code <= 122) {
+        let diff = code - 97 - shift
+        if (diff >= 0) {
+          plainLetter = String.fromCharCode((diff % 26) + 97);
+        } else {
+          plainLetter = String.fromCharCode(((26 + diff) % 26) + 97);
+        }
+      }
+      return plainArr.push(plainLetter)
+    })
+    return plainArr.join("")
+  }
+
+  return (
+    <div className="card w-18 ml-20">
+      <h3 className="card-text text-center my-0 py-20">Ciphertext</h3>
+      <textarea
+        name="ciphertext"
+        rows={6}
+        cols={30}
+        placeholder="Enter Ciphertext"
+        className="mx-25 mb-25"
+        data-testid="cipher-text"
+        value={cipherText}
+        onChange={e => {
+          setCipherText(e.target.value)
+          const plain = decryptText(e.target.value, Number(shift))
+          setPlainText(plain)
+        }
+        }
+      />
+    </div>
+  )
+}
+
+export default Ciphertext
+
+
+================================================= Timer Component  ============================================
+
+
+import React, { useEffect, useRef, useState } from "react";
+import "./index.css"
+
+export default function Timer({ initial }) {
+	const [value, setValue] = useState(initial);
+	const intRef = useRef(null);
+	useEffect(() => {
+		intRef.current = setInterval(
+			() => { setValue((prev) => prev > 1 ? prev - 1 : 0); }, 1000);
+		return () => clearInterval(intRef.current);
+	}, []);
+	function stop() {
+		clearInterval(intRef.current);
+	}
+	return (
+		<div className="mt-100 layout-column align-items-center justify-content-center">
+			<div className="timer-value" data-testid="timer-value">{value}</div>
+			<button className="large" onClick={stop} data-testid="stop-button">Stop Timer</button>
+		</div>
+	);
+
+}
+
+
+
+
+

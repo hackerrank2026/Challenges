@@ -1,0 +1,433 @@
+================================================================================
+1) SPRING CORE (DI) + STEREOTYPES
+================================================================================
+@Autowired | import org.springframework.beans.factory.annotation.Autowired; | Target: field/constructor/method | Inject a Spring bean (prefer constructor injection).
+@Qualifier | import org.springframework.beans.factory.annotation.Qualifier; | Target: field/param/method | Choose a specific bean when multiple candidates exist.
+@Primary | import org.springframework.context.annotation.Primary; | Target: class/method | Mark default bean when multiple candidates exist.
+@Lazy | import org.springframework.context.annotation.Lazy; | Target: class/method/field/param | Create bean only when first needed.
+@Value | import org.springframework.beans.factory.annotation.Value; | Target: field/param | Inject property values like ${app.name}.
+@Scope | import org.springframework.context.annotation.Scope; | Target: class/method | Set bean scope (singleton/prototype/request/session).
+
+@Component | import org.springframework.stereotype.Component; | Target: class | Generic Spring-managed component.
+@Service | import org.springframework.stereotype.Service; | Target: class | Service layer bean for business logic.
+@Repository | import org.springframework.stereotype.Repository; | Target: class | DAO bean; enables exception translation.
+@Controller | import org.springframework.stereotype.Controller; | Target: class | MVC controller returning views.
+@RestController | import org.springframework.web.bind.annotation.RestController; | Target: class | REST controller (JSON by default).
+
+================================================================================
+2) SPRING BOOT / CONFIGURATION
+================================================================================
+@SpringBootApplication | import org.springframework.boot.autoconfigure.SpringBootApplication; | Target: class | Boot entry point: config + auto-config + component scan.
+@Configuration | import org.springframework.context.annotation.Configuration; | Target: class | Configuration class.
+@Bean | import org.springframework.context.annotation.Bean; | Target: method | Define a bean from a method.
+@ComponentScan | import org.springframework.context.annotation.ComponentScan; | Target: class | Scan packages for components.
+@Import | import org.springframework.context.annotation.Import; | Target: class | Import additional configs.
+@PropertySource | import org.springframework.context.annotation.PropertySource; | Target: class | Load custom properties file.
+@ConfigurationProperties | import org.springframework.boot.context.properties.ConfigurationProperties; | Target: class | Bind application.yml properties into POJO.
+@EnableConfigurationProperties | import org.springframework.boot.context.properties.EnableConfigurationProperties; | Target: class | Enable @ConfigurationProperties beans.
+@Profile | import org.springframework.context.annotation.Profile; | Target: class/method | Activate bean only for a profile.
+
+================================================================================
+3) WEB / REST (MAPPINGS + BINDING)
+================================================================================
+@RequestMapping | import org.springframework.web.bind.annotation.RequestMapping; | Target: class/method | Map base path + method/produces/consumes.
+@GetMapping | import org.springframework.web.bind.annotation.GetMapping; | Target: method | Map GET endpoint.
+@PostMapping | import org.springframework.web.bind.annotation.PostMapping; | Target: method | Map POST endpoint.
+@PutMapping | import org.springframework.web.bind.annotation.PutMapping; | Target: method | Map PUT endpoint.
+@DeleteMapping | import org.springframework.web.bind.annotation.DeleteMapping; | Target: method | Map DELETE endpoint.
+@PatchMapping | import org.springframework.web.bind.annotation.PatchMapping; | Target: method | Map PATCH endpoint.
+
+@PathVariable | import org.springframework.web.bind.annotation.PathVariable; | Target: param | Bind {id} from URL.
+@RequestParam | import org.springframework.web.bind.annotation.RequestParam; | Target: param | Bind query param (?q=).
+@RequestBody | import org.springframework.web.bind.annotation.RequestBody; | Target: param | Bind JSON request body to object.
+@ResponseBody | import org.springframework.web.bind.annotation.ResponseBody; | Target: method/class | Return object as JSON (implicit in @RestController).
+@RequestHeader | import org.springframework.web.bind.annotation.RequestHeader; | Target: param | Read HTTP header value.
+@CookieValue | import org.springframework.web.bind.annotation.CookieValue; | Target: param | Read cookie value.
+@ModelAttribute | import org.springframework.web.bind.annotation.ModelAttribute; | Target: param/method | Bind form data / add model attributes (MVC).
+@SessionAttributes | import org.springframework.web.bind.annotation.SessionAttributes; | Target: class | Store model attributes in session (MVC).
+@CrossOrigin | import org.springframework.web.bind.annotation.CrossOrigin; | Target: class/method | Enable CORS.
+
+@ResponseStatus | import org.springframework.web.bind.annotation.ResponseStatus; | Target: method/class | Set HTTP status for response.
+
+@ControllerAdvice | import org.springframework.web.bind.annotation.ControllerAdvice; | Target: class | Global MVC exception handling.
+@RestControllerAdvice | import org.springframework.web.bind.annotation.RestControllerAdvice; | Target: class | Global REST exception handling (JSON).
+@ExceptionHandler | import org.springframework.web.bind.annotation.ExceptionHandler; | Target: method | Handle exceptions in controller/advice.
+
+================================================================================
+4) SPRING DATA JPA (REPOSITORY / CRUD)
+================================================================================
+JpaRepository (interface) | import org.springframework.data.jpa.repository.JpaRepository; | Target: interface | Extend to get CRUD + paging + sorting.
+@Query | import org.springframework.data.jpa.repository.Query; | Target: method | Provide JPQL/native query.
+@Param | import org.springframework.data.repository.query.Param; | Target: param | Bind named parameters in @Query.
+@Modifying | import org.springframework.data.jpa.repository.Modifying; | Target: method | Mark update/delete query.
+@Transactional | import org.springframework.transaction.annotation.Transactional; | Target: class/method | Transaction boundary (usually on service).
+
+@Lock | import org.springframework.data.jpa.repository.Lock; | Target: method | Apply lock mode.
+@EntityGraph | import org.springframework.data.jpa.repository.EntityGraph; | Target: method | Control fetch graph (avoid N+1).
+
+================================================================================
+5) JPA / HIBERNATE ENTITY MAPPING (CRUD CORE)
+================================================================================
+@Entity | import jakarta.persistence.Entity; | Target: class | Marks a JPA entity.
+@Table | import jakarta.persistence.Table; | Target: class | Configure table name/indexes/constraints.
+@Id | import jakarta.persistence.Id; | Target: field/getter | Primary key.
+@GeneratedValue | import jakarta.persistence.GeneratedValue; | Target: field/getter | Auto-generate primary key.
+GenerationType (enum) | import jakarta.persistence.GenerationType; | Target: n/a | ID strategy (IDENTITY/SEQUENCE/AUTO/TABLE).
+@Column | import jakarta.persistence.Column; | Target: field/getter | Configure column (nullable, length, unique, name).
+@Transient | import jakarta.persistence.Transient; | Target: field/getter | Not persisted to DB.
+@Version | import jakarta.persistence.Version; | Target: field/getter | Optimistic locking version column.
+
+@OneToOne | import jakarta.persistence.OneToOne; | Target: field/getter | One-to-one relationship.
+@OneToMany | import jakarta.persistence.OneToMany; | Target: field/getter | One-to-many relationship.
+@ManyToOne | import jakarta.persistence.ManyToOne; | Target: field/getter | Many-to-one relationship.
+@ManyToMany | import jakarta.persistence.ManyToMany; | Target: field/getter | Many-to-many relationship.
+@JoinColumn | import jakarta.persistence.JoinColumn; | Target: field/getter | Foreign key column mapping.
+@JoinTable | import jakarta.persistence.JoinTable; | Target: field/getter | Join table for many-to-many.
+FetchType (enum) | import jakarta.persistence.FetchType; | Target: n/a | Fetch strategy (LAZY/EAGER).
+CascadeType (enum) | import jakarta.persistence.CascadeType; | Target: n/a | Cascade operations.
+
+@Embeddable | import jakarta.persistence.Embeddable; | Target: class | Value object embedded into entity.
+@Embedded | import jakarta.persistence.Embedded; | Target: field/getter | Embed an @Embeddable.
+@EmbeddedId | import jakarta.persistence.EmbeddedId; | Target: field/getter | Composite key as embedded object.
+@IdClass | import jakarta.persistence.IdClass; | Target: class | Composite key with separate key class.
+@MapsId | import jakarta.persistence.MapsId; | Target: field/getter | Share primary key in relationship.
+
+@Enumerated | import jakarta.persistence.Enumerated; | Target: field/getter | Store enum as STRING/ORDINAL.
+EnumType (enum) | import jakarta.persistence.EnumType; | Target: n/a | Enum storage strategy.
+@Lob | import jakarta.persistence.Lob; | Target: field/getter | Large object (BLOB/CLOB).
+
+@UniqueConstraint | import jakarta.persistence.UniqueConstraint; | Target: inside @Table | Multi-column unique constraint.
+@Index | import jakarta.persistence.Index; | Target: inside @Table | Declare DB index.
+
+================================================================================
+6) HIBERNATE-SPECIFIC (TIMESTAMPS + HELPERS)
+================================================================================
+@CreationTimestamp | import org.hibernate.annotations.CreationTimestamp; | Target: field/getter | Auto-set created timestamp on insert.
+@UpdateTimestamp | import org.hibernate.annotations.UpdateTimestamp; | Target: field/getter | Auto-update timestamp on update.
+
+================================================================================
+7) SPRING DATA AUDITING (CREATED/MODIFIED BY/DATE)
+================================================================================
+@EnableJpaAuditing | import org.springframework.data.jpa.repository.config.EnableJpaAuditing; | Target: config class | Enable auditing.
+@CreatedDate | import org.springframework.data.annotation.CreatedDate; | Target: field | Auto set created date.
+@LastModifiedDate | import org.springframework.data.annotation.LastModifiedDate; | Target: field | Auto set modified date.
+@CreatedBy | import org.springframework.data.annotation.CreatedBy; | Target: field | Auto set created by.
+@LastModifiedBy | import org.springframework.data.annotation.LastModifiedBy; | Target: field | Auto set modified by.
+
+================================================================================
+8) VALIDATION (JAKARTA BEAN VALIDATION)
+================================================================================
+@Valid | import jakarta.validation.Valid; | Target: param/field | Trigger validation (nested validation too).
+@Validated | import org.springframework.validation.annotation.Validated; | Target: class/method | Enable validation + groups.
+
+@NotNull | import jakarta.validation.constraints.NotNull; | Target: field/param | Must not be null.
+@NotEmpty | import jakarta.validation.constraints.NotEmpty; | Target: field/param | Not null and not empty (String/Collection).
+@NotBlank | import jakarta.validation.constraints.NotBlank; | Target: field/param | String not null and trimmed length > 0.
+@Size | import jakarta.validation.constraints.Size; | Target: field/param | Size/length bounds.
+@Min | import jakarta.validation.constraints.Min; | Target: field/param | Minimum numeric value.
+@Max | import jakarta.validation.constraints.Max; | Target: field/param | Maximum numeric value.
+@Positive | import jakarta.validation.constraints.Positive; | Target: field/param | Must be > 0.
+@PositiveOrZero | import jakarta.validation.constraints.PositiveOrZero; | Target: field/param | Must be >= 0.
+@Negative | import jakarta.validation.constraints.Negative; | Target: field/param | Must be < 0.
+@NegativeOrZero | import jakarta.validation.constraints.NegativeOrZero; | Target: field/param | Must be <= 0.
+@Pattern | import jakarta.validation.constraints.Pattern; | Target: field/param | Regex validation.
+@Email | import jakarta.validation.constraints.Email; | Target: field/param | Email format.
+
+@Past | import jakarta.validation.constraints.Past; | Target: field/param | Date/time must be in past.
+@PastOrPresent | import jakarta.validation.constraints.PastOrPresent; | Target: field/param | Past or present.
+@Future | import jakarta.validation.constraints.Future; | Target: field/param | Date/time must be in future.
+@FutureOrPresent | import jakarta.validation.constraints.FutureOrPresent; | Target: field/param | Future or present.
+
+================================================================================
+9) JACKSON (JSON) - CRUD API HELPERS
+================================================================================
+@JsonProperty | import com.fasterxml.jackson.annotation.JsonProperty; | Target: field/getter/setter/param | Rename JSON field or control access.
+@JsonIgnore | import com.fasterxml.jackson.annotation.JsonIgnore; | Target: field/method | Exclude from JSON.
+@JsonInclude | import com.fasterxml.jackson.annotation.JsonInclude; | Target: class/field | Include only non-null/non-empty fields.
+@JsonIgnoreProperties | import com.fasterxml.jackson.annotation.JsonIgnoreProperties; | Target: class | Ignore unknown/specific properties.
+@JsonFormat | import com.fasterxml.jackson.annotation.JsonFormat; | Target: field/getter | Format date/time in JSON.
+@JsonCreator | import com.fasterxml.jackson.annotation.JsonCreator; | Target: ctor/factory | Custom creation from JSON.
+@JsonValue | import com.fasterxml.jackson.annotation.JsonValue; | Target: method/field | Serialize as single value (often enums).
+@JsonPropertyOrder | import com.fasterxml.jackson.annotation.JsonPropertyOrder; | Target: class | Control JSON order.
+@JsonManagedReference | import com.fasterxml.jackson.annotation.JsonManagedReference; | Target: field | Prevent cycles (parent side).
+@JsonBackReference | import com.fasterxml.jackson.annotation.JsonBackReference; | Target: field | Prevent cycles (child side).
+@JsonIdentityInfo | import com.fasterxml.jackson.annotation.JsonIdentityInfo; | Target: class/field | Use identity to handle cycles.
+
+================================================================================
+10) DATE/TIME FORMATTING (SPRING + JSON)
+================================================================================
+@DateTimeFormat | import org.springframework.format.annotation.DateTimeFormat; | Target: field/param | Parse/format dates in query params/forms.
+@JsonFormat | import com.fasterxml.jackson.annotation.JsonFormat; | Target: field/getter | Format date/time in JSON.
+
+NOTE: Java time TYPES (not annotations):
+LocalDate | import java.time.LocalDate; | Use: date without time.
+LocalDateTime | import java.time.LocalDateTime; | Use: date+time (no zone).
+Instant | import java.time.Instant; | Use: UTC timestamp.
+OffsetDateTime | import java.time.OffsetDateTime; | Use: date+time with offset.
+
+
+================================================================================
+SPRING CHEETSHEET
+================================================================================
+List (ArrayList) essentials
+- When to use: fast index access, append-heavy
+- Methods:
+  - add(E e) → boolean; list.add(10)
+  - get(int i) → E; list.get(0)
+  - set(int i,E e) → E; list.set(0,99)
+  - remove(int i) → E; list.remove(0)
+  - contains(o) → boolean
+  - subList(from,to) → view
+- Pitfalls: remove(int) vs remove(Object); subList is backed view
+
+Set (HashSet) essentials
+- Unique elements, fast lookup
+- Methods:
+  - add(e) → boolean; set.add("A")
+  - contains(o) → boolean
+  - remove(o) → boolean
+  - size()
+- Pitfalls: equals/hashCode correctness; don’t mutate key fields
+
+Map (HashMap) essentials
+- Fast key operations
+- Methods:
+  - put(k,v) → oldV; map.put("k",1)
+  - get(k) → V
+  - containsKey(k) → boolean
+  - remove(k) → V
+  - getOrDefault(k,def) → V
+  - putIfAbsent(k,v)
+  - computeIfAbsent(k,f)
+  - merge(k,v,f)
+- Pitfalls: null from get means missing or null; stable equals/hashCode needed
+
+Queue/Deque (ArrayDeque) essentials
+- Fast queue/stack, no nulls
+- Methods:
+  - addLast(e); dq.addLast(1)
+  - removeFirst()
+  - peekFirst()
+  - addFirst(e)
+  - removeLast()
+- Pitfalls: removeFirst throws, peekFirst returns null
+
+Streams (most used operations)
+- filter(Predicate); s.filter(x->x>0)
+- map(Function); s.map(String::length)
+- flatMap(Function); s.flatMap(List::stream)
+- sorted(Comparator); s.sorted(Comparator.naturalOrder())
+- distinct()
+- collect(Collector); s.collect(Collectors.toList())
+- forEach(Consumer)
+- count()
+- anyMatch(Predicate)
+- findFirst()
+- reduce(id,acc); ints.reduce(0,Integer::sum)
+- Pitfalls: streams are single-use; avoid shared mutation
+
+String & StringBuilder essentials
+- String immutable
+- String methods:
+  - length(), charAt(), substring(b,e), equals(), contains(), indexOf(), startsWith(), endsWith(), trim(), replace(), split(regex)
+- StringBuilder:
+  - append(x), toString(), insert(), delete()
+- Pitfalls: use equals not ==; split uses regex
+
+LocalDate/Time essentials
+- Creation: LocalDate.now(), LocalDate.of(y,m,d), LocalDateTime.now()
+- Arithmetic: plusDays(), minusDays(), withDayOfMonth()
+- Compare: isBefore(), isAfter()
+- Duration.between(t1,t2).toMinutes()
+- Period.between(d1,d2).getDays()
+- Formatting: dt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+- Parsing: LocalDate.parse(text, fmt)
+- Pitfalls: LocalDateTime has no zone; MM vs mm matters
+
+
+=============================
+JAVA CHEAT SHEET – QUICK REVISION
+=============================
+
+====================================
+1. BIGDECIMAL – BASIC FUNCTIONALITY
+====================================
+- Always use String constructor:
+  BigDecimal a = new BigDecimal("10.25");
+
+- add(BigDecimal)
+  a.add(b);
+
+- subtract(BigDecimal)
+  a.subtract(b);
+
+- multiply(BigDecimal)
+  a.multiply(b);
+
+- divide(BigDecimal, scale, RoundingMode)
+  a.divide(b, 2, RoundingMode.HALF_UP);
+
+- compareTo(BigDecimal)
+  a.compareTo(b); // 1, 0, -1
+
+- setScale(int, RoundingMode)
+  a.setScale(2, RoundingMode.HALF_UP);
+
+- toPlainString()
+  a.toPlainString();
+
+
+====================================
+2. LOCALDATE & LOCALDATETIME – KEY METHODS
+====================================
+--- CREATION ---
+LocalDate d = LocalDate.now();
+LocalDate d2 = LocalDate.of(2025, 2, 10);
+LocalDateTime dt = LocalDateTime.now();
+
+--- ARITHMETIC ---
+d.plusDays(5);
+d.minusDays(2);
+
+d.plusMonths(1);
+d.withDayOfMonth(1);
+
+dt.withHour(9);
+
+--- COMPARISONS ---
+d.isBefore(LocalDate.now());
+d.isAfter(LocalDate.now());
+d.isEqual(LocalDate.now());
+
+--- EXTRACTING COMPONENTS ---
+d.getDayOfWeek();      // MONDAY...
+d.getYear();
+d.getMonth();
+d.getDayOfMonth();
+dt.getHour();
+dt.getMinute();
+
+--- PARSING & FORMATTING ---
+LocalDate.parse("2025-02-10");
+
+DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+LocalDate.parse("10-02-2025", f);
+
+dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+
+--- DURATION & PERIOD ---
+Duration.between(t1, t2).toMinutes();
+Period.between(d1, d2).getDays();
+
+
+====================================
+3. VALIDATION ANNOTATIONS (Jakarta/Hibernate)
+====================================
+--- @Size ---
+- For Strings, collections, arrays.
+Params: min, max, message
+@Size(min = 3, max = 20)
+
+--- @Digits ---
+Params: integer, fraction
+@Digits(integer=5, fraction=2)
+
+--- @Pattern ---
+Params: regexp, message
+@Pattern(regexp = "^[A-Za-z]+$")
+
+--- @Email ---
+@Email(message = "Invalid email")
+
+--- @CreditCardNumber ---
+@CreditCardNumber(message = "Invalid card number")
+
+--- Other Useful ---
+@NotNull
+@NotBlank
+@Positive, @PositiveOrZero
+@Past, @Future
+@PastOrPresent
+@PresentOrFuture
+
+
+====================================
+4. IMPORTANT REGEX PATTERNS
+====================================
+--- EMAIL (simple reliable) ---
+^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$
+
+--- PHONE (INDIA, 10 digits) ---
+^[6-9]\d{9}$
+
+--- URL (simple) ---
+^https?://[A-Za-z0-9.-]+\.[A-Za-z]{2,}.*$
+
+
+====================================
+5. USING REGEX IN JAVA
+====================================
+--- EASIEST ---
+String email = "a@gmail.com";
+boolean valid = email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$");
+
+--- PATTERN + MATCHER ---
+Pattern p = Pattern.compile("^[6-9]\d{9}$");
+Matcher m = p.matcher("9876543210");
+boolean valid = m.matches();
+
+
+CHRONOUNIT CHEATSHEET (JAVA)
+=============================
+
+What is ChronoUnit?
+--------------------
+An enum in java.time.temporal representing standard units of time.
+Used for adding/subtracting time and calculating differences in LocalDate/LocalDateTime.
+
+Key Units:
+----------
+- DAYS
+- WEEKS
+- MONTHS
+- YEARS
+- HOURS (LocalDateTime only)
+- MINUTES (LocalDateTime only)
+- SECONDS
+
+Common Operations:
+------------------
+1) Adding/Subtracting Time
+   - date.plus(1, ChronoUnit.DAYS)
+   - date.minus(2, ChronoUnit.MONTHS)
+   - datetime.plus(3, ChronoUnit.HOURS)
+
+2) Difference Between Two Dates/Times
+   - ChronoUnit.DAYS.between(d1, d2)
+   - ChronoUnit.HOURS.between(t1, t2)
+
+3) Truncation (time only)
+   - datetime.truncatedTo(ChronoUnit.HOURS)
+
+4) Check Supported Units
+   - ChronoUnit.HOURS.isSupportedBy(LocalDate.now())
+
+Practical Filters:
+------------------
+- Within last N days:
+  date.isAfter(LocalDate.now().minus(N, ChronoUnit.DAYS))
+
+- Older than N days:
+  ChronoUnit.DAYS.between(date, LocalDate.now()) > N
+
+Notes:
+------
+- LocalDate does not support hours/minutes.
+- between(a,b) = (b - a)
+- MONTHS and YEARS are approximate.
+
+
+=============================
+END OF CHEAT SHEET
+=============================
+
